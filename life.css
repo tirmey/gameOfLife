@@ -9,7 +9,6 @@ body {
 }
 
 h1 {
-    
     text-align: center;
     color: #ddd;
     font-size: 7vmin;
@@ -39,6 +38,16 @@ h2 {
     font-family: 'Changa One', cursive;
 }
 
+h3 {
+    text-align: center;
+    color: #ddd;
+    margin: 10px auto 30px auto;
+    font-size: 3vmin;
+    font-weight: 100;
+    letter-spacing: 0.15vmin;
+    font-family: 'Changa One', cursive;
+}
+
 #gridContainer {
     margin: 30px 0; 
     text-align: center;
@@ -61,6 +70,11 @@ input {
 
 .hidden {
     display: none;
+}
+
+.fade {
+    opacity: 0;
+    z-index: -2
 }
 
 .firstRow-first {
@@ -96,7 +110,7 @@ input {
 button {
     cursor: pointer;
     font-family: 'Ubuntu', sans-serif;
-    font-size: 1.5vmin;
+    font-size: 1.1vmin;
     font-weight: 700;
     color: #444;
     text-transform: uppercase;
@@ -105,6 +119,12 @@ button {
     border-radius: 3px;    
     padding: 1vmin 1.5vmin;
     margin: 1vmin 0.4vmin;    
+}
+
+.fa {
+    font-size: 2vmin;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 #start {
@@ -116,53 +136,6 @@ button {
     background-color: #ba2525;
     color: #ddd;
 }
-
-#grid-control {
-    width: 45vmin;
-    margin: 0 auto;
-    text-align: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-}
-
-label {
-    color: #ddd; 
-    font-size: 1.7vmin;
-    margin-right: 1vmin;
-}
-
-input {
-    padding: 0.8vmin 1.9vmin;
-    margin: 1vmin 0.4vmin; 
-    width: 3vmin;
-    border-radius: 0.3vmin;
-    border: none;
-    background-color: rgba(255, 255, 255, 0);
-    border: 2px solid #ddd;
-    color: #fff;
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 1em;
-    
-    
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    display: none;
-    margin: 0; 
-}
-
-#grid-control div:first-child {
-    margin-right: 3vmin;
-}
-
 ul {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -184,6 +157,9 @@ ul {
     font-weight: 100;
     letter-spacing: 0.3vmin;
     color: #ddd;
+    -webkit-transition: all 0.3s;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
 }
 
 li {
@@ -194,4 +170,103 @@ li {
 li:hover {
     -webkit-transform: scale(1.05, 1.05) translateX(5px);    
             transform: scale(1.05, 1.05) translateX(5px);
+}
+
+nav > div {
+    
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: flex-start;
+    align-content: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    position: fixed;
+    top: 245px;
+    right: 50px;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    width: 250px;
+    height: 380px;
+    border: solid #ddd 2px;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 1.2em;
+    font-family: 'Changa One', cursive;
+    font-weight: 100;
+    letter-spacing: 0.3vmin;
+    color: #ddd;  
+    -webkit-transition: all 0.5s;  
+    transition: all 0.5s;
+}
+
+nav div i {
+    position: absolute;
+    display: inline;
+    top: 10px;
+    right: -215px;
+    width: 20px;
+    
+}
+
+
+form div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 70%;
+    z-index: 1;
+}
+
+label {
+    color: #ddd; 
+    font-size: 1.8vmin;
+    margin-right: 1vmin;
+}
+
+input {
+    padding: 0.6vmin 1.2vmin;
+    margin: 1vmin 0.4vmin; 
+    width: 3vmin;
+    border-radius: 0.3vmin;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    border: 2px solid #ddd;
+    color: #fff;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1em;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    display: none;
+    margin: 0; 
+}
+
+#grid-control {
+    width: 45vmin;
+    margin: 0 auto;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+
+#grid-control div:first-child {
+    margin-right: 3vmin;
 }

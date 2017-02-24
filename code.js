@@ -4,8 +4,6 @@ var col = 20,
     action,
     start;
 
-
-
 ///////////////////////////////LISTENERS///////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
@@ -72,11 +70,32 @@ document.getElementById("invert").addEventListener("click", function(){
     invert();
 });
 
-
-
 //BUTTON PRESET 1 - PReset Pattern 1
 document.getElementById("preset1").addEventListener("click", function(){
     preset1()
+});
+
+
+//MENU - give acess to menu items
+//listener apply to the cell container the cells
+document.getElementById("menu").addEventListener("click", function(e){
+    var clickedItem;
+    
+    if (e.target !== e.currentTarget) {
+        clickedItem = e.target;                    
+    }
+    e.stopPropagation();
+    
+    document.getElementById("menu").classList.add("fade");
+    
+    console.log (clickedItem);
+    if (clickedItem.id = "open-options") {        
+        document.getElementById("options").classList.remove("fade");        
+    } else if (clickedItem.id = "open-about-game") {
+        document.getElementById("about-game").classList.remove("fade");
+    } else if (clickedItem.id = "open-about-author") {  
+        document.getElementById("about-author").classList.remove("fade");
+    }
 });
 
 //INPUT COLUMS - change the width of the matrix

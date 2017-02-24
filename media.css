@@ -135,7 +135,7 @@
     position: absolute;
     bottom: auto;
     right: auto;
-    top: 190px;
+    top: 200px;
     left: calc(50% - 300px);    
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
