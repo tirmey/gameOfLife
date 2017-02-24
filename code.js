@@ -39,13 +39,8 @@ document.getElementById("pause").addEventListener("click", function(){
 
 //clear the board
 document.getElementById("clear").addEventListener("click", function(){
-   
-    var cells = document.getElementById("gridContainer").children; 
+   remove();
     
-    for (let i = 0; i <= ((col * line)); i++) {
-        console.log(i + "childrens");
-        cells[i].classList.remove("alive");
-    }
 });
 
 //change the width of the matrix
@@ -64,9 +59,9 @@ document.getElementById("lines").addEventListener("change", function(){
 
 //randomly populate the matrix
 document.getElementById("random").addEventListener("click", function(){
+    remove();
     for (let i = line; i >= 1; i--) {
-        for (let j = col; j >= 1; j--) {            
-            
+        for (let j = col; j >= 1; j--) { 
             rand = Math.random();
             if (rand > 0.5) {
                 document.getElementById(i + "-" + j).classList.add("alive");
@@ -113,7 +108,7 @@ marking = function newCicle(col, line) {
                     }
                 }
             }
-            //console.log("adjacent live cells" + adjacentLiveCells);
+            
             if (adjacentLiveCells < 2 || adjacentLiveCells > 3) {
                 document.getElementById(i + "-" + j).classList.add("willDie");    
             } else if (adjacentLiveCells == 3) {
@@ -123,6 +118,13 @@ marking = function newCicle(col, line) {
                 
             }
         }
+    }
+}
+
+remove = function() {
+    var cells = document.getElementById("gridContainer").children;    
+    for (let i = 0; i <= (cells.length-1); i++) {        
+        cells[i].classList.remove("alive");
     }
 }
 
