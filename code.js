@@ -9,7 +9,7 @@ var col = 20,
 ///////////////////////////////LISTENERS///////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-//listener to the cells
+//listener apply to the cell container the cells
 document.getElementById("gridContainer").addEventListener("click", function(e){
     var clickedItem;
     if (e.target.classList.contains("cell")) {
@@ -24,26 +24,26 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
     }             
 });
 
-//start the simulation
+//BUTTON START - start the simulation
 document.getElementById("start").addEventListener("click", function(){
     startPause();
     document.getElementById("start").classList.toggle("hidden");
     document.getElementById("pause").classList.toggle("hidden");
 });
 
-//pause the simulation
+//BUTTON PAUSE - pause the simulation
 document.getElementById("pause").addEventListener("click", function(){
     clearInterval(start);
     document.getElementById("start").classList.toggle("hidden");
     document.getElementById("pause").classList.toggle("hidden");
 });
 
-//start and pause the simulation
+//SPACEBAR - start and pause the simulation
 document.addEventListener("keypress", function(e){
     
     if (e.keyCode == 32) {
     
-        if (document.getElementById("start").classList.contains("hidden")) {       
+        if (document.getElementById("start").classList.contains("hidden")) {
             clearInterval(start)
             document.getElementById("start").classList.toggle("hidden");
             document.getElementById("pause").classList.toggle("hidden");
@@ -56,42 +56,44 @@ document.addEventListener("keypress", function(e){
     }
     
 });
-//clear the board
+//BUTTON CLEAR - clear the board
 document.getElementById("clear").addEventListener("click", function(){
     remove();
 });
 
-//change the width of the matrix
+//BUTTON RANDOM - randomly populate the matrix
+document.getElementById("random").addEventListener("click", function(){
+    remove();
+    random();
+});
+
+//BUTTON INVERT - randomly populate the matrix
+document.getElementById("invert").addEventListener("click", function(){
+    invert();
+});
+
+
+
+//BUTTON PRESET 1 - PReset Pattern 1
+document.getElementById("preset1").addEventListener("click", function(){
+    preset1()
+});
+
+//INPUT COLUMS - change the width of the matrix
 document.getElementById("cols").addEventListener("change", function(){
     col = document.getElementById("cols").value;
     document.getElementById("gridContainer").innerHTML="";
     grid(col, line);
 });
 
-//change the height of the matrix
+//INPUT LINES - change the height of the matrix
 document.getElementById("lines").addEventListener("change", function(){
     line = document.getElementById("lines").value;
     document.getElementById("gridContainer").innerHTML="";
     grid(col, line);
 });
 
-//randomly populate the matrix
-document.getElementById("random").addEventListener("click", function(){
-    remove();
-    for (let i = line; i >= 1; i--) {
-        for (let j = col; j >= 1; j--) { 
-            rand = Math.random();
-            if (rand > 0.5) {
-                document.getElementById(i + "-" + j).classList.add("alive");
-            }
-        }
-    }
-});
 
-//preset 1 button
-document.getElementById("preset1").addEventListener("click", function(){
-    preset1()
-});
 
 ///////////////////////////////FUNCTIONS///////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -148,6 +150,25 @@ marking = function newCicle(col, line) {
     }
 }
 
+random = function() {
+    for (let i = line; i >= 1; i--) {
+        for (let j = col; j >= 1; j--) { 
+            rand = Math.random();
+            if (rand > 0.5) {
+                document.getElementById(i + "-" + j).classList.add("alive");
+            }
+        }
+    }
+}
+
+invert = function() {
+    for (let i = line; i >= 1; i--) {
+        for (let j = col; j >= 1; j--) {
+            document.getElementById(i + "-" + j).classList.toggle("alive");
+        }
+    }  
+}
+
 remove = function() {
     var cells = document.getElementById("gridContainer").children;    
     for (let i = 0; i <= (cells.length-1); i++) {        
@@ -175,32 +196,28 @@ startPause = function() {
     start = setInterval(function() {
         marking(col, line);
         action(col, line);
-    },50);
+    },100);
 }
 
+
+
 preset1 = function() {
+    
+    remove();
     //central cell
     document.getElementById((Math.round(line/2) + 0) + "-" + (Math.round(col/2) + 0)).classList.add("alive");
     
     //central line 
-    document.getElementById((Math.round(line/2) + 1) + "-" + Math.round(col/2)).classList.add("alive");
-    document.getElementById((Math.round(line/2) + 2)  + "-" + Math.round(col/2)).classList.add("alive");
-    document.getElementById((Math.round(line/2) + 3)  + "-" + Math.round(col/2)).classList.add("alive");
-    document.getElementById((Math.round(line/2) + 4)  + "-" + Math.round(col/2)).classList.add("alive"); 
-    document.getElementById((Math.round(line/2) - 1)  + "-" + Math.round(col/2)).classList.add("alive");
-    document.getElementById((Math.round(line/2) - 2) + "-" + Math.round(col/2)).classList.add("alive");
-    document.getElementById((Math.round(line/2) - 3) + "-" + Math.round(col/2)).classList.add("alive");
-    document.getElementById((Math.round(line/2) - 4) + "-" + Math.round(col/2)).classList.add("alive");
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById((Math.round(line/2) + i) + "-" + Math.round(col/2)).classList.add("alive"); 
+        document.getElementById((Math.round(line/2) - i)  + "-" + Math.round(col/2)).classList.add("alive");
+    }
     
     // central col
-    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) + 1)).classList.add("alive");
-    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) + 2)).classList.add("alive");
-    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) + 3)).classList.add("alive");
-    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) + 4)).classList.add("alive");
-    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) - 1)).classList.add("alive");
-    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) - 2)).classList.add("alive");
-    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) - 3)).classList.add("alive");
-    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) - 4)).classList.add("alive");
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) + i)).classList.add("alive");
+        document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) - i)).classList.add("alive");
+    }
     
     //line and col terminations
     document.getElementById((Math.round(line/2) + 4)  + "-" + (Math.round(col/2) + 1)).classList.add("alive");
@@ -224,7 +241,6 @@ preset1 = function() {
     
     document.getElementById((Math.round(line/2) + 3)  + "-" + (Math.round(col/2) - 2)).classList.add("alive");
     document.getElementById((Math.round(line/2) + 2)  + "-" + (Math.round(col/2) - 3)).classList.add("alive");
-    
 }
 
 grid(col, line);

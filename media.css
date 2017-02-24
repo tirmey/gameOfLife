@@ -1,8 +1,22 @@
 @media screen and (max-width: 450px) {
     
-       h1 {
-        font-size: 9vmin;
+   h1 {
+    font-size: 12vmin;
+    font-family: 'Changa One', cursive;
     }
+    
+    hr {
+        width: 50%;
+        margin: 0 auto;
+        height: 2px;
+        background-color: #ddd;
+    }
+    
+    h2 {
+        font-size: 6vmin;
+        font-family: 'Changa One', cursive;
+    }
+    
     .cell {
         border: 0.1vmin solid rgba(180, 218, 250, 0.27);
         width: 3vmin;
@@ -10,13 +24,13 @@
     }
     
     .controls {
-        width: 90%;
+        width: 100%;
     }
     
     button {
-        font-size: 0.7em;
+        font-size: 0.8em;
         font-weight: 700;
-        padding: 2vmin 3vmin;
+        padding: 2vmin 1.5vmin;
         margin: 1.5vmin 0;      
     }
 
@@ -40,13 +54,30 @@
     #grid-control div:first-child {
         margin-right: 2em;
     }
+    
+    
 
 }
 
 @media screen and (min-width: 451px) and (max-width: 768px) {
     
     h1 {
-        font-size: 2.7em;
+        font-size: 3.5em;
+        font-family: 'Changa One', cursive;
+        width: 100%
+    }
+    
+    hr {
+        width: 50%;
+        margin: 0 auto;
+        height: 2px;
+        background-color: #ddd;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+        
+        font-family: 'Changa One', cursive;
     }
     
     .cell {
@@ -85,4 +116,49 @@
         border-radius: 3px;
     }
 
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    
+    h1 {
+        margin-bottom: 50px;
+    }
+    
+    ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: distribute;
+    align-content:center;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+    position: absolute;
+    bottom: auto;
+    right: auto;
+    top: 190px;
+    left: calc(50% - 300px);    
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    width: 600px;
+    height: auto;
+    border: solid #ddd 0px;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 1em;
+    font-family: 'Changa One', cursive;
+    font-weight: 100;
+    letter-spacing: 0.3vmin;
+    color: #ddd;
+}
+    
+    li {
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        cursor: pointer;
+    }
+    li:hover {
+        -webkit-transform: scale(1.2, 1.2);    
+                transform: scale(1.2, 1.2);
+    }
+    
 }

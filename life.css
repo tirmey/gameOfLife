@@ -1,15 +1,42 @@
 body {
-    padding: 20px;
+    padding: 10px;
     background-image: url(img/back.jpg);
-    line-height: 0px;
     font-family: 'Ubuntu', sans-serif;
 }
 
+#gridContainer {
+    line-height: 0px;
+}
+
 h1 {
+    
     text-align: center;
     color: #ddd;
     font-size: 7vmin;
-    margin: 40px 0px 60px 0px;
+    margin: 10px auto 30px auto;
+    font-size: 9vmin;
+    font-family: 'Changa One', cursive;
+    font-weight: 100;
+    letter-spacing: 0.3vmin;
+}
+
+hr {
+    width: 300px;;
+    margin: 0 auto;
+    height: 2px;
+    background-color: #ddd;
+    
+}
+
+h2 {
+    
+    text-align: center;
+    color: #ddd;
+    margin: 40px auto 30px auto;
+    font-size: 3.5vmin;
+    font-weight: 100;
+    letter-spacing: 0.15vmin;
+    font-family: 'Changa One', cursive;
 }
 
 #gridContainer {
@@ -67,6 +94,7 @@ input {
 }
 
 button {
+    cursor: pointer;
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.5vmin;
     font-weight: 700;
@@ -133,4 +161,37 @@ input[type=number]::-webkit-outer-spin-button {
 
 #grid-control div:first-child {
     margin-right: 3vmin;
+}
+
+ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: distribute;
+        align-content: space-around;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    width: 250px;
+    height: 200px;
+    border: solid #ddd 2px;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 1.2em;
+    font-family: 'Changa One', cursive;
+    font-weight: 100;
+    letter-spacing: 0.3vmin;
+    color: #ddd;
+}
+
+li {
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+li:hover {
+    -webkit-transform: scale(1.05, 1.05) translateX(5px);    
+            transform: scale(1.05, 1.05) translateX(5px);
 }

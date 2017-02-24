@@ -4,36 +4,47 @@
     <meta charset = "UTF-8"/>
     <title>The Game of Life</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Changa+One" rel="stylesheet">
     <link rel="stylesheet" href="reset-min.css">
     <link rel="stylesheet" href="life.css">
     <link rel="stylesheet" href="media.css">
    
 </head>
 <body>
-<h1> THE GAME OF LIFE</h1>
-<div id="gridContainer">
-    <!--cells here-->
-</div>
-
-<div class="controls">
-<button id="start">start</button>
-<button id="pause" class="hidden">pause</button>
-<button id="clear">clear</button>
-<button id="random">random</button>
-<button id="preset1">preset 1</buton>
-</div>
-
-<form id="grid-control">
-    <div>
-        <label for="cols">COLUMS</label>
-        <input id="cols" type="number">  
+    <h2>Jim Meyer´s</h2>
+    <hr>
+    <h1>GAME OF LIFE</h1>
+    <div id="gridContainer">
+        <!--cells here-->
     </div>
-    <div>
-        <label for="lines">LINES</label>
-        <input id="lines" type="number">
+
+    <div class="controls">
+    <button id="start">start</button>
+    <button id="pause" class="hidden">pause</button>
+    <button id="clear">clear</button>
+    <button id="random">random</button>
+    <button id="invert">invert</button>
+    <button id="preset1">preset 1</buton>
     </div>
-</form>
-<script src="code.js"></script>
+
+    <form id="grid-control">
+        <div>
+            <label for="cols">COLUMS</label>
+            <input id="cols" type="number">  
+        </div>
+        <div>
+            <label for="lines">LINES</label>
+            <input id="lines" type="number">
+        </div>
+    </form>
+    <nav>
+    <ul>
+        <li>OPTIONS</li>
+        <li>ABOUT THE GAME</li>
+        <li>ABOUT THE AUTHOR</li>
+    </ul>
+    </nav>
+    <script src="code.js"></script>
 
 </body>
 </html>
