@@ -15,12 +15,11 @@ table {
     width: 20px;
     height: 20px;
     display: inline-block;
-    
 }
 
-/*.dead {
-    background-color: transparent;
-}*/
+input {
+    display: inline-block;
+}
 
 .alive {
     background-color: white;

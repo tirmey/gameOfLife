@@ -1,11 +1,15 @@
-var height = 50,
-    width = 30,
+var col = 20,
+    line = 30,
     marking,
-    action;
+    action,
+    start;
 
 
 
-///////////////////////////////listeners
+///////////////////////////////LISTENERS///////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+//listener to the cells
 document.getElementById("gridContainer").addEventListener("click", function(e){
     var clickedItem;
     if (e.target.classList.contains("cell")) {
@@ -20,30 +24,66 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
     }             
 });
 
+//start the simulation
 document.getElementById("start").addEventListener("click", function(){
-    marking(width, height);
-    action(width, height);
+    start = setInterval(function() {
+        marking(col, line);
+        action(col, line);
+    },100);
 });
 
+//pause the simulation
+document.getElementById("pause").addEventListener("click", function(){
+    clearInterval(start);
+});
+
+//clear the board
 document.getElementById("clear").addEventListener("click", function(){
    
-    var cells = document.getElementById("gridContainer").children;
+    var cells = document.getElementById("gridContainer").children; 
     
-    for (let i = width*height; i >= 1; i--) {
+    for (let i = 0; i <= ((col * line)); i++) {
+        console.log(i + "childrens");
         cells[i].classList.remove("alive");
     }
 });
 
+//change the width of the matrix
+document.getElementById("cols").addEventListener("change", function(){
+    col = document.getElementById("cols").value;
+    document.getElementById("gridContainer").innerHTML="";
+    grid(col, line);
+});
 
+//change the height of the matrix
+document.getElementById("lines").addEventListener("change", function(){
+    line = document.getElementById("lines").value;
+    document.getElementById("gridContainer").innerHTML="";
+    grid(col, line);
+});
 
-
-
-
-grid = function createGrid(width, height) {
-    for (let i = width; i >= 1; i--) {
-        for (let j = height; j >= 1; j--) {            
+//randomly populate the matrix
+document.getElementById("random").addEventListener("click", function(){
+    for (let i = line; i >= 1; i--) {
+        for (let j = col; j >= 1; j--) {            
             
-            if (j == height) {
+            rand = Math.random();
+            if (rand > 0.5) {
+                document.getElementById(i + "-" + j).classList.add("alive");
+            }
+        }
+    }
+});
+
+///////////////////////////////FUNCTIONS///////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+grid = function createGrid(col, line) {
+    for (let i = line; i >= 1; i--) {
+        for (let j = col; j >= 1; j--) {            
+            
+            if (j == col) {
                 document.getElementById("gridContainer").insertAdjacentHTML("afterbegin",'<div id = "' + i + '-' + j + '" class = "cell"></div><br>');
             } else {
                 document.getElementById("gridContainer").insertAdjacentHTML("afterbegin",'<div id = "' + i + '-' + j + '" class = "cell"></div>');
@@ -52,23 +92,22 @@ grid = function createGrid(width, height) {
     }
 }
 
-marking = function newCicle(width, height) {
+marking = function newCicle(col, line) {
     var adjacentLiveCells,    
-        line,
-        column,        
+        IdLine,
+        IdColumn,        
         idSplit;
-    for (let i = width; i >= 1; i--) {
-        for (let j = height; j >= 1; j--) {            
+    for (let i = line; i >= 1; i--) { //i = y, j= x / i= linha, j = coluna
+        for (let j = col; j >= 1; j--) {            
             adjacentLiveCells = 0;
             
-            for (let adjX = -1; adjX <= 1; adjX++) {
-                for (let adjY = -1; adjY <= 1; adjY++) {
+            for (let adjY = -1; adjY <= 1; adjY++) {
+                for (let adjX = -1; adjX <= 1; adjX++) {
                     if (adjX != 0 || adjY != 0) {  
                         idSplit = document.getElementById(i + "-" + j).id.split("-");
-                        console.log()
-                        line = Number(idSplit[0]);
-                        column = Number(idSplit[1]);
-                        if ( (line + adjX > 0) && (column + adjY > 0) && (line + adjX <= width) && (column + adjY <= height) && document.getElementById((line + adjX) + "-" + (column + adjY)).classList.contains("alive")) {
+                        IdLine = Number(idSplit[0]);
+                        IdColumn = Number(idSplit[1]);
+                        if ( (IdLine + adjY > 0) && (IdColumn + adjX > 0) && (IdLine + adjY <= line) && (IdColumn + adjX <= col) && document.getElementById((IdLine + adjY) + "-" + (IdColumn + adjX)).classList.contains("alive")) {
                             adjacentLiveCells++
                         } 
                     }
@@ -87,9 +126,9 @@ marking = function newCicle(width, height) {
     }
 }
 
-action = function createGrid(width, height) {
-    for (let i = width; i >= 1; i--) {
-        for (let j = height; j >= 1; j--) {            
+action = function createGrid(col, line) {
+    for (let i = line; i >= 1; i--) {
+        for (let j = col; j >= 1; j--) {            
             
             if (document.getElementById(i + "-" + j).classList.contains("willDie")) {
                 document.getElementById(i + "-" + j).classList.remove("alive");
@@ -103,4 +142,4 @@ action = function createGrid(width, height) {
     }
 }
 
-grid(width, height);
+grid(col, line);
