@@ -3,26 +3,35 @@
 <head>
     <meta charset = "UTF-8"/>
     <title>The Game of Life</title>
-     <link rel="stylesheet" href="reset-min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="reset-min.css">
     <link rel="stylesheet" href="life.css">
    
 </head>
 <body>
 
 <div id="gridContainer">
-    <!--<div class = "cell 1-2"></div>-->
+    <!--cells here-->
 </div>
 
 <div class="controls">
 <button id="start">start</button>
-<button id="pause">pause</button>
+<button id="pause" class="hidden">pause</button>
 <button id="clear">clear</button>
 <button id="random">random</button>
+<button id="preset1">preset 1</buton>
 </div>
 
-
-<input id="cols" type="number" placeholder = "cols"></div> 
-<input id="lines" type="number" placeholder="lines"></div> 
+<form id="grid-control">
+    <div>
+        <label for="cols">COLUMS</label>
+        <input id="cols" type="number">  
+    </div>
+    <div>
+        <label for="lines">LINES</label>
+        <input id="lines" type="number">
+    </div>
+</form>
 <script src="code.js"></script>
 
 </body>

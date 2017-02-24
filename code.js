@@ -29,18 +29,21 @@ document.getElementById("start").addEventListener("click", function(){
     start = setInterval(function() {
         marking(col, line);
         action(col, line);
-    },100);
+    },50);
+    document.getElementById("start").classList.toggle("hidden");
+    document.getElementById("pause").classList.toggle("hidden");
 });
 
 //pause the simulation
 document.getElementById("pause").addEventListener("click", function(){
     clearInterval(start);
+    document.getElementById("start").classList.toggle("hidden");
+    document.getElementById("pause").classList.toggle("hidden");
 });
 
 //clear the board
 document.getElementById("clear").addEventListener("click", function(){
-   remove();
-    
+    remove();
 });
 
 //change the width of the matrix
@@ -70,13 +73,18 @@ document.getElementById("random").addEventListener("click", function(){
     }
 });
 
+//randomly populate the matrix
+document.getElementById("preset1").addEventListener("click", function(){
+    preset1()
+});
+
 ///////////////////////////////FUNCTIONS///////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
 
 grid = function createGrid(col, line) {
     for (let i = line; i >= 1; i--) {
-        for (let j = col; j >= 1; j--) {            
+        for ( let j = col; j >= 1; j--) {            
             
             if (j == col) {
                 document.getElementById("gridContainer").insertAdjacentHTML("afterbegin",'<div id = "' + i + '-' + j + '" class = "cell"></div><br>');
@@ -85,8 +93,13 @@ grid = function createGrid(col, line) {
             }
         }
     }
+    console.log(document.getElementById("1-1"));
+    console.log(document.getElementById("1-" + col));
+    document.getElementById("1-1").classList.add("firstRow-first");
+    document.getElementById("1-" + col).classList.add("firstRow-last");
+    document.getElementById(line + "-1").classList.add("lastRow-first");
+    document.getElementById(line + "-" + col).classList.add("lastRow-last");
 }
-
 marking = function newCicle(col, line) {
     var adjacentLiveCells,    
         IdLine,
@@ -115,7 +128,6 @@ marking = function newCicle(col, line) {
                 if (!document.getElementById(i + "-" + j).classList.contains("alive")); {
                     document.getElementById(i + "-" + j).classList.add("becomeAlive");
                 }
-                
             }
         }
     }
@@ -142,6 +154,55 @@ action = function createGrid(col, line) {
             }
         }
     }
+}
+
+preset1 = function() {
+    //central cell
+    document.getElementById((Math.round(line/2) + 0) + "-" + (Math.round(col/2) + 0)).classList.add("alive");
+    
+    //central line 
+    document.getElementById((Math.round(line/2) + 1) + "-" + Math.round(col/2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) + 2)  + "-" + Math.round(col/2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) + 3)  + "-" + Math.round(col/2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) + 4)  + "-" + Math.round(col/2)).classList.add("alive"); 
+    document.getElementById((Math.round(line/2) - 1)  + "-" + Math.round(col/2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) - 2) + "-" + Math.round(col/2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) - 3) + "-" + Math.round(col/2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) - 4) + "-" + Math.round(col/2)).classList.add("alive");
+    
+    // central col
+    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) + 1)).classList.add("alive");
+    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) + 2)).classList.add("alive");
+    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) + 3)).classList.add("alive");
+    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) + 4)).classList.add("alive");
+    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) - 1)).classList.add("alive");
+    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) - 2)).classList.add("alive");
+    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) - 3)).classList.add("alive");
+    document.getElementById(Math.round(line/2) + "-" + (Math.round(col/2) - 4)).classList.add("alive");
+    
+    //line and col terminations
+    document.getElementById((Math.round(line/2) + 4)  + "-" + (Math.round(col/2) + 1)).classList.add("alive");
+    document.getElementById((Math.round(line/2) + 4)  + "-" + (Math.round(col/2) - 1)).classList.add("alive");
+    document.getElementById((Math.round(line/2) - 4) + "-" + (Math.round(col/2) + 1)).classList.add("alive");
+    document.getElementById((Math.round(line/2) - 4) + "-" + (Math.round(col/2) - 1)).classList.add("alive");
+    document.getElementById((Math.round(line/2) + 1) + "-" + (Math.round(col/2) + 4)).classList.add("alive");
+    document.getElementById((Math.round(line/2) - 1) + "-" + (Math.round(col/2) + 4)).classList.add("alive");
+    document.getElementById((Math.round(line/2) + 1) + "-" + (Math.round(col/2) - 4)).classList.add("alive");
+    document.getElementById((Math.round(line/2) - 1) + "-" + (Math.round(col/2) - 4)).classList.add("alive");
+    
+    //connecting cells    
+    document.getElementById((Math.round(line/2) + 3)  + "-" + (Math.round(col/2) + 2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) + 2)  + "-" + (Math.round(col/2) + 3)).classList.add("alive");
+    
+    document.getElementById((Math.round(line/2) - 3)  + "-" + (Math.round(col/2) - 2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) - 2)  + "-" + (Math.round(col/2) - 3)).classList.add("alive");
+    
+    document.getElementById((Math.round(line/2) - 3)  + "-" + (Math.round(col/2) + 2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) - 2)  + "-" + (Math.round(col/2) + 3)).classList.add("alive");
+    
+    document.getElementById((Math.round(line/2) + 3)  + "-" + (Math.round(col/2) - 2)).classList.add("alive");
+    document.getElementById((Math.round(line/2) + 2)  + "-" + (Math.round(col/2) - 3)).classList.add("alive");
+    
 }
 
 grid(col, line);
