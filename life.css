@@ -4,6 +4,14 @@ body {
     line-height: 0px;
     font-family: 'Ubuntu', sans-serif;
 }
+
+h1 {
+    text-align: center;
+    color: #ddd;
+    font-size: 7vmin;
+    margin: 40px 0px 60px 0px;
+}
+
 #gridContainer {
     margin: 30px 0; 
     text-align: center;
@@ -49,10 +57,10 @@ input {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-flow: row nowrap;
-        flex-flow: row nowrap;
+    flex-flow: row nowrap;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     text-align: center;
     width: 45vmin;
     margin: 0 auto;
@@ -66,7 +74,7 @@ button {
     text-transform: uppercase;
     background-color: #d3d3d3;
     border: none;
-    border-radius: 0.3vmin;    
+    border-radius: 3px;    
     padding: 1vmin 1.5vmin;
     margin: 1vmin 0.4vmin;    
 }
@@ -85,20 +93,14 @@ button {
     width: 45vmin;
     margin: 0 auto;
     text-align: center;
-}
-
-#grid-control {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-flow: row wrap;
-        flex-flow: row wrap;
-   
-            -webkit-box-pack: start;
-   
-                -ms-flex-pack: start;
-   
-                    justify-content: flex-start;
+    flex-flow: row wrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
 }
 
 label {
@@ -108,17 +110,24 @@ label {
 }
 
 input {
-    padding: 0.8vmin 1.5vmin;
+    padding: 0.8vmin 1.9vmin;
     margin: 1vmin 0.4vmin; 
     width: 3vmin;
     border-radius: 0.3vmin;
     border: none;
-    background-color: #ddd;    
+    background-color: rgba(255, 255, 255, 0);
+    border: 2px solid #ddd;
+    color: #fff;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1em;
+    
+    
 }
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
+    display: none;
     margin: 0; 
 }
 

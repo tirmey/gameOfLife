@@ -26,10 +26,7 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
 
 //start the simulation
 document.getElementById("start").addEventListener("click", function(){
-    start = setInterval(function() {
-        marking(col, line);
-        action(col, line);
-    },50);
+    startPause();
     document.getElementById("start").classList.toggle("hidden");
     document.getElementById("pause").classList.toggle("hidden");
 });
@@ -41,6 +38,24 @@ document.getElementById("pause").addEventListener("click", function(){
     document.getElementById("pause").classList.toggle("hidden");
 });
 
+//start and pause the simulation
+document.addEventListener("keypress", function(e){
+    
+    if (e.keyCode == 32) {
+    
+        if (document.getElementById("start").classList.contains("hidden")) {       
+            clearInterval(start)
+            document.getElementById("start").classList.toggle("hidden");
+            document.getElementById("pause").classList.toggle("hidden");
+        } else {
+            startPause();
+            document.getElementById("start").classList.toggle("hidden");
+            document.getElementById("pause").classList.toggle("hidden");
+            
+        }
+    }
+    
+});
 //clear the board
 document.getElementById("clear").addEventListener("click", function(){
     remove();
@@ -73,7 +88,7 @@ document.getElementById("random").addEventListener("click", function(){
     }
 });
 
-//randomly populate the matrix
+//preset 1 button
 document.getElementById("preset1").addEventListener("click", function(){
     preset1()
 });
@@ -154,6 +169,13 @@ action = function createGrid(col, line) {
             }
         }
     }
+}
+
+startPause = function() {
+    start = setInterval(function() {
+        marking(col, line);
+        action(col, line);
+    },50);
 }
 
 preset1 = function() {
