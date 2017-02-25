@@ -29,7 +29,7 @@
     </div>
 
     
-    <nav>
+    <nav id = "main-navigation">
         <ul id = "menu">
             <li id="open-options">OPTIONS</li>            
             <li id="open-about-game">ABOUT THE GAME</li>
@@ -37,7 +37,7 @@
         </ul>
         <div id = "options" class="fade">
             <h3>OPTIONS</h3>
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i id= "close-options" class="fa fa-times" aria-hidden="true"></i>
             
             <form id="grid-control">
                 <div>
@@ -47,23 +47,28 @@
                 <div>
                     <label for="lines">LINES</label>
                     <input id="lines" type="number">
-                </div>
-                <div>
-                    <label for = "presets">STARTER SHAPES PRESETS</label>
-                    <select name = "presets">
-                        <option value="preset1">Preset 1</option>
-                        <option value="preset2">Preset 2</option>
-                        <option value="preset3">Preset 3</option>
-                        <option value="preset4">Preset 4</option>
-                    </select>
-                </div>
+                </div>                
             </form>
+            <div id = "presets">
+                <label for = "presets">SHAPES PRESETS</label>
+                <select name = "presets">
+                    <option value="preset1">Preset 1</option>
+                    <option value="preset2">Preset 2</option>
+                    <option value="preset3">Preset 3</option>
+                    <option value="preset4">Preset 4</option>
+                </select>
+            </div>
         </div>
-        <div id = "about-game" class="fade">
-            
+        <div id="about-game" class="fade">
+            <h3><span>ABOUT</span>GAME OF LIFE</h3>
+            <i id= "close-about-game" class="fa fa-times" aria-hidden="true"></i>
+            <p>The Game of Life is not your typical computer game. It is a 'cellular automaton', and was invented by Cambridge mathematician John Conway.<p>
+
+            <p>This game became widely known when it was mentioned in an <a href = "http://ddi.cs.uni-potsdam.de/HyFISCH/Produzieren/lis_projekt/proj_gamelife/ConwayScientificAmerican.htm" target="_blank">article</a> published by Scientific American in 1970. It consists of a collection of cells which, based on a few mathematical rules, can live, die or multiply. Depending on the initial conditions, the cells form various patterns throughout the course of the game. For an introduction, you can watch the <a href = "http://www.youtube.com/watch?v=CgOcEZinQ2I&feature=share&list=FLwikA_t8e6TSJW-L-lAHkKw" target="_blank"> video fragment from Stephen Hawkings The Meaning of Life</a>.</p>
         </div> 
-        <div id = "aboutAuthor" class = "fade">
-        
+        <div id = "about-author" class = "fade">
+            <h3>ABOUT THE AUTHOR</h3>
+            <i id= "close-about-author" class="fa fa-times" aria-hidden="true"></i>
         </div>
     </nav>
     

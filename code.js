@@ -16,7 +16,6 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
         }
         e.stopPropagation();
     }
-    
     if (e.target.classList.contains("cell")) {        
         e.target.classList.toggle("alive");        
     }             
@@ -40,7 +39,6 @@ document.getElementById("pause").addEventListener("click", function(){
 document.addEventListener("keypress", function(e){
     
     if (e.keyCode == 32) {
-    
         if (document.getElementById("start").classList.contains("hidden")) {
             clearInterval(start)
             document.getElementById("start").classList.toggle("hidden");
@@ -49,11 +47,10 @@ document.addEventListener("keypress", function(e){
             startPause();
             document.getElementById("start").classList.toggle("hidden");
             document.getElementById("pause").classList.toggle("hidden");
-            
         }
     }
-    
 });
+
 //BUTTON CLEAR - clear the board
 document.getElementById("clear").addEventListener("click", function(){
     remove();
@@ -89,13 +86,39 @@ document.getElementById("menu").addEventListener("click", function(e){
     document.getElementById("menu").classList.add("fade");
     
     console.log (clickedItem);
-    if (clickedItem.id = "open-options") {        
-        document.getElementById("options").classList.remove("fade");        
-    } else if (clickedItem.id = "open-about-game") {
+    if (clickedItem.id == "open-options") {        
+        document.getElementById("options").classList.remove("fade"); 
+        document.getElementById("about-game").classList.add("fade");
+        document.getElementById("about-author").classList.add("fade");
+    } else if (clickedItem.id == "open-about-game") {
         document.getElementById("about-game").classList.remove("fade");
-    } else if (clickedItem.id = "open-about-author") {  
+        document.getElementById("options").classList.add("fade");
+        document.getElementById("about-author").classList.add("fade");
+    } else if (clickedItem.id == "open-about-author") {  
         document.getElementById("about-author").classList.remove("fade");
+         document.getElementById("options").classList.add("fade");
+        document.getElementById("about-game").classList.add("fade");
     }
+});
+
+//MENU - closing windows - closing the window
+document.getElementById("main-navigation").addEventListener("click", function(e){
+    var clickedItem;
+    
+    if (e.target !== e.currentTarget) {
+        clickedItem = e.target;                    
+    }
+    e.stopPropagation();
+    
+    if (clickedItem.id == "close-options") {
+        document.getElementById("options").classList.add("fade"); 
+    } else if (clickedItem.id == "close-about-game") {
+        document.getElementById("about-game").classList.add("fade");       
+    } else if (clickedItem.id == "close-about-author") {
+        document.getElementById("about-author").classList.add("fade");
+    }
+      
+    document.getElementById("menu").classList.remove("fade");
 });
 
 //INPUT COLUMS - change the width of the matrix
@@ -112,7 +135,29 @@ document.getElementById("lines").addEventListener("change", function(){
     grid(col, line);
 });
 
-
+//SELECT PRESETS
+document.getElementById("presets").addEventListener("click", function(e){
+    var clickedItem;
+    
+    if (e.target !== e.currentTarget) {
+        clickedItem = e.target;                    
+    }
+    e.stopPropagation();
+  
+    if (clickedItem.id = "preset1") {   
+        remove();
+        preset1();      
+    } else if (clickedItem.id = "preset2") {
+        remove();
+       preset2();
+    } else if (clickedItem.id = "preset3") { 
+        remove();
+        preset3();
+    } else if (clickedItem.id = "preset4") {
+        remove();
+        preset4(); 
+    }
+});
 
 ///////////////////////////////FUNCTIONS///////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -129,8 +174,7 @@ grid = function createGrid(col, line) {
             }
         }
     }
-    console.log(document.getElementById("1-1"));
-    console.log(document.getElementById("1-" + col));
+    
     document.getElementById("1-1").classList.add("firstRow-first");
     document.getElementById("1-" + col).classList.add("firstRow-last");
     document.getElementById(line + "-1").classList.add("lastRow-first");
