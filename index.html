@@ -2,6 +2,8 @@
 <html>
 <head>
     <meta charset = "UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>The Game of Life</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Changa+One" rel="stylesheet">
@@ -12,67 +14,74 @@
    
 </head>
 <body>
-    <h2>Jim Meyer´s</h2>
-    <hr>
-    <h1>GAME OF LIFE</h1>
-    <div id="gridContainer">
-        <!--cells here-->
-    </div>
+    <div id = "operacional">
+        <div id = "title">
+            <h2>Jim Meyer´s</h2>
+            <hr>
+            <h1>GAME OF LIFE</h1>
+        </div>
+          <nav id = "main-navigation">
+            <ul id = "menu">
+                <li id="open-options">OPTIONS</li>            
+                <li id="open-about-game">ABOUT THE GAME</li>
+                <li id="open-about-author">ABOUT THE AUTHOR</li>
+            </ul>
+            <div id = "options" class="fade">
+                <h3>OPTIONS</h3>
+                <i id= "close-options" class="fa fa-times" aria-hidden="true"></i>
 
-    <div class="controls">
-    <button id="start"><i class="fa fa-play" aria-hidden="true"></i>start</button>
-    <button id="pause" class="hidden"><i class="fa fa-pause" aria-hidden="true"></i>pause</button>
-    <button id="clear"><i class="fa fa-refresh" aria-hidden="true"></i>clear</button>
-    <button id="random"><i class="fa fa-random" aria-hidden="true"></i>random</button>
-    <button id="invert"><i class="fa fa-adjust" aria-hidden="true"></i>invert</button>
-    <button id="preset1">preset 1</buton>
-    </div>
+                <form id="grid-control">
+                    <div>
+                        <label for="cols">COLUMS</label>
+                        <input id="cols" type="number" value="20">  
+                    </div>
+                    <div>
+                        <label for="lines">LINES</label>
+                        <input id="lines" type="number" value="30">
+                    </div>                
+                </form>
+                
+            </div>
+            <div id="about-game" class="fade">
+                <h3><span>ABOUT</span>GAME OF LIFE</h3>
+                <i id= "close-about-game" class="fa fa-times" aria-hidden="true"></i>
+                <p>The Game of Life is not your typical computer game. It is a 'cellular automaton', and was invented by Cambridge mathematician John Conway.<p>
 
-    
-    <nav id = "main-navigation">
-        <ul id = "menu">
-            <li id="open-options">OPTIONS</li>            
-            <li id="open-about-game">ABOUT THE GAME</li>
-            <li id="open-about-author">ABOUT THE AUTHOR</li>
-        </ul>
-        <div id = "options" class="fade">
-            <h3>OPTIONS</h3>
-            <i id= "close-options" class="fa fa-times" aria-hidden="true"></i>
-            
-            <form id="grid-control">
-                <div>
-                    <label for="cols">COLUMS</label>
-                    <input id="cols" type="number">  
-                </div>
-                <div>
-                    <label for="lines">LINES</label>
-                    <input id="lines" type="number">
-                </div>                
-            </form>
-            <div id = "presets">
-                <label for = "presets">SHAPES PRESETS</label>
-                <select name = "presets">
-                    <option value="preset1">Preset 1</option>
-                    <option value="preset2">Preset 2</option>
-                    <option value="preset3">Preset 3</option>
-                    <option value="preset4">Preset 4</option>
-                </select>
+                <p>This game became widely known when it was mentioned in an <a href = "http://ddi.cs.uni-potsdam.de/HyFISCH/Produzieren/lis_projekt/proj_gamelife/ConwayScientificAmerican.htm" target="_blank">article</a> published by Scientific American in 1970. It consists of a collection of cells which, based on a few mathematical rules, can live, die or multiply. Depending on the initial conditions, the cells form various patterns throughout the course of the game. For an introduction, you can watch the <a href = "http://www.youtube.com/watch?v=CgOcEZinQ2I&feature=share&list=FLwikA_t8e6TSJW-L-lAHkKw" target="_blank"> video fragment from Stephen Hawkings The Meaning of Life</a>.</p>
+            </div> 
+            <div id = "about-author" class = "fade">
+                <h3>ABOUT THE AUTHOR</h3>
+                <i id= "close-about-author" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </nav>
+    </div>
+    <main>
+        <div id="gridContainer">
+            <!--cells here-->
+        </div>
+            <div class="controls">
+            <button id="start"><i class="fa fa-play" aria-hidden="true"></i>start</button>
+            <button id="pause" class="hidden"><i class="fa fa-pause" aria-hidden="true"></i>pause</button>
+            <button id="clear"><i class="fa fa-refresh" aria-hidden="true"></i>clear</button>
+            <button id="random"><i class="fa fa-random" aria-hidden="true"></i>random</button>
+            <button id="preset"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><i class="fa fa-ellipsis-h" aria-hidden="true"></i><i class="fa fa-ellipsis-v" aria-hidden="true"></i>preset</button>
+        </div>
+    </main>
+    <div id = "presets-div" class = "fade">
+        <div id="presets-div-header">
+            <h3>SHAPES PRESETS</h3>
+            <div id="presets-div-new">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <p>NEW PRESET</p>
             </div>
         </div>
-        <div id="about-game" class="fade">
-            <h3><span>ABOUT</span>GAME OF LIFE</h3>
-            <i id= "close-about-game" class="fa fa-times" aria-hidden="true"></i>
-            <p>The Game of Life is not your typical computer game. It is a 'cellular automaton', and was invented by Cambridge mathematician John Conway.<p>
-
-            <p>This game became widely known when it was mentioned in an <a href = "http://ddi.cs.uni-potsdam.de/HyFISCH/Produzieren/lis_projekt/proj_gamelife/ConwayScientificAmerican.htm" target="_blank">article</a> published by Scientific American in 1970. It consists of a collection of cells which, based on a few mathematical rules, can live, die or multiply. Depending on the initial conditions, the cells form various patterns throughout the course of the game. For an introduction, you can watch the <a href = "http://www.youtube.com/watch?v=CgOcEZinQ2I&feature=share&list=FLwikA_t8e6TSJW-L-lAHkKw" target="_blank"> video fragment from Stephen Hawkings The Meaning of Life</a>.</p>
-        </div> 
-        <div id = "about-author" class = "fade">
-            <h3>ABOUT THE AUTHOR</h3>
-            <i id= "close-about-author" class="fa fa-times" aria-hidden="true"></i>
+        <div id="presets-div-items">
+            <img src="img/circleCross.jpg" id="preset-0">
+            <img src="img/gosperGlider.jpg" id = preset-1>
         </div>
-    </nav>
-    
-    
+        
+        
+    </div>
     <script src="code.js"></script>
 </body>
 </html>

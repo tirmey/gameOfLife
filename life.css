@@ -1,26 +1,65 @@
 body {
-    padding: 10px;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+                -ms-flex-pack: distribute;
+                    justify-content: space-around;
     background-image: url(img/back.jpg);
     font-family: 'Ubuntu', sans-serif;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
+#operacional {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;  
+    -ms-flex-line-pack: start;  
+        align-content: flex-start;
+    width: 300px;
+    height: 100vh;
+    margin: 20px;
+    -ms-flex-preferred-size: 10%;
+        flex-basis: 10%;
+   
+}
+
+main {
+    margin: 0 20px;
+    -ms-flex-preferred-size: 90%;
+        flex-basis: 90%;
+   
+}
 #gridContainer {
     line-height: 0px;
 }
 
 h1 {
     text-align: center;
-    color: #ddd;
-    font-size: 7vmin;
+    color: #ddd;    
     margin: 10px auto 30px auto;
-    font-size: 9vmin;
+    font-size: 5vmin;
     font-family: 'Changa One', cursive;
     font-weight: 100;
     letter-spacing: 0.3vmin;
 }
 
 hr {
-    width: 300px;
+    width: 230px;
     margin: 0 auto;
     height: 2px;
     background-color: #ddd;
@@ -28,14 +67,14 @@ hr {
 }
 
 h2 {
-    
     text-align: center;
     color: #ddd;
-    margin: 40px auto 30px auto;
-    font-size: 3.5vmin;
+    margin: 40px auto 10px auto;
+    font-size: 3vmin;
     font-weight: 100;
     letter-spacing: 0.15vmin;
     font-family: 'Changa One', cursive;
+    text-transform: uppercase;
 }
 
 h3 {
@@ -70,7 +109,7 @@ a {
 }
 
 .cell {
-    border: 0.2vmin solid rgba(180, 218, 250, 0.27);
+    border: 0.2vmin solid rgba(180, 218, 250, 0.15);
     width: 2vmin;
     height: 2vmin;
     display: inline-block;
@@ -81,16 +120,7 @@ input {
 }
 
 .alive {
-    background-color: white;
-}
-
-.hidden {
-    display: none;
-}
-
-.fade {
-    opacity: 0;
-    z-index: -2
+    background-color: #fff !important;
 }
 
 .firstRow-first {
@@ -114,7 +144,9 @@ input {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+            flex-flow: row nowrap;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
@@ -143,6 +175,14 @@ button {
     margin-bottom: 5px;
 }
 
+.controls .fa {
+    width: 50%;
+}
+
+.controls button:last-of-type .fa {
+    width:25%;
+}
+
 #start {
     background-color: #279027;
     color: #ddd;    
@@ -157,12 +197,13 @@ ul {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-line-pack: distribute;
-        align-content: space-around;
-    position: fixed;
+        align-content: space-around;    
     bottom: 50px;
     right: 50px;
     -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+            flex-flow: row wrap;
     width: 250px;
     height: 200px;
     border: solid #ddd 2px;
@@ -196,13 +237,14 @@ nav > div {
     -ms-flex-line-pack: flex-start;
     align-content: flex-start;
     -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-    position: fixed;
-    top: 245px;
-    right: 50px;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    position: absolute;
+    top: 278px;
     -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+            flex-flow: row wrap;
     width: 250px;
     height: 380px;
     border: solid #ddd 2px;
@@ -230,9 +272,7 @@ nav div::-webkit-scrollbar-track {
 nav div::-webkit-scrollbar-thumb {
     background-color: #ddd;
     border-radius: 10px;
- 
 }
-
 
 nav div .fa {
     position: absolute;
@@ -241,7 +281,6 @@ nav div .fa {
     right: 10px;
     width: 20px;
     cursor: pointer;
-    
 }
 
 form div {
@@ -249,13 +288,12 @@ form div {
     display: -ms-flexbox;
     display: flex;
     position: relative;
-    
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     width: 70%;
     z-index: 1;
 }
@@ -294,7 +332,9 @@ input[type=number]::-webkit-outer-spin-button {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+            flex-flow: row wrap;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     justify-content: flex-start;
@@ -304,37 +344,113 @@ input[type=number]::-webkit-outer-spin-button {
     margin-right: 3vmin;
 }
 
-#presets {
-    margin-top: 15px;
-}
-
-#presets label {
-   
-}
-
-select {
-    border-radius: 3px;
-    background: transparent;
-    padding: 0vmin 1.4vmin;
-    margin: 1vmin 0.4vmin; 
-    width: 100%;
-    font-size: 0.9em;
+#presets-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 20px;
+    border-radius: 10px;
     border: 2px solid #ddd;
-    height: 40px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s
+    
+}
+
+#presets-div-header {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#presets-div h3 {
+    text-align: left;
+    margin: 5px 0;
+}
+
+#presets-div i {
+    color: #ddd;
+    font-size: 1em;
+    margin-right: -5px !important;
+    padding-top: 5px;
+}
+
+#presets-div p {
+    display: inline-block;
     font-family: 'Changa One', cursive;
     font-weight: 100;
-    text-transform: uppercase;
     color: #ddd;
-    letter-spacing: 0.1em;
+    font-size: 1em;
 }
 
-
-
-#presets select option {
-    background-color: rgb(4, 72, 108);
-    
-    
+#presets-div-new {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 120px;
 }
+
+#presets-div img {
+    width: 50px;
+    border-radius: 10px;
+    margin: 5px;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.preset-selected, #presets-div img:hover {
+    -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+}
+
+.preset-selected {
+    -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+    border: 3px solid #71a3b5;
+}
+
+#cancel-preset-insertion {
+    color: #ddd; 
+    font-size: 1.8vmin;
+    margin-top: 20px;
+    padding: 10px 5px;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    -webkit-transition: all 0.6s;
+    transition: all 0.6s;
+}
+
+.hidden {
+    display: none;
+}
+
+.fade {
+    opacity: 0;
+    z-index: -2
+}
+
+.blink {
+    opacity: 0.2;
+}
+
+.inboard {
+    background-color: rgba(50, 193, 89, 0.45);
+}
+
+.outboard {
+     background-color: rgba(193, 50, 50, 0.45);
+}
+
