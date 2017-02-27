@@ -99,7 +99,7 @@ document.getElementById("gridContainer").addEventListener("mouseover", function(
         idLine = Number(idSplit[0]);
         idColumn = Number(idSplit[1]);
     }
-    console.log("selcted preset vale" + presets.selectedPreset);
+    
     preset = presets.selectedPreset.split("-")[1];
     presetNumber = Number(preset);
     
@@ -216,7 +216,7 @@ document.getElementById("random").addEventListener("click", function(){
 document.getElementById("preset").addEventListener("click", function(e) {
     document.getElementById("presets-div").classList.toggle("fade");
     presets.selectedPreset = "";    
-    var removeAll = document.getElementById("presets-div").children;
+    var removeAll = document.getElementById("presets-div-items").children;
     for (let i = 0; i < removeAll.length; i++) {        
         removeAll[i].classList.remove("preset-selected");
     }
@@ -234,16 +234,11 @@ document.getElementById("presets-div-items").addEventListener("click", function(
     
     if (e.target.classList.contains("icon-cluster")) {
         selected = e.target.parentElement
-        console.log("tem icon-cluster!");
     } else if (e.target.classList.contains("fa")) {
-        selected = e.target.parentElement.parentElement;  
-        console.log("tem fa!");
+        selected = e.target.parentElement.parentElement; 
     } else if (e.target.classList.contains("preset-item")) {
         selected = e.target;
     }
-    console.log(selected);
-    
-    
     
     removeAll = document.getElementById("presets-div-items").children;
     for (let i = 0; i < removeAll.length; i++) {
