@@ -230,13 +230,24 @@ document.getElementById("presets-div-new").addEventListener("click", function() 
 //SELECT PRESETS 
 document.getElementById("presets-div-items").addEventListener("click", function(e) {   
     
+    var selected;
+    
+    if (e.target.classList.contains("icon-cluster")) {
+        selected = e.target.parentElement
+        console.log("tem icon-cluster!");
+    } else if (e.target.classList.contains("fa")) {
+        selected = e.target.parentElement.parentElement;  
+        console.log("tem fa!");
+    } else if (e.target.classList.contains("preset-item")) {
+        selected = e.target;
+    }
+    console.log(selected);
     
     
     
-    //removing the selection from all other preset icons
     removeAll = document.getElementById("presets-div-items").children;
     for (let i = 0; i < removeAll.length; i++) {
-        if (removeAll[i] == e.target) {
+        if (removeAll[i] == selected) {
             continue;
         } else {
             removeAll[i].classList.remove("preset-selected");
@@ -244,13 +255,13 @@ document.getElementById("presets-div-items").addEventListener("click", function(
     }
     
     //clicking on an icon toggles the "select-preset" class
-    if (e.target.id != "presets-div-items") { //to exclude the DIV itself
-        e.target.classList.toggle("preset-selected");
+    if (selected.id != "presets-div-items") { //to exclude the DIV itself
+        selected.classList.toggle("preset-selected");
     }
     
     //defining the selectedPreset object property
-    if (e.target != document.getElementById("presets-div") && e.target.classList.contains("preset-selected") ) {
-        presets.selectedPreset = e.target.id; 
+    if (selected != document.getElementById("presets-div") && selected.classList.contains("preset-selected") ) {
+        presets.selectedPreset = selected.id; 
     } else {
         presets.selectedPreset = "";
     }
@@ -523,7 +534,7 @@ writePattern = function() {
                 }   
         };
         presets.presetList.push(newPreset); 
-        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><div><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[presets.presetList.length - 1].name + "</div>");
+        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[presets.presetList.length - 1].name + "</div>");
         console.log(presets.presetList);
         
     } else {
@@ -538,6 +549,6 @@ grid(col, line);
 //writing the presets
 (function(){
     for (let i = 0; i < presets.presetList.length; i++) {
-        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + i + "' class='preset-item'><div><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[i].name + "</div>");
+        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + i + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[i].name + "</div>");
     }
 })();
