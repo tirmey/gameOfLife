@@ -147,7 +147,6 @@ document.getElementById("gridContainer").addEventListener("mouseout", function(e
                 if ((idLine - j > 0) && (idColumn + i <= col)) {
                     document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.remove("inboard");
                     document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.remove("outboard");
-                    console.log("apagando");
                 }
             }
         }
@@ -210,6 +209,11 @@ document.getElementById("preset").addEventListener("click", function(e) {
     }
 });
 
+// ADD PRESET
+document.getElementById("presets-div-new").addEventListener("click", function() {
+    writePattern();
+});
+
 //SELECT PRESETS 
 document.getElementById("presets-div-items").addEventListener("click", function(e) {   
     
@@ -224,7 +228,7 @@ document.getElementById("presets-div-items").addEventListener("click", function(
     }
     
     //clicking on an icon toggles the "select-preset" class
-    if (e.target.id != "presets-div-items") {
+    if (e.target.id != "presets-div-items") { //to exclude the DIV itself
         e.target.classList.toggle("preset-selected");
     }
     
@@ -247,8 +251,7 @@ document.getElementById("menu").addEventListener("click", function(e){
     e.stopPropagation();
     
     if (clickedItem.id != "menu") {
-        document.getElementById("menu").classList.add("fade");
-        console.log(clickedItem);
+        document.getElementById("menu").classList.add("fade");       
     }    
     if (clickedItem.id == "open-options") {        
         document.getElementById("options").classList.remove("fade"); 
@@ -411,10 +414,6 @@ insertPreset = function(selectedPreset, initialPosition) {
     presetNumber = Number(presetSplit[1]); 
     
     
-    console.log("ID split1 - coluna: " + (idColumn));
-    console.log("incremento coluna: " + presets.presetList[presetSplit[1]].limits.dX);
-    console.log("ID split0 - linha: " + (idLine));
-    console.log("decremento linha: " + presets.presetList[presetSplit[1]].limits.dY);
     // generating the shape, based on the initial position
     if (idColumn + presets.presetList[presetNumber].limits.dX <= col && idLine - presets.presetList[presetNumber].limits.dY > 0) {            
         for (let i = 0; i < presets.presetList[presetNumber].coordinates.length; i++) {                
@@ -426,18 +425,91 @@ insertPreset = function(selectedPreset, initialPosition) {
 }
 
 writePattern = function() {
-    var newArrayCoord,
+    var newArrayCoord =[],
+        arrLines = [],
+        arrLinesSorted = [],
+        arrLinesTransposed = [],
+        arrCols = [],
+        arrColsSorted = [],
+        arrColsTransposed = [],
+        formattedCoordinates = [],
+        newPreset = {},
+        dL, //delta line
+        dC, // delta column
         idSplit;
     
+    function transpose(array, type) { //type shouuld be "lines" ou "cols"
+        
+        if (type == "lines") {
+            for (let i = 0; i < array.length; i++) {
+                array[i] -= arrLinesSorted[arrLinesSorted.length - 1];//each element will be subtracted from the max line value
+            }
+        } else if (type == "cols") {
+            for (let i = 0; i < array.length; i++) {
+                array[i] -= arrColsSorted[0];//each element will be subtracted from the max line value
+            }
+        }
+        return array;
+    }
     
-    for(let i = 0; i <= line; i++) {
-        for (let j = 0; j <= col; j++) {
+    // getting the recorded points
+    for(let i = 1; i <= line; i++) {
+        for (let j = 1; j <= col; j++) {
             if (document.getElementById(i + "-" + j).classList.contains("alive")) {
                 newArrayCoord.push([i,j]);
             }
         }
     } 
-    presets.presetList.push(newArrayCoord);   
-    document.getElementById("presets-div").insertAdjacentHTML("beforeend", "new array");
+    
+    
+    //separating the lines and columns in other arrays to sorting
+    for (let i = 0; i<newArrayCoord.length; i++) {
+        arrLines.push(newArrayCoord[i][0]); //array with all the lines
+        arrCols.push(newArrayCoord[i][1]); //array with all the columns
+    }
+    
+    //copying the values of the original arrays for sorting
+    for (let i = 0; i < newArrayCoord.length; i++) {
+        arrLinesSorted[i] = arrLines[i];
+        arrColsSorted[i] = arrCols[i];
+    }
+    
+    //sorting the arrays to determine dL and dC:
+    arrLinesSorted.sort(function(a, b){return a-b}); //sorting in ascending order
+    arrColsSorted.sort(function(a, b){return a-b}); //sorting in ascending order
+    
+    //determining dL and dC
+    dL = arrLinesSorted[arrLinesSorted.length-1] - arrLinesSorted[0];
+    dC = arrColsSorted[arrColsSorted.length-1] - arrColsSorted[0];
+    
+ 
+    //transposing the points
+    arrLinesTransposed = transpose(arrLines, "lines");
+    arrColsTransposed = transpose(arrCols, "cols");
+    
+ 
+    //joining the points
+    for (let i = 0; i < arrLines.length; i++) {
+        let joined = [arrLinesTransposed[i], arrColsTransposed[i]];
+        formattedCoordinates.push(joined);
+    }
+    
+    newPreset = {
+            src: "",
+            coordinates: formattedCoordinates,
+            limits: {
+                dX: dC,
+                dY: dL
+            }   
+    };
+  
+    if (formattedCoordinates[0] != undefined) {
+        presets.presetList.push(newPreset); 
+        document.getElementById("presets-div-items").insertAdjacentHTML("beforeend", "<p id='preset-" + (presets.presetList.length - 1) + "'> preset " + presets.presetList.length + "</p>");
+        console.log(presets.presetList);
+        
+    }
 }
+
+
 grid(col, line);
