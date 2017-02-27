@@ -14,6 +14,17 @@ body {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+     -webkit-touch-callout: none; 
+/* iOS Safari */ 
+-webkit-user-select: none; 
+/* Chrome/Safari/Opera */ 
+/* Konqueror */ 
+-moz-user-select: none; 
+/* Firefox */ 
+-ms-user-select: none; 
+/* Internet Explorer/Edge */ 
+user-select: none; 
+/* Non-prefixed version, currently not supported by any browser */ 
 }
 
 #operacional {
@@ -166,7 +177,8 @@ button {
     border: none;
     border-radius: 3px;    
     padding: 1vmin 1.5vmin;
-    margin: 1vmin 0.4vmin;    
+    margin: 1vmin 0.4vmin;   
+    width: 70px;
 }
 
 .fa {
@@ -180,7 +192,7 @@ button {
 }
 
 .controls button:last-of-type .fa {
-    width:25%;
+    width: 15%;   
 }
 
 #start {
@@ -259,16 +271,16 @@ nav > div {
     overflow: auto;
 }
 
-nav div::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 0.25em;
 }
  
-nav div::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 0 rgba(0,0,0,0);
     
 }
  
-nav div::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #ddd;
     border-radius: 10px;
 }
@@ -352,13 +364,17 @@ input[type=number]::-webkit-outer-spin-button {
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
     position: absolute;
+    width: 350px;
+    height: 270px;
+    overflow: auto;
     bottom: 10px;
-    left: 10px;
+    left: 20px;
     padding: 20px;
     border-radius: 10px;
     border: 2px solid #ddd;
     -webkit-transition: all 0.5s;
-    transition: all 0.5s
+    transition: all 0.5s;
+    
     
 }
 
@@ -372,7 +388,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 5px 0;
 }
 
-#presets-div i {
+#presets-div-new i {
     color: #ddd;
     font-size: 1em;
     margin-right: -5px !important;
@@ -395,42 +411,57 @@ input[type=number]::-webkit-outer-spin-button {
         -ms-flex-align: center;
             align-items: center;
     width: 120px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
 }
 
-#presets-div img {
-    width: 50px;
-    border-radius: 10px;
-    margin: 5px;
+#presets-div-new:hover {
+    -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+}
+
+#presets-div-items {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+}
+
+.preset-item {
+    width: 60px;
+    border-radius: 4px;
+    background-color: #ddd;
+    margin: 5px 5px;
+    text-transform: uppercase;
+    font-size: 0.55em;
+    text-align: center;
+    padding: 8px 0px;
+    cursor: pointer;
     -webkit-transition: -webkit-transform 0.3s;
     transition: -webkit-transform 0.3s;
     transition: transform 0.3s;
     transition: transform 0.3s, -webkit-transform 0.3s;
+    border: 3px solid #ddd;
 }
 
-.preset-selected, #presets-div img:hover {
+.preset-item .fa {    
+    width: 15%;
+}
+
+.preset-item:hover {
     -webkit-transform: scale(1.1, 1.1);
             transform: scale(1.1, 1.1);
 }
 
 .preset-selected {
-    -webkit-transform: scale(1.1, 1.1);
-            transform: scale(1.1, 1.1);
+
     border: 3px solid #71a3b5;
 }
 
-#cancel-preset-insertion {
-    color: #ddd; 
-    font-size: 1.8vmin;
-    margin-top: 20px;
-    padding: 10px 5px;
-    text-align: center;
-    border: 2px solid #ddd;
-    border-radius: 3px;
-    cursor: pointer;
-    -webkit-transition: all 0.3s;
-    -webkit-transition: all 0.6s;
-    transition: all 0.6s;
-}
 
 .hidden {
     display: none;

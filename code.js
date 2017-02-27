@@ -19,8 +19,7 @@ var col = 20,
         presetList: [
         
             {
-                src: "img/circleCross.jpg",
-
+                name: "DiCross",
                 coordinates:
                 [[-3,0], [-4,0], [-5,0], [-2,1], [-4,1], [-6,1], [-1,2], [-4,2], [-7,2], [0,3], [-4,3], [-8,3], [0,4], [-1,4], [-2,4], [-3,4], [-4,4], [-5,4], [-6,4], [-7,4], [-8,4], [0,5], [-4,5], [-8,5], [-1,6], [-4,6], [-7,6], [-2,7], [-4,7], [-6,7], [-3,8], [-4,8], [-5,8]],//initialPosition,
 
@@ -31,7 +30,7 @@ var col = 20,
             },
             
             {
-                src: "img/gosperGlider.jpg",
+                name: "GosperGl",    
                 coordinates:
                 [[-4,0], [-5,0], [-4,1], [-5,1], [-3,10], [-4,10], [-5,10], [-2,11], [-6,11], [-1,12], [-7,12], [-1,13], [-7,13], [-4,14], [-2,15], [-6,15], [-3,16], [-4,16], [-5,16], [-4,17], [-5,20], [-6,20], [-7,20], [-5,21], [-6,21], [-7,21], [-4,22], [-8,22], [-3,24], [-4,24], [-8,24], [-9,24], [-6,34], [-7,34], [-6,35], [-7,35]],
 
@@ -39,6 +38,20 @@ var col = 20,
                     dX: 35,
                     dY: 9
                 }
+            },
+            
+            {
+                name: "Pulsar",
+               
+                coordinates:
+                [[-12,2], [-12,3], [-12,4], [-12,8], [-12,9], [-12,10], [-10,0], [-10,5], [-10,7], [-10,12], [-9,0], [-9,5], [-9,7], [-9,12], [-8,0], [-8,5], [-8,7], [-8,12], [-7,2], [-7,3], [-7,4], [-7,8], [-7,9], [-7,10], [-5,2], [-5,3], [-5,4], [-5,8], [-5,9], [-5,10], [-4,0], [-4,5], [-4,7], [-4,12], [-3,0], [-3,5], [-3,7], [-3,12], [-2,0], [-2,5], [-2,7], [-2,12], [0,2], [0,3], [0,4], [0,8], [0,9], [0,10]], 
+            
+                limits: {
+                    dX: 12,
+                    dY: 12
+                }
+            
+            
             }
         ]
     };
@@ -86,7 +99,7 @@ document.getElementById("gridContainer").addEventListener("mouseover", function(
         idLine = Number(idSplit[0]);
         idColumn = Number(idSplit[1]);
     }
-
+    console.log("selcted preset vale" + presets.selectedPreset);
     preset = presets.selectedPreset.split("-")[1];
     presetNumber = Number(preset);
     
@@ -216,6 +229,9 @@ document.getElementById("presets-div-new").addEventListener("click", function() 
 
 //SELECT PRESETS 
 document.getElementById("presets-div-items").addEventListener("click", function(e) {   
+    
+    
+    
     
     //removing the selection from all other preset icons
     removeAll = document.getElementById("presets-div-items").children;
@@ -434,6 +450,7 @@ writePattern = function() {
         arrColsTransposed = [],
         formattedCoordinates = [],
         newPreset = {},
+        name,
         dL, //delta line
         dC, // delta column
         idSplit;
@@ -460,7 +477,6 @@ writePattern = function() {
             }
         }
     } 
-    
     
     //separating the lines and columns in other arrays to sorting
     for (let i = 0; i<newArrayCoord.length; i++) {
@@ -494,22 +510,34 @@ writePattern = function() {
         formattedCoordinates.push(joined);
     }
     
-    newPreset = {
-            src: "",
-            coordinates: formattedCoordinates,
-            limits: {
-                dX: dC,
-                dY: dL
-            }   
-    };
+    
   
     if (formattedCoordinates[0] != undefined) {
+        name = prompt("please inform the name of the new preset (8 char max.)");
+        newPreset = { 
+                name: name,
+                coordinates: formattedCoordinates,
+                limits: {
+                    dX: dC,
+                    dY: dL
+                }   
+        };
         presets.presetList.push(newPreset); 
-        document.getElementById("presets-div-items").insertAdjacentHTML("beforeend", "<p id='preset-" + (presets.presetList.length - 1) + "'> preset " + presets.presetList.length + "</p>");
+        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><div><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[presets.presetList.length - 1].name + "</div>");
         console.log(presets.presetList);
         
+    } else {
+        alert("draw some cells to record a new preset");
     }
 }
 
 
+
 grid(col, line);
+
+//writing the presets
+(function(){
+    for (let i = 0; i < presets.presetList.length; i++) {
+        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + i + "' class='preset-item'><div><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[i].name + "</div>");
+    }
+})();
