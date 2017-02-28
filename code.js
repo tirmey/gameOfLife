@@ -6,8 +6,7 @@ var col = 20,
     marking,
     random,
     action,
-    getPresetPosition,
-    insertPreset,   
+    getPresetPosition,     
     start,
     blink;
     
@@ -75,7 +74,175 @@ var col = 20,
                 }
             }
         
-        ]
+        ],
+        
+        insertPreset: function(selectedPreset, initialPosition) { //preset method
+            //initial position is the id of the cell (remebering, I-J, or line-col)
+            var idSplit,
+                presetSplit,   
+                idLine,
+                idColumn,
+                presetNumber;
+
+            idSplit = initialPosition.split("-");
+            presetSplit = selectedPreset.split("-"); //presetsplit[0] is the word "preset" and presetSplit[1] is the index of the preset
+
+            idLine = Number(idSplit[0]);
+            idColumn = Number(idSplit[1]);
+            presetNumber = Number(presetSplit[1]); 
+
+
+            // generating the shape, based on the initial position
+            if (idColumn + presets.presetList[presetNumber].limits.dX <= col && idLine - presets.presetList[presetNumber].limits.dY > 0) {            
+                for (let i = 0; i < presets.presetList[presetNumber].coordinates.length; i++) {                
+                    document.getElementById((idLine + presets.presetList[presetNumber].coordinates[i][0]) + "-" + (idColumn + presets.presetList[presetNumber].coordinates[i][1])).classList.add("alive")
+                }
+            } else {
+                console.log("no room to insert this shape");
+            }
+        },
+        
+        writePattern: function() { //preset method
+            var newArrayCoord =[],
+                arrLines = [],
+                arrLinesSorted = [],
+                arrLinesTransposed = [],
+                arrCols = [],
+                arrColsSorted = [],
+                arrColsTransposed = [],
+                formattedCoordinates = [],
+                newPreset = {},
+                name,
+                dL, //delta line
+                dC, // delta column
+                idSplit;
+
+            function transpose(array, type) { //type should be "lines" ou "cols"
+
+                if (type == "lines") {
+                    for (let i = 0; i < array.length; i++) {
+                        array[i] -= arrLinesSorted[arrLinesSorted.length - 1];//each element will be subtracted from the max line value
+                    }
+                } else if (type == "cols") {
+                    for (let i = 0; i < array.length; i++) {
+                        array[i] -= arrColsSorted[0];//each element will be subtracted from the max line value
+                    }
+                }
+                return array;
+            }
+
+            // getting the recorded points
+            for(let i = 1; i <= line; i++) {
+                for (let j = 1; j <= col; j++) {
+                    if (document.getElementById(i + "-" + j).classList.contains("alive")) {
+                        newArrayCoord.push([i,j]);
+                    }
+                }
+            } 
+
+            //separating the lines and columns in other arrays to sorting
+            for (let i = 0; i<newArrayCoord.length; i++) {
+                arrLines.push(newArrayCoord[i][0]); //array with all the lines
+                arrCols.push(newArrayCoord[i][1]); //array with all the columns
+            }
+
+            //copying the values of the original arrays for sorting
+            for (let i = 0; i < newArrayCoord.length; i++) {
+                arrLinesSorted[i] = arrLines[i];
+                arrColsSorted[i] = arrCols[i];
+            }
+
+            //sorting the arrays to determine dL and dC:
+            arrLinesSorted.sort(function(a, b){return a-b}); //sorting in ascending order
+            arrColsSorted.sort(function(a, b){return a-b}); //sorting in ascending order
+
+            //determining dL and dC
+            dL = arrLinesSorted[arrLinesSorted.length-1] - arrLinesSorted[0];
+            dC = arrColsSorted[arrColsSorted.length-1] - arrColsSorted[0];
+
+
+            //transposing the points
+            arrLinesTransposed = transpose(arrLines, "lines");
+            arrColsTransposed = transpose(arrCols, "cols");
+
+
+            //joining the points
+            for (let i = 0; i < arrLines.length; i++) {
+                let joined = [arrLinesTransposed[i], arrColsTransposed[i]];
+                formattedCoordinates.push(joined);
+            }
+
+
+
+            if (formattedCoordinates[0] != undefined) {
+                name = document.getElementById("input-preset-name").value;
+                newPreset = { 
+                        name: name,
+                        coordinates: formattedCoordinates,
+                        limits: {
+                            dX: dC,
+                            dY: dL
+                        }   
+                };
+                presets.presetList.push(newPreset); 
+                document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-trash' aria-hidden='true' class = 'fade'></i></div>" + presets.presetList[presets.presetList.length - 1].name + "</div>");
+                console.log(presets.presetList);
+
+            } else {
+                alert("draw some cells first to record a new preset");
+            }
+            document.getElementById("input-preset-name").value = "";
+            document.getElementById("preset-name").classList.add("fade");
+        },
+        
+        rotateObj: function() { //preset method
+            var presetIndex,
+                rotatedCoord = [],
+                dXInverted,
+                dYInverted,
+                rotatedObj = {};
+
+            //picking the id of the current selected preset
+            presetIndex = presets.selectedPreset.split("-")[1];
+
+            //rotating their coordinates and inverting their limits
+            rotatedCoord = rotateArray(presets.presetList[presetIndex].coordinates);
+            dXInverted = presets.presetList[presetIndex].limits.dY;
+            dYInverted = presets.presetList[presetIndex].limits.dX;
+
+            //creating the temporary object
+            rotatedObj = {                
+                name: "temporary-" + (presets.presetList.length - 1), // - o nome não pode ser temporário... tem que ser temporário-lastIndex... pára a função insertPreset poder clivar o nome e pegar a parte numérica, que é o índex da criança - que deverá ser sempre o último! 
+                coordinates: rotatedCoord,
+                limits: {
+                    dX: dXInverted,
+                    dY:dYInverted
+                }
+            };
+
+            if (presets.presetList[presets.presetList.length - 1].name == "temporary-" + (presets.presetList.length - 1) || presets.presetList[presets.presetList.length - 1].name == "temporary-" + (presets.presetList.length)) {
+                //eliminating the previous rotation
+                presets.presetList.pop();
+                console.log("apagou");
+
+            }
+            rotatedObj.name = "temporary-" + (presets.presetList.length); // the temporary preset name should be the lenght of the preset array, because it will be inserted in the next-step! 
+
+            //including the rotated object in the objects array
+            presets.presetList.push(rotatedObj);  
+            presets.selectedPreset = presets.presetList[presets.presetList.length-1].name;
+            console.log("the selected preset now is ");
+            console.log(presets.selectedPreset);
+        },
+        
+        deleteTemporary: function() { //array method
+            var lastPresetType;    
+            lastPresetType = presets.presetList[presets.presetList.length - 1].name.split("-")[0];
+            if (lastPresetType == "temporary") {
+                presets.presetList.pop();
+            }
+        }
+
     };
 ///////////////////////////////LISTENERS//////////////////////////////
 //////////////////////////////////////////////////////////////////////
@@ -96,7 +263,7 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
             e.target.classList.toggle("alive");        
         }
     } else {
-        insertPreset(presets.selectedPreset, clickedItem.id);
+        presets.insertPreset(presets.selectedPreset, clickedItem.id);
     }
 });
 
@@ -251,27 +418,15 @@ document.getElementById("presets-div-new").addEventListener("click", function() 
 
 // SELECTING A PRESET NAME
 document.getElementById("input-preset-name-ok").addEventListener("click", function() {
-    
-    
-    var lastPresetType;    
-    lastPresetType = presets.presetList[presets.presetList.length - 1].name.split("-")[0];   
-    if (lastPresetType == "temporary") {
-        presets.presetList.pop();
-    }
-    writePattern();
+    presets.deleteTemporary()
+    presets.writePattern();
 });
 
 //SELECTING A PRESET NAME - ENTER KEY
 document.addEventListener("keypress", function(e) {
     if (e.keyCode == 13 && document.getElementById("input-preset-name") === document.activeElement) {
-        var lastPresetType;    
-        lastPresetType = presets.presetList[presets.presetList.length - 1].name.split("-")[0];
-
-
-        if (lastPresetType == "temporary") {
-            presets.presetList.pop();
-        }
-        writePattern();
+        presets.deleteTemporary();
+        presets.writePattern();
     }
     
 });
@@ -359,12 +514,8 @@ document.addEventListener("keypress", function(e) {
         
     //rotating the item if some preset is selected. keyCode 82 correspond to letter "r"
     if (e.keyCode == 114 && presets.selectedPreset != "") {
+        presets.rotateObj();  
         
-        rotateObj();  
-        
-       
-        console.log("ao final da rotação, o nome do preset ativo é: ")
-        console.log(presets.selectedPreset);   
         console.log("eis os presets salvos, incluindo o temporário: ")
         console.log(presets.presetList);
     }
@@ -538,128 +689,7 @@ startPause = function() {
     },actionVelocity);
 }
 
-insertPreset = function(selectedPreset, initialPosition) {
-    //initial position is the id of the cell (remebering, I-J, or line-col)
-    var idSplit,
-        presetSplit,   
-        idLine,
-        idColumn,
-        presetNumber;
-    
-    idSplit = initialPosition.split("-");
-    presetSplit = selectedPreset.split("-"); //presetsplit[0] is the word "preset" and presetSplit[1] is the index of the preset
-    
-    idLine = Number(idSplit[0]);
-    idColumn = Number(idSplit[1]);
-    presetNumber = Number(presetSplit[1]); 
-    
-    
-    // generating the shape, based on the initial position
-    if (idColumn + presets.presetList[presetNumber].limits.dX <= col && idLine - presets.presetList[presetNumber].limits.dY > 0) {            
-        for (let i = 0; i < presets.presetList[presetNumber].coordinates.length; i++) {                
-            document.getElementById((idLine + presets.presetList[presetNumber].coordinates[i][0]) + "-" + (idColumn + presets.presetList[presetNumber].coordinates[i][1])).classList.add("alive")
-        }
-    } else {
-        console.log("no room to insert this shape");
-    }
-}
-
-
-
-writePattern = function() {
-    var newArrayCoord =[],
-        arrLines = [],
-        arrLinesSorted = [],
-        arrLinesTransposed = [],
-        arrCols = [],
-        arrColsSorted = [],
-        arrColsTransposed = [],
-        formattedCoordinates = [],
-        newPreset = {},
-        name,
-        dL, //delta line
-        dC, // delta column
-        idSplit;
-    
-    function transpose(array, type) { //type shouuld be "lines" ou "cols"
-        
-        if (type == "lines") {
-            for (let i = 0; i < array.length; i++) {
-                array[i] -= arrLinesSorted[arrLinesSorted.length - 1];//each element will be subtracted from the max line value
-            }
-        } else if (type == "cols") {
-            for (let i = 0; i < array.length; i++) {
-                array[i] -= arrColsSorted[0];//each element will be subtracted from the max line value
-            }
-        }
-        return array;
-    }
-    
-    // getting the recorded points
-    for(let i = 1; i <= line; i++) {
-        for (let j = 1; j <= col; j++) {
-            if (document.getElementById(i + "-" + j).classList.contains("alive")) {
-                newArrayCoord.push([i,j]);
-            }
-        }
-    } 
-    
-    //separating the lines and columns in other arrays to sorting
-    for (let i = 0; i<newArrayCoord.length; i++) {
-        arrLines.push(newArrayCoord[i][0]); //array with all the lines
-        arrCols.push(newArrayCoord[i][1]); //array with all the columns
-    }
-    
-    //copying the values of the original arrays for sorting
-    for (let i = 0; i < newArrayCoord.length; i++) {
-        arrLinesSorted[i] = arrLines[i];
-        arrColsSorted[i] = arrCols[i];
-    }
-    
-    //sorting the arrays to determine dL and dC:
-    arrLinesSorted.sort(function(a, b){return a-b}); //sorting in ascending order
-    arrColsSorted.sort(function(a, b){return a-b}); //sorting in ascending order
-    
-    //determining dL and dC
-    dL = arrLinesSorted[arrLinesSorted.length-1] - arrLinesSorted[0];
-    dC = arrColsSorted[arrColsSorted.length-1] - arrColsSorted[0];
-    
- 
-    //transposing the points
-    arrLinesTransposed = transpose(arrLines, "lines");
-    arrColsTransposed = transpose(arrCols, "cols");
-    
- 
-    //joining the points
-    for (let i = 0; i < arrLines.length; i++) {
-        let joined = [arrLinesTransposed[i], arrColsTransposed[i]];
-        formattedCoordinates.push(joined);
-    }
-    
-    
-  
-    if (formattedCoordinates[0] != undefined) {
-        name = document.getElementById("input-preset-name").value;
-        newPreset = { 
-                name: name,
-                coordinates: formattedCoordinates,
-                limits: {
-                    dX: dC,
-                    dY: dL
-                }   
-        };
-        presets.presetList.push(newPreset); 
-        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-trash' aria-hidden='true' class = 'fade'></i></div>" + presets.presetList[presets.presetList.length - 1].name + "</div>");
-        console.log(presets.presetList);
-        
-    } else {
-        alert("draw some cells first to record a new preset");
-    }
-    document.getElementById("input-preset-name").value = "";
-    document.getElementById("preset-name").classList.add("fade");
-};
-
-rotateArray = function(array) {
+rotateArray = function(array) { 
     
     var xRot = [],
         yRot = [],
@@ -674,55 +704,8 @@ rotateArray = function(array) {
     return arrRotated;
 }
 
-function rotateObj() {
-    var presetIndex,
-        rotatedCoord = [],
-        dXInverted,
-        dYInverted,
-        rotatedObj = {};
-    
-    //picking the id of the current selected preset
-            presetIndex = presets.selectedPreset.split("-")[1];
-
-            //rotating their coordinates and inverting their limits
-            rotatedCoord = rotateArray(presets.presetList[presetIndex].coordinates);
-            dXInverted = presets.presetList[presetIndex].limits.dY;
-            dYInverted = presets.presetList[presetIndex].limits.dX;
-            
-            //creating the temporary object
-            rotatedObj = {                
-                name: "temporary-" + (presets.presetList.length - 1), // - o nome não pode ser temporário... tem que ser temporário-lastIndex... pára a função insertPreset poder clivar o nome e pegar a parte numérica, que é o índex da criança - que deverá ser sempre o último! 
-                coordinates: rotatedCoord,
-                limits: {
-                    dX: dXInverted,
-                    dY:dYInverted
-                }
-            };
-            
-            if (presets.presetList[presets.presetList.length - 1].name == "temporary-" + (presets.presetList.length - 1) || presets.presetList[presets.presetList.length - 1].name == "temporary-" + (presets.presetList.length)) {
-                //eliminating the previous rotation
-                presets.presetList.pop();
-                console.log("apagou");
-                
-            }
-            rotatedObj.name = "temporary-" + (presets.presetList.length); // the temporary preset name should be the lenght of the preset array, because it will be inserted in the next-step! 
-    
-            //including the rotated object in the objects array
-            presets.presetList.push(rotatedObj);  
-            presets.selectedPreset = presets.presetList[presets.presetList.length-1].name;
-            console.log("the selected preset now is ");
-            console.log(presets.selectedPreset);
-}
-
-deleteTemporary = function() {
-    var lastPresetType;    
-        lastPresetType = presets.presetList[presets.presetList.length - 1].name.split("-")[0];
 
 
-        if (lastPresetType == "temporary") {
-            presets.presetList.pop();
-        }
-}
 
 grid(col, line);
 
