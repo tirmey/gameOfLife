@@ -270,6 +270,8 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
 
 // to change the color of the cells when hovering to insert pattern
 document.getElementById("gridContainer").addEventListener("mouseover", function(e){
+    
+    
     var hoveredItem,
         idSplit,
         idLine,
@@ -295,10 +297,13 @@ document.getElementById("gridContainer").addEventListener("mouseover", function(
     
     if (presets.selectedPreset != "") {
         if (idLine - presets.presetList[presetNumber].limits.dY > 0 && idColumn + presets.presetList[presetNumber].limits.dX <= col) {
-            for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) {
-                for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) {                    
-                    document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("inboard");
-                     
+            for (let k = 0; k < presets.presetList[presetNumber].coordinates.length; k++) { //k loops across preset coordinates                
+                for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) { // i loops across possible colums (dX)
+                    for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) { // j loops across possible lines (dY)
+                        if (presets.presetList[presetNumber].coordinates[k][0] == -j && presets.presetList[presetNumber].coordinates[k][1] == i) {
+                            document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("inboard");
+                        }
+                    }
                 }
             }
         } else {
