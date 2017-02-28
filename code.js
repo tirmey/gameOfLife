@@ -17,8 +17,8 @@ var col = 20,
         
         
         presetList: [
-        
-            {
+            
+                {
                 name: "DiCross",
                 coordinates:
                 [[-3,0], [-4,0], [-5,0], [-2,1], [-4,1], [-6,1], [-1,2], [-4,2], [-7,2], [0,3], [-4,3], [-8,3], [0,4], [-1,4], [-2,4], [-3,4], [-4,4], [-5,4], [-6,4], [-7,4], [-8,4], [0,5], [-4,5], [-8,5], [-1,6], [-4,6], [-7,6], [-2,7], [-4,7], [-6,7], [-3,8], [-4,8], [-5,8]],//initialPosition,
@@ -28,9 +28,20 @@ var col = 20,
                     dY: 8
                 }
             },
+        
+            {
+                name: "LWSS",    
+                coordinates:
+                [[-3,1], [-3,2], [-3,3], [-3,4], [-3,5], [-2,0], [-2,5], [-1,5], [0,0], [0,4]],
+
+                limits: {
+                    dX: 5,
+                    dY: 3
+                }
+            },
             
             {
-                name: "GosperGl",    
+                name: "GospGlid",    
                 coordinates:
                 [[-4,0], [-5,0], [-4,1], [-5,1], [-3,10], [-4,10], [-5,10], [-2,11], [-6,11], [-1,12], [-7,12], [-1,13], [-7,13], [-4,14], [-2,15], [-6,15], [-3,16], [-4,16], [-5,16], [-4,17], [-5,20], [-6,20], [-7,20], [-5,21], [-6,21], [-7,21], [-4,22], [-8,22], [-3,24], [-4,24], [-8,24], [-9,24], [-6,34], [-7,34], [-6,35], [-7,35]],
 
@@ -50,9 +61,20 @@ var col = 20,
                     dX: 12,
                     dY: 12
                 }
+            },
             
+            {
+                name: "glider",
+               
+                coordinates:
+                [[-2,1], [-2,2], [-1,0], [-1,2], [0,2]], 
             
+                limits: {
+                    dX: 2,
+                    dY: 2
+                }
             }
+        
         ]
     };
 ///////////////////////////////LISTENERS//////////////////////////////
@@ -69,7 +91,7 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
         e.stopPropagation();
     }
     
-    if(presets.selectedPreset == "") { 
+    if (presets.selectedPreset == "") { 
         if (e.target.classList.contains("cell")) {        
             e.target.classList.toggle("alive");        
         }
@@ -185,12 +207,11 @@ document.getElementById("pause").addEventListener("click", function(){
     document.getElementById("pause").classList.toggle("hidden");
 });
 
-//SPACEBAR - start and pause the simulation
+//PRESS R - start and pause the simulation
 document.addEventListener("keypress", function(e){
     
-    if (e.keyCode == 32) {
-        if (document.getElementById("start").classList.contains("hidden")) {
-            clearInterval(start)
+    if (e.keyCode == 82) {
+        if (document.getElementById("start").classList.contains("hidden")) {            
             document.getElementById("start").classList.toggle("hidden");
             document.getElementById("pause").classList.toggle("hidden");
         } else {
@@ -224,14 +245,70 @@ document.getElementById("preset").addEventListener("click", function(e) {
 
 // ADD PRESET
 document.getElementById("presets-div-new").addEventListener("click", function() {
+    document.getElementById("preset-name").classList.remove("fade");
+    document.getElementById("input-preset-name").focus();
+});
+
+// SELECTING A PRESET NAME
+document.getElementById("input-preset-name-ok").addEventListener("click", function() {
     writePattern();
 });
 
-//SELECT PRESETS 
+//SELECTING A PRESET NAME - ENTER KEY
+document.addEventListener("keypress", function(e) {
+    if (e.keyCode == 13 && document.getElementById("input-preset-name") ===document.activeElement) {
+        writePattern();
+    }
+    
+});
+
+//CANCELING NAMING A NEW PRESET
+document.getElementById("input-preset-name-cancel").addEventListener("click", function() {
+    document.getElementById("input-preset-name").value = "";
+    document.getElementById("preset-name").classList.add("fade");
+});
+
+
+
+// INSERT/DELETE PRESETS 
 document.getElementById("presets-div-items").addEventListener("click", function(e) {   
     
-    var selected;
+    var selected,
+        arrIndex,
+        removeAll,
+        allPresetsArray = [],
+        allPresets = [];
     
+    //deleting a preset
+    if (e.target.classList.contains("fa-trash")) {
+        console.log("cliquei na lixeira");
+        
+        //getting the index of the clicked preset on the object arrayList    
+        arrIndex = e.target.parentElement.parentElement.id.split("-")[1];
+        
+        //erasing the preset from object
+        presets.presetList.splice(arrIndex, 1);
+        
+        //erasing object from DOM
+        e.target.parentElement.parentElement.outerHTML = "";
+        
+        //getting all the DOM presets and transform the nodeList to an array
+        allPresets = document.querySelectorAll(".preset-item");
+        allPresetsArray = Array.prototype.slice.call(allPresets);
+        
+        
+        
+         //rearranging the id's
+        for (let i = 0; i < allPresetsArray.length; i++) {
+            allPresetsArray[i].id = "preset-" + (allPresetsArray.length - (i+1));            
+        }
+        
+        presets.selectedPreset = "";
+        console.log("selectedpreset vale");
+        console.log(presets.selectedPreset);
+    }
+    
+    //selecting presets
     if (e.target.classList.contains("icon-cluster")) {
         selected = e.target.parentElement
     } else if (e.target.classList.contains("fa")) {
@@ -255,17 +332,40 @@ document.getElementById("presets-div-items").addEventListener("click", function(
     }
     
     //defining the selectedPreset object property
-    if (selected != document.getElementById("presets-div") && selected.classList.contains("preset-selected") ) {
+    if (selected != document.getElementById("presets-div") && selected != document.getElementById("presets-div-items") && selected.classList.contains("preset-selected") ) {
         presets.selectedPreset = selected.id; 
     } else {
         presets.selectedPreset = "";
     }
+});
+
+//ROTATE PRESETS
+
+document.addEventListener("keypress", function(e) {
     
+        
+    //rotating the item if some preset is selected. keyCode 82 correspond to letter "r"
+    if (e.keyCode == 114 && presets.selectedPreset != "") {
+        
+        rotateObj();  
+        
+       
+        console.log("ao final da rotação, o nome do preset ativo é: ")
+        console.log(presets.selectedPreset);   
+        console.log("eis os presets salvos, incluindo o temporário: ")
+        console.log(presets.presetList);
+    }
+    
+            
+        
 });
 
 //MENU - give acess to menu items
 document.getElementById("menu").addEventListener("click", function(e){
-    var clickedItem;
+    var clickedItem,
+        removeAll;
+    
+    removeAll = document.getElementById("presets-div-items").children;
     
     if (e.target !== e.currentTarget) {
         clickedItem = e.target;                    
@@ -274,6 +374,11 @@ document.getElementById("menu").addEventListener("click", function(e){
     
     if (clickedItem.id != "menu") {
         document.getElementById("menu").classList.add("fade");       
+        document.getElementById("presets-div").classList.add("fade"); 
+        for (let i = 0; i < removeAll.length; i++) {        
+            removeAll[i].classList.remove("preset-selected");
+            presets.selectedPreset = "";
+        }
     }    
     if (clickedItem.id == "open-options") {        
         document.getElementById("options").classList.remove("fade"); 
@@ -446,6 +551,8 @@ insertPreset = function(selectedPreset, initialPosition) {
     }
 }
 
+
+
 writePattern = function() {
     var newArrayCoord =[],
         arrLines = [],
@@ -519,7 +626,7 @@ writePattern = function() {
     
   
     if (formattedCoordinates[0] != undefined) {
-        name = prompt("please inform the name of the new preset (8 char max.)");
+        name = document.getElementById("input-preset-name").value;
         newPreset = { 
                 name: name,
                 coordinates: formattedCoordinates,
@@ -529,15 +636,65 @@ writePattern = function() {
                 }   
         };
         presets.presetList.push(newPreset); 
-        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[presets.presetList.length - 1].name + "</div>");
+        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-trash' aria-hidden='true' class = 'fade'></i></div>" + presets.presetList[presets.presetList.length - 1].name + "</div>");
         console.log(presets.presetList);
         
     } else {
-        alert("draw some cells to record a new preset");
+        alert("draw some cells first to record a new preset");
     }
+    document.getElementById("input-preset-name").value = "";
+    document.getElementById("preset-name").classList.add("fade");
+};
+
+rotateArray = function(array) {
+    
+    var xRot = [],
+        yRot = [],
+        arrRotated = [];
+
+
+    for (let i = 0; i < array.length; i++) {
+        xRot = array[i][1];
+        yRot = array[i][0] - 2*array[i][0]; 
+        arrRotated.push([xRot, yRot]);
+    }
+    return arrRotated;
 }
 
+function rotateObj() {
+    var presetIndex,
+        rotatedCoord = [],
+        dXInverted,
+        dYInverted,
+        rotatedObj = {};
+    
+    //picking the id of the current selected preset
+            presetIndex = presets.selectedPreset.split("-")[1];
 
+            //rotating their coordinates and inverting their limits
+            rotatedCoord = rotateArray(presets.presetList[presetIndex].coordinates);
+            dXInverted = presets.presetList[presetIndex].limits.dY;
+            dYInverted = presets.presetList[presetIndex].limits.dX;
+            
+            //creating the temporary object
+            rotatedObj = {                
+                name: "temporary", // - o nome não pode ser temporário... tem que ser temporário-lastIndex... pára a função insertPreset poder clivar o nome e pegar a parte numérica, que é o índex da criança - que deverá ser sempre o último! 
+                coordinates: rotatedCoord,
+                limits: {
+                    dX: dXInverted,
+                    dY:dYInverted
+                }
+            };
+            
+            if (presets.selectedPreset == "temporary") {
+                //eliminating the previous rotation
+                presets.presetList.pop();
+            }
+            
+            //including the rotated object in the objects array
+            presets.presetList.push(rotatedObj);  
+            presets.selectedPreset = "temporary";
+}
 
 grid(col, line);
 

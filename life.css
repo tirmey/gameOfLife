@@ -28,7 +28,7 @@ user-select: none;
 }
 
 #operacional {
-    position: relative;
+    position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -41,20 +41,29 @@ user-select: none;
             justify-content: center;  
     -ms-flex-line-pack: start;  
         align-content: flex-start;
-    width: 300px;
-    height: 90vh;
-    margin: 20px;
-    -ms-flex-preferred-size: 10%;
-        flex-basis: 10%;
+    width: 400px;
+    min-height: 100vh;
+    height: 100%;
+    top: 0px;
+    left: 0;
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+    -webkit-box-shadow: 10px 0px 15px -6px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 0px 15px -6px rgba(0,0,0,0.75);
+box-shadow: 5px 0px 25px 00px rgba(0,0,0,0.75);
    
 }
 
 main {
-    margin: 0 20px;
-    -ms-flex-preferred-size: 90%;
-        flex-basis: 90%;
-   
+    position: relative;
+    left: 200px;
+    top: 0
+    margin: 0 10px;
+    -ms-flex-preferred-size: 75%;
+        flex-basis: 75%;
+    padding-top: 50px;
 }
+
 #gridContainer {
     line-height: 0px;
 }
@@ -214,12 +223,12 @@ ul {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     flex-flow: row wrap;
-    width: 250px;
+    width: 95%;
     height: 200px;
     border: solid #ddd 2px;
     border-radius: 10px;
     padding: 15px;
-    margin-top: 60px;
+    margin: 40px auto;
     font-size: 1.2em;
     font-family: 'Changa One', cursive;
     font-weight: 100;
@@ -231,13 +240,15 @@ ul {
 }
 
 li {
+    width: 100%;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
     cursor: pointer;
 }
+
 li:hover {
-    -webkit-transform: scale(1.05, 1.05) translateX(5px);    
-            transform: scale(1.05, 1.05) translateX(5px);
+    -webkit-transform: scale(1.05, 1.05) translateX(20px);    
+            transform: scale(1.05, 1.05) translateX(20px);
 }
 
 nav > div {
@@ -251,13 +262,14 @@ nav > div {
     -ms-flex-align: start;
     align-items: flex-start;
     position: absolute;
-    top: 278px;
+    top: 210px;
     -ms-flex-flow: row wrap;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
             flex-flow: row wrap;
-    width: 250px;
-    height: 380px;
+    left: 3%;
+    right: 3%;
+    height: auto;
     border: solid #ddd 2px;
     border-radius: 10px;
     padding: 15px;
@@ -364,43 +376,28 @@ input[type=number]::-webkit-outer-spin-button {
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
     position: absolute;
-    width: 350px;
-    height: 270px;
-    overflow: auto;
+    height: 270px;    
     bottom: 10px;
-    left: 20px;
+    left: 3%;
+    right: 3%;
     padding: 20px;
     border-radius: 10px;
     border: 2px solid #ddd;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     
-    
+   
 }
 
 #presets-div-header {
     width: 100%;
-    margin-bottom: 20px;
+    height: 80px;
+    
 }
 
 #presets-div h3 {
     text-align: left;
     margin: 5px 0;
-}
-
-#presets-div-new i {
-    color: #ddd;
-    font-size: 1em;
-    margin-right: -5px !important;
-    padding-top: 5px;
-}
-
-#presets-div p {
-    display: inline-block;
-    font-family: 'Changa One', cursive;
-    font-weight: 100;
-    color: #ddd;
-    font-size: 1em;
 }
 
 #presets-div-new {
@@ -416,26 +413,67 @@ input[type=number]::-webkit-outer-spin-button {
     transition: all 0.3s;
 }
 
+#presets-div-new i {
+    color: #ddd;
+    font-size: 1em;
+    margin-right: -5px !important;
+    padding-top: 5px;
+}
+
+#presets-div p {
+    display: inline-block;
+    font-family: 'Changa One', cursive;
+    font-weight: 100;
+    color: #ddd;
+    font-size: 1em;
+    
+}
+
 #presets-div-new:hover {
     -webkit-transform: scale(1.1, 1.1);
             transform: scale(1.1, 1.1);
 }
 
+#preset-name {
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;  
+}
+
+#input-preset-name {
+    width: 120px;  
+    -webkit-transition: all 0.3s;  
+    
+}
+
+#preset-name > p {
+    padding: 5px 5px;
+    margin-left: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+}
+
 #presets-div-items {
-    display: -webkit-box;
+    display: -web it-box;
     display: -ms-flexbox;
+    display: -webkit-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
+    -ms-flex-line-pack: start;
+        align-content: flex-start;
+    margin-top: 30px;
+    height: 100px;
+    width: 100%;
+    overflow: auto;
 }
 
 .preset-item {
     width: 60px;
-    height: 60px;
+    height: 55px;
     border-radius: 4px;
-    background-color: #ddd;
+    color: #ddd;
     margin: 5px 5px;
     text-transform: uppercase;
     font-size: 0.55em;
@@ -446,11 +484,25 @@ input[type=number]::-webkit-outer-spin-button {
     transition: -webkit-transform 0.3s;
     transition: transform 0.3s;
     transition: transform 0.3s, -webkit-transform 0.3s;
-    border: 3px solid #ddd;
+    border: 2px solid #ddd;
+    background: -webkit-linear-gradient(top, #ddd 0%, #ddd 60%, #0b39d0 60%, #0b39d0 100%);
+    background: linear-gradient(to bottom, #ddd 0%, #ddd 60%, #0b39d0 60%, #0b39d0 100%);
+    position: relative;
 }
 
 .preset-item .fa {    
     width: 15%;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.preset-item .fa-trash {
+    font-size: 1.5em;
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
 }
 
 .preset-item:hover {
@@ -459,7 +511,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .preset-selected {
-    border: 3px solid #71a3b5;
+    border: 3px solid #0b39d0;
 }
 
 

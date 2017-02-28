@@ -54,6 +54,23 @@
                 <i id= "close-about-author" class="fa fa-times" aria-hidden="true"></i>
             </div>
         </nav>
+        <div id = "presets-div" class = "fade">
+            <div id="presets-div-header">
+                <h3>SHAPES PRESETS</h3>
+                <div id="presets-div-new">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <p>NEW PRESET</p>                
+                </div>
+                <div id = "preset-name" class="fade">
+                    <input id="input-preset-name" type="text" maxlength="8" placeholder="preset name" >
+                    <p id="input-preset-name-ok">OK</p><p id="input-preset-name-cancel">CANCEL</p>
+                </div>
+            </div>
+            <div id="presets-div-items">
+                <!--<img src="img/circleCross.jpg" id="preset-0">
+                <img src="img/gosperGlider.jpg" id = preset-1>-->
+            </div>
+        </div>
     </div>
     <main>
         <div id="gridContainer">
@@ -67,21 +84,7 @@
             <button id="preset"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><i class="fa fa-ellipsis-v" aria-hidden="true"></i><i class="fa fa-ellipsis-v" aria-hidden="true"></i>preset</button>
         </div>
     </main>
-    <div id = "presets-div" class = "fade">
-        <div id="presets-div-header">
-            <h3>SHAPES PRESETS</h3>
-            <div id="presets-div-new">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                <p>NEW PRESET</p>
-            </div>
-        </div>
-        <div id="presets-div-items">
-            <!--<img src="img/circleCross.jpg" id="preset-0">
-            <img src="img/gosperGlider.jpg" id = preset-1>-->
-        </div>
-        
-        
-    </div>
+    
     <script src="code.js"></script>
 </body>
 </html>
