@@ -84,7 +84,6 @@ var col = 20,
 
             //deleting a preset
             if (e.target.classList.contains("fa-trash")) {
-                console.log("cliquei na lixeira");
 
                 //getting the index of the clicked preset on the object arrayList    
                 arrIndex = e.target.parentElement.parentElement.id.split("-")[1];
@@ -107,8 +106,6 @@ var col = 20,
                 }
 
                 presets.selectedPreset = "";
-                console.log("selectedpreset vale");
-                console.log(presets.selectedPreset);
             }
 
             //selecting presets
@@ -252,7 +249,6 @@ var col = 20,
                 };
                 presets.presetList.push(newPreset); 
                 document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-trash' aria-hidden='true' class = 'fade'></i></div>" + presets.presetList[presets.presetList.length - 1].name + "</div>");
-                console.log(presets.presetList);
 
             } else {
                 alert("draw some cells first to record a new preset");
@@ -290,16 +286,12 @@ var col = 20,
             if (presets.presetList[presets.presetList.length - 1].name == "temporary-" + (presets.presetList.length - 1) || presets.presetList[presets.presetList.length - 1].name == "temporary-" + (presets.presetList.length)) {
                 //eliminating the previous rotation
                 presets.presetList.pop();
-                console.log("apagou");
-
             }
             rotatedObj.name = "temporary-" + (presets.presetList.length); // the temporary preset name should be the lenght of the preset array, because it will be inserted in the next-step! 
 
             //including the rotated object in the objects array
             presets.presetList.push(rotatedObj);  
             presets.selectedPreset = presets.presetList[presets.presetList.length-1].name;
-            console.log("the selected preset now is ");
-            console.log(presets.selectedPreset);
         },
         
         deleteTemporary: function() { //array method
@@ -316,8 +308,8 @@ var col = 20,
             idLine,
             preset,
             presetNumber,
-            idColumn;
-    
+            idColumn;            
+            
             if (e.target.classList.contains("cell")) {
                 if (e.target !== e.currentTarget) {
                     hoveredItem = e.target;                    
@@ -388,14 +380,12 @@ var col = 20,
             presetNumber = Number(preset);
 
             if (presets.selectedPreset != "") { 
-                for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) {
-                    for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) {  
-                        if ((idLine - j > 0) && (idColumn + i <= col)) {
-                            document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.remove("inboard");
-                            document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.remove("outboard");
-                        }
+                for (let i = 1; i <= line; i++) {
+                    for (let j = 1; j <= col; j++) { 
+                        document.getElementById(i + "-" + j).classList.remove("inboard");
+                        document.getElementById(i + "-" + j).classList.remove("outboard");
                     }
-                }
+                } 
             } else {
                 if (hoveredItem) {
                     document.getElementById(idLine + "-" + idColumn).classList.remove("inboard");
@@ -524,7 +514,7 @@ document.addEventListener("keypress", function(e) {
     //rotating the item if some preset is selected. keyCode 82 correspond to letter "r"
     if (e.key == "r" && presets.selectedPreset != "") {
         presets.rotateObj(); 
-        presets.shapeRefresh(e);
+        presets.shapePreview(e);
     }
 });
 
