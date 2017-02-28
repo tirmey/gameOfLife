@@ -206,9 +206,10 @@ var col = 20,
             presetIndex = presets.selectedPreset.split("-")[1];
 
             //rotating their coordinates and inverting their limits
-            rotatedCoord = rotateArray(presets.presetList[presetIndex].coordinates);
             dXInverted = presets.presetList[presetIndex].limits.dY;
             dYInverted = presets.presetList[presetIndex].limits.dX;
+            rotatedCoord = rotateArray(presets.presetList[presetIndex].coordinates);
+            
 
             //creating the temporary object
             rotatedObj = {                
@@ -693,12 +694,15 @@ rotateArray = function(array) {
     
     var xRot = [],
         yRot = [],
-        arrRotated = [];
-
-
+        arrRotated = [],
+        selectedPresetIndex;
+    
+    selectedPresetIndex = presets.selectedPreset.split("-")[1];
+    
+    //in clockwise rotations: (x,y) --> (y, -x);
     for (let i = 0; i < array.length; i++) {
-        xRot = array[i][1];
-        yRot = array[i][0] - 2*array[i][0]; 
+        xRot = array[i][1] - presets.presetList[selectedPresetIndex].limits.dX; // translating the lines! subtracting the dX of the original offset to compensate the line deviation caused by the rotation
+        yRot = -array[i][0]; 
         arrRotated.push([xRot, yRot]);
     }
     return arrRotated;
