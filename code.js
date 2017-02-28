@@ -251,12 +251,26 @@ document.getElementById("presets-div-new").addEventListener("click", function() 
 
 // SELECTING A PRESET NAME
 document.getElementById("input-preset-name-ok").addEventListener("click", function() {
+    
+    
+    var lastPresetType;    
+    lastPresetType = presets.presetList[presets.presetList.length - 1].name.split("-")[0];   
+    if (lastPresetType == "temporary") {
+        presets.presetList.pop();
+    }
     writePattern();
 });
 
 //SELECTING A PRESET NAME - ENTER KEY
 document.addEventListener("keypress", function(e) {
-    if (e.keyCode == 13 && document.getElementById("input-preset-name") ===document.activeElement) {
+    if (e.keyCode == 13 && document.getElementById("input-preset-name") === document.activeElement) {
+        var lastPresetType;    
+        lastPresetType = presets.presetList[presets.presetList.length - 1].name.split("-")[0];
+
+
+        if (lastPresetType == "temporary") {
+            presets.presetList.pop();
+        }
         writePattern();
     }
     
@@ -342,7 +356,6 @@ document.getElementById("presets-div-items").addEventListener("click", function(
 //ROTATE PRESETS
 
 document.addEventListener("keypress", function(e) {
-    
         
     //rotating the item if some preset is selected. keyCode 82 correspond to letter "r"
     if (e.keyCode == 114 && presets.selectedPreset != "") {
@@ -678,7 +691,7 @@ function rotateObj() {
             
             //creating the temporary object
             rotatedObj = {                
-                name: "temporary", // - o nome não pode ser temporário... tem que ser temporário-lastIndex... pára a função insertPreset poder clivar o nome e pegar a parte numérica, que é o índex da criança - que deverá ser sempre o último! 
+                name: "temporary-" + (presets.presetList.length - 1), // - o nome não pode ser temporário... tem que ser temporário-lastIndex... pára a função insertPreset poder clivar o nome e pegar a parte numérica, que é o índex da criança - que deverá ser sempre o último! 
                 coordinates: rotatedCoord,
                 limits: {
                     dX: dXInverted,
@@ -686,19 +699,34 @@ function rotateObj() {
                 }
             };
             
-            if (presets.selectedPreset == "temporary") {
+            if (presets.presetList[presets.presetList.length - 1].name == "temporary-" + (presets.presetList.length - 1) || presets.presetList[presets.presetList.length - 1].name == "temporary-" + (presets.presetList.length)) {
                 //eliminating the previous rotation
                 presets.presetList.pop();
+                console.log("apagou");
+                
             }
-            
+            rotatedObj.name = "temporary-" + (presets.presetList.length); // the temporary preset name should be the lenght of the preset array, because it will be inserted in the next-step! 
+    
             //including the rotated object in the objects array
             presets.presetList.push(rotatedObj);  
-            presets.selectedPreset = "temporary";
+            presets.selectedPreset = presets.presetList[presets.presetList.length-1].name;
+            console.log("the selected preset now is ");
+            console.log(presets.selectedPreset);
+}
+
+deleteTemporary = function() {
+    var lastPresetType;    
+        lastPresetType = presets.presetList[presets.presetList.length - 1].name.split("-")[0];
+
+
+        if (lastPresetType == "temporary") {
+            presets.presetList.pop();
+        }
 }
 
 grid(col, line);
 
-//writing the presets
+//writing the default presets on DOM 
 (function(){
     for (let i = 0; i < presets.presetList.length; i++) {
         document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + i + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[i].name + "</div>");
