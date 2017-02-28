@@ -375,10 +375,10 @@ document.getElementById("pause").addEventListener("click", function(){
     document.getElementById("pause").classList.toggle("hidden");
 });
 
-//PRESS R - start and pause the simulation
+//PRESS c - start and pause the simulation
 document.addEventListener("keypress", function(e){
     
-    if (e.keyCode == 82) {
+    if (e.key == "c") {
         if (document.getElementById("start").classList.contains("hidden")) {            
             document.getElementById("start").classList.toggle("hidden");
             document.getElementById("pause").classList.toggle("hidden");
@@ -512,17 +512,11 @@ document.getElementById("presets-div-items").addEventListener("click", function(
 //ROTATE PRESETS
 
 document.addEventListener("keypress", function(e) {
-        
-    //rotating the item if some preset is selected. keyCode 82 correspond to letter "r"
-    if (e.keyCode == 114 && presets.selectedPreset != "") {
-        presets.rotateObj();  
-        
-        console.log("eis os presets salvos, incluindo o temporário: ")
-        console.log(presets.presetList);
-    }
     
-            
-        
+    //rotating the item if some preset is selected. keyCode 82 correspond to letter "r"
+    if (e.key == "r" && presets.selectedPreset != "") {
+        presets.rotateObj();  
+    }
 });
 
 //MENU - give acess to menu items
@@ -707,9 +701,6 @@ rotateArray = function(array) {
     }
     return arrRotated;
 }
-
-
-
 
 grid(col, line);
 
