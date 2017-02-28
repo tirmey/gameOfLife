@@ -12,8 +12,7 @@ var col = 20,
     
     var presets = {
         
-        selectedPreset: "",        
-        
+        selectedPreset: "",  
         
         presetList: [
             
@@ -75,6 +74,73 @@ var col = 20,
             }
         
         ],
+        
+        addOrRemove: function(e) {
+            var selected,
+                arrIndex,
+                removeAll,
+                allPresetsArray = [],
+                allPresets = [];
+
+            //deleting a preset
+            if (e.target.classList.contains("fa-trash")) {
+                console.log("cliquei na lixeira");
+
+                //getting the index of the clicked preset on the object arrayList    
+                arrIndex = e.target.parentElement.parentElement.id.split("-")[1];
+
+                //erasing the preset from object
+                presets.presetList.splice(arrIndex, 1);
+
+                //erasing object from DOM
+                e.target.parentElement.parentElement.outerHTML = "";
+
+                //getting all the DOM presets and transform the nodeList to an array
+                allPresets = document.querySelectorAll(".preset-item");
+                allPresetsArray = Array.prototype.slice.call(allPresets);
+
+
+
+                 //rearranging the id's
+                for (let i = 0; i < allPresetsArray.length; i++) {
+                    allPresetsArray[i].id = "preset-" + (allPresetsArray.length - (i+1));            
+                }
+
+                presets.selectedPreset = "";
+                console.log("selectedpreset vale");
+                console.log(presets.selectedPreset);
+            }
+
+            //selecting presets
+            if (e.target.classList.contains("icon-cluster")) {
+                selected = e.target.parentElement
+            } else if (e.target.classList.contains("fa")) {
+                selected = e.target.parentElement.parentElement; 
+            } else if (e.target.classList.contains("preset-item")) {
+                selected = e.target;
+            }
+
+            removeAll = document.getElementById("presets-div-items").children;
+            for (let i = 0; i < removeAll.length; i++) {
+                if (removeAll[i] == selected) {
+                    continue;
+                } else {
+                    removeAll[i].classList.remove("preset-selected");
+                }
+            }
+
+            //clicking on an icon toggles the "select-preset" class
+            if (selected.id != "presets-div-items") { //to exclude the DIV itself
+                selected.classList.toggle("preset-selected");
+            }
+
+            //defining the selectedPreset object property
+            if (selected != document.getElementById("presets-div") && selected != document.getElementById("presets-div-items") && selected.classList.contains("preset-selected") ) {
+                presets.selectedPreset = selected.id; 
+            } else {
+                presets.selectedPreset = "";
+            }
+        },
         
         insertPreset: function(selectedPreset, initialPosition) { //preset method
             //initial position is the id of the cell (remebering, I-J, or line-col)
@@ -242,8 +308,100 @@ var col = 20,
             if (lastPresetType == "temporary") {
                 presets.presetList.pop();
             }
-        }
+        },
+        
+        shapePreview: function(e) {
+            var hoveredItem,
+            idSplit,
+            idLine,
+            preset,
+            presetNumber,
+            idColumn;
+    
+            if (e.target.classList.contains("cell")) {
+                if (e.target !== e.currentTarget) {
+                    hoveredItem = e.target;                    
+                }
+                e.stopPropagation();
+            }
 
+            if (hoveredItem) {
+                idSplit = hoveredItem.id.split("-");
+                idLine = Number(idSplit[0]);
+                idColumn = Number(idSplit[1]);
+            }
+
+            preset = presets.selectedPreset.split("-")[1];
+            presetNumber = Number(preset);
+
+            if (presets.selectedPreset != "") {
+                if (idLine - presets.presetList[presetNumber].limits.dY > 0 && idColumn + presets.presetList[presetNumber].limits.dX <= col) {
+                    for (let k = 0; k < presets.presetList[presetNumber].coordinates.length; k++) { //k loops across preset coordinates                
+                        for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) { // i loops across possible colums (dX)
+                            for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) { // j loops across possible lines (dY)
+                                if (presets.presetList[presetNumber].coordinates[k][0] == -j && presets.presetList[presetNumber].coordinates[k][1] == i) {
+                                    document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("inboard");
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) {
+                        for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) {  
+                            if ((idLine - j > 0) && (idColumn + i <= col)) {
+                                document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("outboard");
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (hoveredItem) {
+                    document.getElementById(idLine + "-" + idColumn).classList.add("inboard");
+                }
+            }
+        },
+        
+        shapeRefresh: function(e) {
+            var hoveredItem,
+                idSplit,
+                idLine,
+                idColumn,
+                preset,
+                presetNumber,    
+                idLine,
+                idColumn;
+
+            if (e.target.classList.contains("cell")) {
+                if (e.target !== e.currentTarget) {
+                    hoveredItem = e.target;                    
+                }
+                e.stopPropagation();
+            }
+
+            if (hoveredItem) {
+                idSplit = hoveredItem.id.split("-");
+                idLine = Number(idSplit[0]);
+                idColumn = Number(idSplit[1]);
+            }
+
+            preset = presets.selectedPreset.split("-")[1]
+            presetNumber = Number(preset);
+
+            if (presets.selectedPreset != "") { 
+                for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) {
+                    for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) {  
+                        if ((idLine - j > 0) && (idColumn + i <= col)) {
+                            document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.remove("inboard");
+                            document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.remove("outboard");
+                        }
+                    }
+                }
+            } else {
+                if (hoveredItem) {
+                    document.getElementById(idLine + "-" + idColumn).classList.remove("inboard");
+                }
+            }
+        }
     };
 ///////////////////////////////LISTENERS//////////////////////////////
 //////////////////////////////////////////////////////////////////////
@@ -270,100 +428,12 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
 
 // to change the color of the cells when hovering to insert pattern
 document.getElementById("gridContainer").addEventListener("mouseover", function(e){
-    
-    
-    var hoveredItem,
-        idSplit,
-        idLine,
-        preset,
-        presetNumber,
-        idColumn;
-    
-    if (e.target.classList.contains("cell")) {
-        if (e.target !== e.currentTarget) {
-            hoveredItem = e.target;                    
-        }
-        e.stopPropagation();
-    }
-
-    if (hoveredItem) {
-        idSplit = hoveredItem.id.split("-");
-        idLine = Number(idSplit[0]);
-        idColumn = Number(idSplit[1]);
-    }
-    
-    preset = presets.selectedPreset.split("-")[1];
-    presetNumber = Number(preset);
-    
-    if (presets.selectedPreset != "") {
-        if (idLine - presets.presetList[presetNumber].limits.dY > 0 && idColumn + presets.presetList[presetNumber].limits.dX <= col) {
-            for (let k = 0; k < presets.presetList[presetNumber].coordinates.length; k++) { //k loops across preset coordinates                
-                for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) { // i loops across possible colums (dX)
-                    for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) { // j loops across possible lines (dY)
-                        if (presets.presetList[presetNumber].coordinates[k][0] == -j && presets.presetList[presetNumber].coordinates[k][1] == i) {
-                            document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("inboard");
-                        }
-                    }
-                }
-            }
-        } else {
-            for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) {
-                for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) {  
-                    if ((idLine - j > 0) && (idColumn + i <= col)) {
-                        document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("outboard");
-                    }
-                }
-            }
-        }
-    } else {
-        if (hoveredItem) {
-            document.getElementById(idLine + "-" + idColumn).classList.add("inboard");
-        }
-    }
+    presets.shapePreview(e);
 });
 
 // to refresh the color of the cells when hovering to insert pattern
 document.getElementById("gridContainer").addEventListener("mouseout", function(e){
-    var hoveredItem,
-        idSplit,
-        idLine,
-        idColumn,
-        preset,
-        presetNumber,    
-        idLine,
-        idColumn;
-    
-    if (e.target.classList.contains("cell")) {
-        if (e.target !== e.currentTarget) {
-            hoveredItem = e.target;                    
-        }
-        e.stopPropagation();
-    }
-
-    if (hoveredItem) {
-        idSplit = hoveredItem.id.split("-");
-        idLine = Number(idSplit[0]);
-        idColumn = Number(idSplit[1]);
-    }
-
-    preset = presets.selectedPreset.split("-")[1]
-    presetNumber = Number(preset);
-        
-    if (presets.selectedPreset != "") { 
-        for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) {
-            for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) {  
-                if ((idLine - j > 0) && (idColumn + i <= col)) {
-                    document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.remove("inboard");
-                    document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.remove("outboard");
-                }
-            }
-        }
-    } else {
-        if (hoveredItem) {
-            document.getElementById(idLine + "-" + idColumn).classList.remove("inboard");
-        }
-        
-    }
+    presets.shapeRefresh(e);
 });
 
 //BUTTON START - start the simulation
@@ -434,7 +504,6 @@ document.addEventListener("keypress", function(e) {
         presets.deleteTemporary();
         presets.writePattern();
     }
-    
 });
 
 //CANCELING NAMING A NEW PRESET
@@ -443,75 +512,9 @@ document.getElementById("input-preset-name-cancel").addEventListener("click", fu
     document.getElementById("preset-name").classList.add("fade");
 });
 
-
-
 // INSERT/DELETE PRESETS 
-document.getElementById("presets-div-items").addEventListener("click", function(e) {   
-    
-    var selected,
-        arrIndex,
-        removeAll,
-        allPresetsArray = [],
-        allPresets = [];
-    
-    //deleting a preset
-    if (e.target.classList.contains("fa-trash")) {
-        console.log("cliquei na lixeira");
-        
-        //getting the index of the clicked preset on the object arrayList    
-        arrIndex = e.target.parentElement.parentElement.id.split("-")[1];
-        
-        //erasing the preset from object
-        presets.presetList.splice(arrIndex, 1);
-        
-        //erasing object from DOM
-        e.target.parentElement.parentElement.outerHTML = "";
-        
-        //getting all the DOM presets and transform the nodeList to an array
-        allPresets = document.querySelectorAll(".preset-item");
-        allPresetsArray = Array.prototype.slice.call(allPresets);
-        
-        
-        
-         //rearranging the id's
-        for (let i = 0; i < allPresetsArray.length; i++) {
-            allPresetsArray[i].id = "preset-" + (allPresetsArray.length - (i+1));            
-        }
-        
-        presets.selectedPreset = "";
-        console.log("selectedpreset vale");
-        console.log(presets.selectedPreset);
-    }
-    
-    //selecting presets
-    if (e.target.classList.contains("icon-cluster")) {
-        selected = e.target.parentElement
-    } else if (e.target.classList.contains("fa")) {
-        selected = e.target.parentElement.parentElement; 
-    } else if (e.target.classList.contains("preset-item")) {
-        selected = e.target;
-    }
-    
-    removeAll = document.getElementById("presets-div-items").children;
-    for (let i = 0; i < removeAll.length; i++) {
-        if (removeAll[i] == selected) {
-            continue;
-        } else {
-            removeAll[i].classList.remove("preset-selected");
-        }
-    }
-    
-    //clicking on an icon toggles the "select-preset" class
-    if (selected.id != "presets-div-items") { //to exclude the DIV itself
-        selected.classList.toggle("preset-selected");
-    }
-    
-    //defining the selectedPreset object property
-    if (selected != document.getElementById("presets-div") && selected != document.getElementById("presets-div-items") && selected.classList.contains("preset-selected") ) {
-        presets.selectedPreset = selected.id; 
-    } else {
-        presets.selectedPreset = "";
-    }
+document.getElementById("presets-div-items").addEventListener("click", function(e) { 
+    presets.addOrRemove(e);
 });
 
 //ROTATE PRESETS
@@ -520,7 +523,8 @@ document.addEventListener("keypress", function(e) {
     
     //rotating the item if some preset is selected. keyCode 82 correspond to letter "r"
     if (e.key == "r" && presets.selectedPreset != "") {
-        presets.rotateObj();  
+        presets.rotateObj(); 
+        presets.shapeRefresh(e);
     }
 });
 
