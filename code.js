@@ -1,6 +1,6 @@
 
 
-var col = 20,
+var col = 50,
     line = 30,
     actionVelocity = 50,    
     getPresetPosition,     
@@ -442,6 +442,19 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
     }
 });
 
+//listener apply to windows, to detect resize
+window.addEventListener("resize", function() {
+    col = document.getElementById("cols").value;
+    line = document.getElementById("lines").value;
+    document.getElementById("gridContainer").innerHTML="";
+    grid(col, line);
+    if (document.getElementById("start").classList.contains("hidden")) {
+        clearInterval(start);
+        document.getElementById("start").classList.toggle("hidden");
+        document.getElementById("pause").classList.toggle("hidden");
+    }
+});
+
 // to change the color of the cells when hovering to insert pattern
 document.getElementById("gridContainer").addEventListener("mouseover", function(e){
     presets.shapePreview(e);
@@ -451,6 +464,15 @@ document.getElementById("gridContainer").addEventListener("mouseover", function(
 document.getElementById("gridContainer").addEventListener("mouseout", function(e){
     presets.shapeRefresh(e);
 });
+
+//HAMBURGER MENU
+document.getElementById("hamb-menu").addEventListener("click", function(){
+    console.log("works!");
+    document.getElementById("operacional").classList.toggle("left");
+    document.getElementById("title").classList.toggle("left");
+    document.getElementById("preset").classList.toggle("left");
+});
+
 
 //BUTTON START - start the simulation
 document.getElementById("start").addEventListener("click", function(){
@@ -469,7 +491,7 @@ document.getElementById("pause").addEventListener("click", function(){
 //PRESS ENTER - start and pause the simulation
 document.addEventListener("keypress", function(e){
     
-    if (e.keyCode == 13 && document.querySelector(".cell") === document.activeElement) {
+    if (e.keyCode == 13 && document.getElementById("input-preset-name") !== document.activeElement) {
         if (document.getElementById("start").classList.contains("hidden")) {
             clearInterval(start);
             document.getElementById("start").classList.toggle("hidden");
@@ -625,8 +647,13 @@ grid = function createGrid(col, line) {
     
     allCells = document.querySelectorAll(".cell");
     for (i = 0; i <allCells.length; i++) {
-        allCells[i].style.width = (1000/col) + "px";
-        allCells[i].style.height = (1000/col) + "px";
+        if (window.innerWidth >= 1501) {
+            allCells[i].style.width = (window.innerWidth*0.65/col) + "px";
+            allCells[i].style.height = (window.innerWidth*0.65/col) + "px";
+        } else if (window.innerWidth < 1501 /*&& window.innerWidth >= 1025*/){
+            allCells[i].style.width = (window.innerWidth*0.82/col) + "px";
+            allCells[i].style.height = (window.innerWidth*0.82/col) + "px";
+        }
     }
 }
 marking = function newCicle(col, line) {
