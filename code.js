@@ -508,17 +508,15 @@ document.getElementById("presets-div-items").addEventListener("click", function(
 });
 
 //ROTATE PRESETS
-
 document.addEventListener("keypress", function(e) {
     
     //rotating the item if some preset is selected. keyCode 82 correspond to letter "r"
     if (e.key == "r" && presets.selectedPreset != "") {
         presets.rotateObj(); 
-        presets.shapePreview(e);
     }
 });
 
-//MENU - give acess to menu items
+//MENU - open windows - give acess to menu items
 document.getElementById("menu").addEventListener("click", function(e){
     var clickedItem,
         removeAll;
@@ -531,7 +529,6 @@ document.getElementById("menu").addEventListener("click", function(e){
     e.stopPropagation();
     
     if (clickedItem.id != "menu") {
-        document.getElementById("menu").classList.add("fade");       
         document.getElementById("presets-div").classList.add("fade"); 
         for (let i = 0; i < removeAll.length; i++) {        
             removeAll[i].classList.remove("preset-selected");
@@ -539,21 +536,18 @@ document.getElementById("menu").addEventListener("click", function(e){
         }
     }    
     if (clickedItem.id == "open-options") {        
-        document.getElementById("options").classList.remove("fade"); 
-        document.getElementById("about-game").classList.add("fade");
-        document.getElementById("about-author").classList.add("fade");
+        document.getElementById("options").classList.add("options-down"); 
+        
     } else if (clickedItem.id == "open-about-game") {
-        document.getElementById("about-game").classList.remove("fade");
-        document.getElementById("options").classList.add("fade");
-        document.getElementById("about-author").classList.add("fade");
+        document.getElementById("about-game").classList.add("about-game-down");
+        
     } else if (clickedItem.id == "open-about-author") {  
-        document.getElementById("about-author").classList.remove("fade");
-         document.getElementById("options").classList.add("fade");
-        document.getElementById("about-game").classList.add("fade");
+        document.getElementById("about-author").classList.add("about-author-down");
+        
     }
 });
 
-//MENU - closing windows - closing the menu windows 
+//MENU - closing windows - closing the menu items windows 
 document.getElementById("main-navigation").addEventListener("click", function(e){
     var clickedItem;
     
@@ -563,14 +557,14 @@ document.getElementById("main-navigation").addEventListener("click", function(e)
     e.stopPropagation();
     //closing windows
     if (clickedItem.id == "close-options") {
-        document.getElementById("options").classList.add("fade"); 
-        document.getElementById("menu").classList.remove("fade");
+        document.getElementById("options").classList.remove("options-down"); 
+        
     } else if (clickedItem.id == "close-about-game") {
-        document.getElementById("about-game").classList.add("fade");
-        document.getElementById("menu").classList.remove("fade");
+        document.getElementById("about-game").classList.remove("about-game-down");
+        
     } else if (clickedItem.id == "close-about-author") {
-        document.getElementById("about-author").classList.add("fade");
-        document.getElementById("menu").classList.remove("fade");
+        document.getElementById("about-author").classList.remove("about-author-down");
+        
     }
 });
 
