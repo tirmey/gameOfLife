@@ -47,9 +47,11 @@
                 <h3><span>ABOUT</span>GAME OF LIFE</h3>
                 <div class="divider"><hr><img src="img/divider.png"><hr></div>
                 <i id= "close-about-game" class="fa fa-times" aria-hidden="true"></i>
-                <p>The Game of Life is not your typical computer game. It is a 'cellular automaton', and was invented by Cambridge mathematician John Conway.<p>
+                <div id="about-game-text">
+                    <p>The Game of Life is not your typical computer game. It is a 'cellular automaton', and was invented by Cambridge mathematician John Conway.<p>
 
-                <p>This game became widely known when it was mentioned in an <a href = "http://ddi.cs.uni-potsdam.de/HyFISCH/Produzieren/lis_projekt/proj_gamelife/ConwayScientificAmerican.htm" target="_blank">article</a> published by Scientific American in 1970. It consists of a collection of cells which, based on a few mathematical rules, can live, die or multiply. Depending on the initial conditions, the cells form various patterns throughout the course of the game. For an introduction, you can watch the <a href = "http://www.youtube.com/watch?v=CgOcEZinQ2I&feature=share&list=FLwikA_t8e6TSJW-L-lAHkKw" target="_blank"> video fragment from Stephen Hawkings The Meaning of Life</a>.</p>
+                    <p>This game became widely known when it was mentioned in an <a href = "http://ddi.cs.uni-potsdam.de/HyFISCH/Produzieren/lis_projekt/proj_gamelife/ConwayScientificAmerican.htm" target="_blank">article</a> published by Scientific American in 1970. It consists of a collection of cells which, based on a few mathematical rules, can live, die or multiply. Depending on the initial conditions, the cells form various patterns throughout the course of the game. For an introduction, you can watch the <a href = "http://www.youtube.com/watch?v=CgOcEZinQ2I&feature=share&list=FLwikA_t8e6TSJW-L-lAHkKw" target="_blank"> video fragment from Stephen Hawkings The Meaning of Life</a>.</p>
+                </div>
             </div> 
             <div id = "about-author">
                 <h3>ABOUT THE AUTHOR</h3>
@@ -59,17 +61,20 @@
         </nav>
         <div id = "presets-div" class = "fade">
             <div id="presets-div-header">
+                <div class="divider"><hr><img src="img/divider.png"><hr></div>
                 <h3>SHAPES PRESETS</h3>
                 <div id="presets-div-new">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     <p>NEW PRESET</p>                
                 </div>
-                <div id = "preset-name" class="fade">
+                <div id = "preset-name" class="zero-height">
                     <input id="input-preset-name" type="text" maxlength="8" placeholder="preset name" >
                     <p id="input-preset-name-ok">OK</p><p id="input-preset-name-cancel">CANCEL</p>
                 </div>
             </div>
+            
             <div id="presets-div-items">
+                
                 <!--<img src="img/circleCross.jpg" id="preset-0">
                 <img src="img/gosperGlider.jpg" id = preset-1>-->
             </div>

@@ -58,7 +58,7 @@ box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
     height: 210px;
      -webkit-box-shadow: 0 10px 20px -5px rgba(0,0,0,0.75);
 -moz-box-shadow: 0 10px 20px -5px rgba(0,0,0,0.55);
-box-shadow: 0 10px 20px -5px rgba(0,0,0,0.55);
+box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.55);
     z-index: 1;
 }
 
@@ -97,6 +97,8 @@ h1 {
 
 .divider hr {
     width: 100px;
+    height: 2px;
+    background-color: #ddd;
 }
 
 .divider img {
@@ -395,10 +397,15 @@ input[type=number]::-webkit-outer-spin-button {
     left: 0;
     top: -550px;
     width: 100%;
+    height: 400px;
     padding: 30px; 
     overflow: auto;
     transition: all 1s;
     background-image: url(img/back.jpg);
+}
+
+#about-game-text {
+    overflow: hidden;
 }
 
 #about-game.about-game-down {
@@ -432,20 +439,19 @@ input[type=number]::-webkit-outer-spin-button {
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
     position: absolute;
-    height: 270px;    
+       
     bottom: 10px;
     left: 3%;
     right: 3%;
     padding: 20px;
-    border-radius: 10px;
-    border: 2px solid #ddd;
+    
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
 }
 
 #presets-div-header {
     width: 100%;
-    height: 80px;
+    
 }
 
 #presets-div h3 {
@@ -479,7 +485,6 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: 100;
     color: #ddd;
     font-size: 1em;
-    
 }
 
 #presets-div-new:hover {
@@ -488,14 +493,14 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 #preset-name {
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;  
+    -webkit-transition: all 0.5s;
+    transition: all 0.5;  
+    overflow: hidden;
+    height: 50px;
 }
 
 #input-preset-name {
     width: 120px;  
-    -webkit-transition: all 0.3s;  
-    
 }
 
 #preset-name > p {
@@ -503,6 +508,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 10px;
     border: 2px solid #ddd;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 #presets-div-items {
@@ -517,7 +523,7 @@ input[type=number]::-webkit-outer-spin-button {
     -ms-flex-line-pack: start;
         align-content: flex-start;
     margin-top: 30px;
-    height: 100px;
+    height: 130px;
     width: 100%;
     overflow: auto;
 }
@@ -573,9 +579,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .fade {
     opacity: 0;
-    z-index: -2
+    z-index: -2;
 }
 
+.zero-height {
+    height: 0 !important;
+}
 .blink {
     opacity: 0.2;
 }

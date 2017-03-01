@@ -13,7 +13,18 @@ var col = 20,
         
         presetList: [
             
-                {
+            {
+                name: "flower",
+                coordinates:
+                [[-4,2],[-3,0],[-3,2],[-3,4],[-2,1],[-2,3],[-1,0],[-1,2],[-1,4],[0,2]],//initialPosition,
+
+                limits: {
+                    dX: 4,
+                    dY: 4
+                }
+            },
+            
+            {
                 name: "DiCross",
                 coordinates:
                 [[-3,0], [-4,0], [-5,0], [-2,1], [-4,1], [-6,1], [-1,2], [-4,2], [-7,2], [0,3], [-4,3], [-8,3], [0,4], [-1,4], [-2,4], [-3,4], [-4,4], [-5,4], [-6,4], [-7,4], [-8,4], [0,5], [-4,5], [-8,5], [-1,6], [-4,6], [-7,6], [-2,7], [-4,7], [-6,7], [-3,8], [-4,8], [-5,8]],//initialPosition,
@@ -251,7 +262,7 @@ var col = 20,
                 alert("draw some cells first to record a new preset");
             }
             document.getElementById("input-preset-name").value = "";
-            document.getElementById("preset-name").classList.add("fade");
+            document.getElementById("preset-name").classList.add("zero-height");
         },
         
         rotateArray: function(array) { 
@@ -495,8 +506,9 @@ document.getElementById("preset").addEventListener("click", function(e) {
 });
 
 // ADD PRESET
-document.getElementById("presets-div-new").addEventListener("click", function() {
-    document.getElementById("preset-name").classList.remove("fade");
+document.getElementById("presets-div-new").addEventListener("click", function() {   
+   
+    document.getElementById("preset-name").classList.remove("zero-height");
     document.getElementById("input-preset-name").focus();
 });
 
@@ -511,14 +523,20 @@ document.addEventListener("keypress", function(e) {
     if (e.keyCode == 13 && document.getElementById("input-preset-name") === document.activeElement) {
         presets.deleteTemporary();
         presets.writePattern();
-        document.getElementById("input-preset-name").blur(); ///ver o id 
+        document.getElementById("input-preset-name").blur(); 
+        
+        //exprerimental to take new intersting presets
+        var novopreset = presets.presetList[presets.presetList.length-1].coordinates;
+        var novopreset2 = presets.presetList[presets.presetList.length-1].limits.dX;
+        var novopreset3 = presets.presetList[presets.presetList.length-1].limits.dY;
+        document.getElementById("gridContainer").insertAdjacentHTML("afterend", "//// coordinates: " + novopreset + "//// dX: " + novopreset2 + "//// dy" + novopreset3 + "////");
     }
 });
 
 //CANCELING NAMING A NEW PRESET
 document.getElementById("input-preset-name-cancel").addEventListener("click", function() {
     document.getElementById("input-preset-name").value = "";
-    document.getElementById("preset-name").classList.add("fade");
+    document.getElementById("preset-name").classList.add("zero-height");
 });
 
 // INSERT/DELETE PRESETS 
