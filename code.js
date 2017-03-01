@@ -2,10 +2,7 @@
 
 var col = 20,
     line = 30,
-    actionVelocity = 50,
-    marking,
-    random,
-    action,
+    actionVelocity = 50,    
     getPresetPosition,     
     start,
     blink;
@@ -257,6 +254,24 @@ var col = 20,
             document.getElementById("preset-name").classList.add("fade");
         },
         
+        rotateArray: function(array) { 
+    
+            var xRot = [],
+                yRot = [],
+                arrRotated = [],
+                selectedPresetIndex;
+
+            selectedPresetIndex = presets.selectedPreset.split("-")[1];
+
+            //in clockwise rotations: (x,y) --> (y, -x);
+            for (let i = 0; i < array.length; i++) {
+                xRot = array[i][1] - presets.presetList[selectedPresetIndex].limits.dX; // translating the lines! subtracting the dX of the original offset to compensate the line deviation caused by the rotation
+                yRot = -array[i][0]; 
+                arrRotated.push([xRot, yRot]);
+            }
+            return arrRotated;
+        },
+        
         rotateObj: function() { //preset method
             var presetIndex,
                 rotatedCoord = [],
@@ -270,7 +285,7 @@ var col = 20,
             //rotating their coordinates and inverting their limits
             dXInverted = presets.presetList[presetIndex].limits.dY;
             dYInverted = presets.presetList[presetIndex].limits.dX;
-            rotatedCoord = rotateArray(presets.presetList[presetIndex].coordinates);
+            rotatedCoord = presets.rotateArray(presets.presetList[presetIndex].coordinates);
             
 
             //creating the temporary object
@@ -440,11 +455,12 @@ document.getElementById("pause").addEventListener("click", function(){
     document.getElementById("pause").classList.toggle("hidden");
 });
 
-//PRESS c - start and pause the simulation
+//PRESS ENTER - start and pause the simulation
 document.addEventListener("keypress", function(e){
     
-    if (e.key == "c") {
-        if (document.getElementById("start").classList.contains("hidden")) {            
+    if (e.keyCode == 13 && document.getElementById("input-preset-name") !== document.activeElement) {
+        if (document.getElementById("start").classList.contains("hidden")) {
+            clearInterval(start);
             document.getElementById("start").classList.toggle("hidden");
             document.getElementById("pause").classList.toggle("hidden");
         } else {
@@ -493,6 +509,7 @@ document.addEventListener("keypress", function(e) {
     if (e.keyCode == 13 && document.getElementById("input-preset-name") === document.activeElement) {
         presets.deleteTemporary();
         presets.writePattern();
+        document.getElementById("input-preset-name").blur(); ///ver o id 
     }
 });
 
@@ -534,17 +551,8 @@ document.getElementById("menu").addEventListener("click", function(e){
             removeAll[i].classList.remove("preset-selected");
             presets.selectedPreset = "";
         }
-    }    
-    if (clickedItem.id == "open-options") {        
-        document.getElementById("options").classList.add("options-down"); 
-        
-    } else if (clickedItem.id == "open-about-game") {
-        document.getElementById("about-game").classList.add("about-game-down");
-        
-    } else if (clickedItem.id == "open-about-author") {  
-        document.getElementById("about-author").classList.add("about-author-down");
-        
-    }
+    } 
+    windowControl(clickedItem.id, "add", "open");
 });
 
 //MENU - closing windows - closing the menu items windows 
@@ -555,17 +563,9 @@ document.getElementById("main-navigation").addEventListener("click", function(e)
         clickedItem = e.target;                    
     }
     e.stopPropagation();
+    
     //closing windows
-    if (clickedItem.id == "close-options") {
-        document.getElementById("options").classList.remove("options-down"); 
-        
-    } else if (clickedItem.id == "close-about-game") {
-        document.getElementById("about-game").classList.remove("about-game-down");
-        
-    } else if (clickedItem.id == "close-about-author") {
-        document.getElementById("about-author").classList.remove("about-author-down");
-        
-    }
+    windowControl(clickedItem.id, "remove", "close");
 });
 
 //INPUT COLUMS - change the width of the matrix
@@ -581,7 +581,6 @@ document.getElementById("lines").addEventListener("change", function(){
     document.getElementById("gridContainer").innerHTML="";
     grid(col, line);
 });
-
 
 ///////////////////////////////FUNCTIONS///////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -636,7 +635,7 @@ marking = function newCicle(col, line) {
     }
 }
 
-random = function() {
+function random() {
     for (let i = line; i >= 1; i--) {
         for (let j = col; j >= 1; j--) { 
             rand = Math.random();
@@ -647,14 +646,14 @@ random = function() {
     }
 }
 
-remove = function() {
+function remove() {
     var cells = document.getElementById("gridContainer").children;    
     for (let i = 0; i <= (cells.length-1); i++) {        
         cells[i].classList.remove("alive");
     }
 }
 
-action = function createGrid(col, line) {
+function action(col, line) {
     for (let i = line; i >= 1; i--) {
         for (let j = col; j >= 1; j--) {            
             
@@ -670,29 +669,22 @@ action = function createGrid(col, line) {
     }
 }
 
-startPause = function() {
+function startPause() {
     start = setInterval(function() {
         marking(col, line);
         action(col, line);
     },actionVelocity);
 }
 
-rotateArray = function(array) { 
-    
-    var xRot = [],
-        yRot = [],
-        arrRotated = [],
-        selectedPresetIndex;
-    
-    selectedPresetIndex = presets.selectedPreset.split("-")[1];
-    
-    //in clockwise rotations: (x,y) --> (y, -x);
-    for (let i = 0; i < array.length; i++) {
-        xRot = array[i][1] - presets.presetList[selectedPresetIndex].limits.dX; // translating the lines! subtracting the dX of the original offset to compensate the line deviation caused by the rotation
-        yRot = -array[i][0]; 
-        arrRotated.push([xRot, yRot]);
+function windowControl(itemId, action, idCommand) { //action must be "add" or "remove" idCommand should be "open" or "close"
+    console.log("funcionou!");
+    if (itemId == idCommand + "-options") {
+        document.getElementById("options").classList[action]("options-down"); 
+    } else if (itemId == idCommand + "-about-game") {
+        document.getElementById("about-game").classList[action]("about-game-down");
+    } else if (itemId == idCommand + "-about-author") {
+        document.getElementById("about-author").classList[action]("about-author-down");
     }
-    return arrRotated;
 }
 
 grid(col, line);
