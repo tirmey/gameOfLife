@@ -469,7 +469,7 @@ document.getElementById("pause").addEventListener("click", function(){
 //PRESS ENTER - start and pause the simulation
 document.addEventListener("keypress", function(e){
     
-    if (e.keyCode == 13 && document.getElementById("input-preset-name") !== document.activeElement) {
+    if (e.keyCode == 13 && document.querySelector(".cell") === document.activeElement) {
         if (document.getElementById("start").classList.contains("hidden")) {
             clearInterval(start);
             document.getElementById("start").classList.toggle("hidden");
@@ -607,6 +607,7 @@ document.getElementById("lines").addEventListener("change", function(){
 
 
 grid = function createGrid(col, line) {
+    var allCells;
     for (let i = line; i >= 1; i--) {
         for ( let j = col; j >= 1; j--) {            
             
@@ -621,6 +622,12 @@ grid = function createGrid(col, line) {
     document.getElementById("1-" + col).classList.add("firstRow-last");
     document.getElementById(line + "-1").classList.add("lastRow-first");
     document.getElementById(line + "-" + col).classList.add("lastRow-last");
+    
+    allCells = document.querySelectorAll(".cell");
+    for (i = 0; i <allCells.length; i++) {
+        allCells[i].style.width = (1000/col) + "px";
+        allCells[i].style.height = (1000/col) + "px";
+    }
 }
 marking = function newCicle(col, line) {
     var adjacentLiveCells,    
