@@ -485,11 +485,13 @@ document.getElementById("random").addEventListener("click", function(){
 //OPEN PRESETS WINDOW 
 document.getElementById("preset").addEventListener("click", function(e) {
     document.getElementById("presets-div").classList.toggle("fade");
+    windowControl("all", "remove", "close");
     presets.selectedPreset = "";    
     var removeAll = document.getElementById("presets-div-items").children;
     for (let i = 0; i < removeAll.length; i++) {        
         removeAll[i].classList.remove("preset-selected");
     }
+    
 });
 
 // ADD PRESET
@@ -676,13 +678,15 @@ function startPause() {
     },actionVelocity);
 }
 
-function windowControl(itemId, action, idCommand) { //action must be "add" or "remove" idCommand should be "open" or "close"
+function windowControl(itemId, action, idCommand) { //action must be "add" or "remove" idCommand should be "open" or "close". If itemId = all, all the windows wilçl be closed
     console.log("funcionou!");
-    if (itemId == idCommand + "-options") {
+    if (itemId == idCommand + "-options" || itemId == "all") {
         document.getElementById("options").classList[action]("options-down"); 
-    } else if (itemId == idCommand + "-about-game") {
+    }
+    if (itemId == idCommand + "-about-game" || itemId == "all") {
         document.getElementById("about-game").classList[action]("about-game-down");
-    } else if (itemId == idCommand + "-about-author") {
+    }
+    if (itemId == idCommand + "-about-author" || itemId == "all") {
         document.getElementById("about-author").classList[action]("about-author-down");
     }
 }
