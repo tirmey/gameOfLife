@@ -2,7 +2,7 @@
 
 var col = 50,
     line = 30,
-    actionVelocity = 50,    
+    actionVelocity = 20,    
     getPresetPosition,     
     start,
     blink;
@@ -166,7 +166,7 @@ var col = 50,
             // generating the shape, based on the initial position
             if (idColumn + presets.presetList[presetNumber].limits.dX <= col && idLine - presets.presetList[presetNumber].limits.dY > 0) {            
                 for (let i = 0; i < presets.presetList[presetNumber].coordinates.length; i++) {                
-                    document.getElementById((idLine + presets.presetList[presetNumber].coordinates[i][0]) + "-" + (idColumn + presets.presetList[presetNumber].coordinates[i][1])).classList.add("alive")
+                    document.getElementById((idLine + presets.presetList[presetNumber].coordinates[i][0]) + "-" + (idColumn + presets.presetList[presetNumber].coordinates[i][1])).id += "-alive";
                 }
             } else {
                 console.log("no room to insert this shape");
@@ -205,7 +205,7 @@ var col = 50,
             // getting the recorded points
             for(let i = 1; i <= line; i++) {
                 for (let j = 1; j <= col; j++) {
-                    if (document.getElementById(i + "-" + j).classList.contains("alive")) {
+                    if (document.getElementById(i + "-" + j + "-alive")) {
                         newArrayCoord.push([i,j]);
                     }
                 }
@@ -358,7 +358,11 @@ var col = 50,
                         for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) { // i loops across possible colums (dX)
                             for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) { // j loops across possible lines (dY)
                                 if (presets.presetList[presetNumber].coordinates[k][0] == -j && presets.presetList[presetNumber].coordinates[k][1] == i) {
-                                    document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("inboard");
+                                    if (document.getElementById((idLine - j) + "-" + (idColumn + i))) {
+                                        document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("inboard");
+                                    } else if (document.getElementById((idLine - j) + "-" + (idColumn + i) + "-alive")) {
+                                        document.getElementById((idLine - j) + "-" + (idColumn + i) + "-alive").classList.add("inboard");
+                                    }
                                 }
                             }
                         }
@@ -367,14 +371,22 @@ var col = 50,
                     for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) {
                         for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) {  
                             if ((idLine - j > 0) && (idColumn + i <= col)) {
-                                document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("outboard");
+                                if (document.getElementById((idLine - j) + "-" + (idColumn + i))) {
+                                    document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("outboard");
+                                } else if (document.getElementById((idLine - j) + "-" + (idColumn + i) + "-alive")) {
+                                    document.getElementById((idLine - j) + "-" + (idColumn + i) + "-alive").classList.add("outboard");
+                                }
                             }
                         }
                     }
                 }
             } else {
                 if (hoveredItem) {
-                    document.getElementById(idLine + "-" + idColumn).classList.add("inboard");
+                    if (document.getElementById(idLine + "-" + idColumn)) {
+                        document.getElementById(idLine + "-" + idColumn).classList.add("inboard");
+                    } else if (document.getElementById(idLine + "-" + idColumn + "-alive")) {
+                        document.getElementById(idLine + "-" + idColumn + "-alive").classList.add("inboard");
+                    }
                 }
             }
         },
@@ -408,13 +420,22 @@ var col = 50,
             if (presets.selectedPreset != "") { 
                 for (let i = 1; i <= line; i++) {
                     for (let j = 1; j <= col; j++) { 
-                        document.getElementById(i + "-" + j).classList.remove("inboard");
-                        document.getElementById(i + "-" + j).classList.remove("outboard");
+                        if (document.getElementById(i + "-" + j)) {
+                            document.getElementById(i + "-" + j).classList.remove("inboard");
+                            document.getElementById(i + "-" + j).classList.remove("outboard");
+                        } else if (document.getElementById(i + "-" + j) + "-alive") {
+                            document.getElementById(i + "-" + j + "-alive").classList.remove("inboard");
+                            document.getElementById(i + "-" + j + "-alive").classList.remove("outboard");
+                        }
                     }
                 } 
             } else {
                 if (hoveredItem) {
-                    document.getElementById(idLine + "-" + idColumn).classList.remove("inboard");
+                    if (document.getElementById(idLine + "-" + idColumn)) {
+                        document.getElementById(idLine + "-" + idColumn).classList.remove("inboard");
+                    } else if (document.getElementById(idLine + "-" + idColumn + "-alive")) {
+                        document.getElementById(idLine + "-" + idColumn + "-alive").classList.remove("inboard");
+                    }
                 }
             }
         }
@@ -435,7 +456,11 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
     
     if (presets.selectedPreset == "") { 
         if (e.target.classList.contains("cell")) {        
-            e.target.classList.toggle("alive");        
+            if (e.target.id.split("-")[2]) {
+                e.target.id = e.target.id.split("-")[0] + "-" + e.target.id.split("-")[1];
+            } else {
+                e.target.id += "-alive";
+            } 
         }
     } else {
         presets.insertPreset(presets.selectedPreset, clickedItem.id);
@@ -645,6 +670,7 @@ grid = function createGrid(col, line) {
     document.getElementById(line + "-1").classList.add("lastRow-first");
     document.getElementById(line + "-" + col).classList.add("lastRow-last");
     
+    //change the cell size dinamically
     allCells = document.querySelectorAll(".cell");
     for (i = 0; i <allCells.length; i++) {
         if (window.innerWidth >= 1501) {
@@ -656,7 +682,7 @@ grid = function createGrid(col, line) {
         }
     }
 }
-marking = function newCicle(col, line) {
+function marking(col, line) {
     var adjacentLiveCells,    
         idLine,
         idColumn,        
@@ -667,43 +693,31 @@ marking = function newCicle(col, line) {
             
             for (let adjY = -1; adjY <= 1; adjY++) {
                 for (let adjX = -1; adjX <= 1; adjX++) {
-                    if (adjX != 0 || adjY != 0) {  
-                        idSplit = document.getElementById(i + "-" + j).id.split("-");
+                    if (adjX != 0 || adjY != 0) {
+                        if (document.getElementById(i + "-" + j)) {
+                            idSplit = document.getElementById(i + "-" + j).id.split("-");
+                        } else if (document.getElementById(i + "-" + j + "-alive")) {
+                            idSplit = document.getElementById(i + "-" + j + "-alive").id.split("-");
+                        }
                         idLine = Number(idSplit[0]);
                         idColumn = Number(idSplit[1]);
-                        if ( (idLine + adjY > 0) && (idColumn + adjX > 0) && (idLine + adjY <= line) && (idColumn + adjX <= col) && document.getElementById((idLine + adjY) + "-" + (idColumn + adjX)).classList.contains("alive")) {
+                        if ( (idLine + adjY > 0) && (idColumn + adjX > 0) && (idLine + adjY <= line) && (idColumn + adjX <= col) && (document.getElementById((idLine + adjY) + "-" + (idColumn + adjX) + "-alive") || document.getElementById((idLine + adjY) + "-" + (idColumn + adjX) + "-alive-willDie")) )  {
                             adjacentLiveCells++
                         } 
                     }
                 }
             }
-            
+            // vou ter que fragmentart o ID porque preciso tanto da observação alive quanto da will die. se eu retiro "alive", prejudica a 
             if (adjacentLiveCells < 2 || adjacentLiveCells > 3) {
-                document.getElementById(i + "-" + j).classList.add("willDie");    
+                if (document.getElementById(i + "-" + j + "-alive")) {
+                    document.getElementById(i + "-" + j + "-alive").id += "-willDie"; 
+                }
             } else if (adjacentLiveCells == 3) {
-                if (!document.getElementById(i + "-" + j).classList.contains("alive")); {
-                    document.getElementById(i + "-" + j).classList.add("becomeAlive");
+                if (document.getElementById(i + "-" + j)) {
+                    document.getElementById(i + "-" + j).id += "-becomeAlive";
                 }
             }
         }
-    }
-}
-
-function random() {
-    for (let i = line; i >= 1; i--) {
-        for (let j = col; j >= 1; j--) { 
-            rand = Math.random();
-            if (rand > 0.5) {
-                document.getElementById(i + "-" + j).classList.add("alive");
-            }
-        }
-    }
-}
-
-function remove() {
-    var cells = document.getElementById("gridContainer").children;    
-    for (let i = 0; i <= (cells.length-1); i++) {        
-        cells[i].classList.remove("alive");
     }
 }
 
@@ -711,17 +725,38 @@ function action(col, line) {
     for (let i = line; i >= 1; i--) {
         for (let j = col; j >= 1; j--) {            
             
-            if (document.getElementById(i + "-" + j).classList.contains("willDie")) {
-                document.getElementById(i + "-" + j).classList.remove("alive");
-                document.getElementById(i + "-" + j).classList.remove("willDie");
+            if (document.getElementById(i + "-" + j + "-alive-willDie")) {
+                document.getElementById(i + "-" + j + "-alive-willDie").id = document.getElementById(i + "-" + j + "-alive-willDie").id.split("-")[0] + "-" + document.getElementById(i + "-" + j + "-alive-willDie").id.split("-")[1];
                 
-            } else if (document.getElementById(i + "-" + j).classList.contains("becomeAlive")) {
-                document.getElementById(i + "-" + j).classList.add("alive");
-                document.getElementById(i + "-" + j).classList.remove("becomeAlive");
+            } else if (document.getElementById(i + "-" + j + "-becomeAlive")) {
+                document.getElementById(i + "-" + j + "-becomeAlive").id = document.getElementById(i + "-" + j + "-becomeAlive").id.split("-")[0] + "-" + document.getElementById(i + "-" + j + "-becomeAlive").id.split("-")[1] + "-alive";                
             }
         }
     }
 }
+
+function random() {
+    remove();
+    for (let i = line; i >= 1; i--) {
+        for (let j = col; j >= 1; j--) { 
+            rand = Math.random();
+            if (rand > 0.5) {
+                document.getElementById(i + "-" + j).id += "-alive";
+            }
+        }
+    }
+}
+
+function remove() {
+    var cells = document.getElementById("gridContainer").children;    
+    for (let i = 0; i <= (cells.length-1); i++) { 
+        if (cells[i].hasAttribute("id")) {
+            cells[i].id = cells[i].id.split("-")[0] + "-" + cells[i].id.split("-")[1];
+        }
+    }
+}
+
+
 
 function startPause() {
     start = setInterval(function() {
@@ -730,8 +765,8 @@ function startPause() {
     },actionVelocity);
 }
 
-function windowControl(itemId, action, idCommand) { //action must be "add" or "remove" idCommand should be "open" or "close". If itemId = all, all the windows wilçl be closed
-    console.log("funcionou!");
+function windowControl(itemId, action, idCommand) { //action must be "add" or "remove" idCommand should be "open" or "close". If itemId = all, all the windows will be closed
+    
     if (itemId == idCommand + "-options" || itemId == "all") {
         document.getElementById("options").classList[action]("options-down"); 
     }
