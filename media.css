@@ -1,8 +1,9 @@
 @media screen and (max-width: 450px) {
     
-   h1 {
-    font-size: 12vmin;
-    font-family: 'Changa One', cursive;
+    h1 {
+        font-size: 3em;
+        font-family: 'Changa One', cursive;
+        width: 100%
     }
     
     hr {
@@ -13,50 +14,144 @@
     }
     
     h2 {
-        font-size: 6vmin;
+        font-size: 1.5em;
+        margin: 20px 0 10px 0;
         font-family: 'Changa One', cursive;
     }
     
     .cell {
-        border: 0.1vmin solid rgba(180, 218, 250, 0.27);
-        width: 3vmin;
-        height: 3vmin;
+        width: 15px;
+        height: 15px;
     }
     
     .controls {
+        
+        -ms-flex-pack: distribute;
+        
+            justify-content: space-around;
         width: 100%;
     }
     
     button {
-        font-size: 0.8em;
+        font-size: 0.5em;
         font-weight: 700;
-        padding: 2vmin 1.5vmin;
-        margin: 1.5vmin 0;      
+        padding: 10px 15px;
+        margin: 1.5vmin 0;    
     }
 
     #grid-control {
-        width: 90%;
-        margin-top: 10px;
+        width: 400px;
+        margin-top: 10px; 
+        -webkit-box-pack:; 
+            -ms-flex-pack:; 
+                justify-content: 
     }
     
     label {
-        font-size: 0.9em;
+        font-size: 1em;
         margin-right: 1vmin;
     }
 
     input {
-        padding: 0.4em  0.8em;
+        padding: 0.6em 1em;
         margin: 1vmin 0.4vmin; 
-        width: 5vmin;
+        width: 30px;
         border-radius: 3px;
     }
     
-    #grid-control div:first-child {
-        margin-right: 2em;
+    #operacional {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;  
+    -ms-flex-line-pack: start;  
+        align-content: flex-start;
+    width: 100%;
+    height: 700px;
+        min-height: auto;
+    top: 0;
+    left: 0;
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+    
+    #operacional.left {
+        position: absolute;
+        -webkit-transition: all 0.5s;
+        left: -300px;
+        min-height: auto;
+        height: 60px;
+        overflow: hidden;
+    }
+    
+    #operacional .fa-bars {
+        display: inline;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        color: #ddd;
+        font-size: 1.5em;
+        z-index: 3;
+    }
+    
+    #title.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    #options.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     }
     
     
-
+    #preset {
+        display: none;
+    }
+    
+    #presets-div.fade {
+        
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        opacity: 1;
+    }
+    
+    main {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        margin: 0 auto;
+        -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+        padding-top: 50px;
+        width: 100%;
+        
+        overflow: hidden;
+    }
+    
+    #gridContainer {
+        line-height: 0px;
+        margin: 30px auto 10px; 
+        text-align: center;
+        width: 100%;
+    }
+    
+    #presets-div {
+        position: absolute;
+        top: 440px;
+    }
 }
 
 @media screen and (min-width: 451px) and (max-width: 768px) {
