@@ -668,7 +668,7 @@ function createGrid(col, line) {
         if (window.innerWidth >= 1501) {
             allCells[i].style.width = (window.innerWidth*0.65/col) + "px";
             allCells[i].style.height = (window.innerWidth*0.65/col) + "px";
-        } else if (window.innerWidth < 1501 /*&& window.innerWidth >= 1025*/){
+        } else if (window.innerWidth < 1501 && window.innerWidth >= 1025){
             allCells[i].style.width = (window.innerWidth*0.82/col) + "px";
             allCells[i].style.height = (window.innerWidth*0.82/col) + "px";
         }
