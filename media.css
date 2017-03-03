@@ -20,8 +20,8 @@
     }
     
     .cell {
-        width: 10px;
-        height: 10px;
+        width: 3vmin;
+        height: 3vmin;
     }
     
     .controls {
@@ -81,14 +81,14 @@
     -ms-flex-preferred-size: auto;
         flex-basis: auto;
     box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
-        -webkit-transition: all 0.5s;
-        transition: all 0.5s;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
     }
     
     #operacional.left {
         position: absolute;
         -webkit-transition: all 0.5s;
-        left: -300px;
+        left: -0px;
         min-height: auto;
         height: 60px;
         overflow: hidden;
@@ -156,61 +156,94 @@
 
 @media screen and (min-width: 451px) and (max-width: 768px) {
     
-    h1 {
-        font-size: 3.5em;
-        font-family: 'Changa One', cursive;
-        width: 100%
+     #operacional {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;  
+    -ms-flex-line-pack: start;  
+        align-content: flex-start;
+    width: 400px;
+    min-height: 100vh;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
     }
     
-    hr {
-        width: 50%;
-        margin: 0 auto;
-        height: 2px;
-        background-color: #ddd;
+    #operacional.left {
+        position: absolute;
+        -webkit-transition: all 0.5s;
+        left: -340px;
     }
     
-    h2 {
+    #operacional .fa-bars {
+        display: inline;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #ddd;
         font-size: 1.5em;
+        z-index: 3;
+    }
+    
+    #title.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    #options.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    
+    #preset {
+        display: none;
+    }
+    
+    #presets-div.fade {
         
-        font-family: 'Changa One', cursive;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        opacity: 1;
+    }
+    
+    main {
+        position: absolute;
+        left: 50px;
+        right: 30px;
+        top: 0px;
+        margin: 0 auto;
+        -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+        padding-top: 50px;
+        width: auto;
+    }
+    
+    #gridContainer {
+        line-height: 0px;
+        margin: 30px auto 10px; 
+        text-align: center;
+        width: 100%;
     }
     
     .cell {
         width: 15px;
         height: 15px;
     }
-    
-    .controls {
-        width: 400px;
-    }
-    
-    button {
-        font-size: 0.8em;
-        font-weight: 700;
-        padding: 10px 15px;
-        margin: 1.5vmin 0;    
-    }
-
-    #grid-control {
-        width: 400px;
-        margin-top: 10px; 
-        -webkit-box-pack:; 
-            -ms-flex-pack:; 
-                justify-content: 
-    }
-    
-    label {
-        font-size: 1em;
-        margin-right: 1vmin;
-    }
-
-    input {
-        padding: 0.6em 1em;
-        margin: 1vmin 0.4vmin; 
-        width: 5vmin;
-        border-radius: 3px;
-    }
-
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
@@ -299,6 +332,11 @@
         width: 100%;
     }
     
+    .cell {
+        width: 15px;
+        height: 15px;
+    }
+    
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1500px) {
@@ -368,30 +406,30 @@
     }
     
     #about-game {
-    box-shadow: 0 5px 2px 0px rgba(0,0,0,0.25);
-    position: absolute;
-    left: 0;
-    top: -420px;
-    width: 100%;
-    height: 400px;
-    padding: 30px; 
-    overflow: hidden;
-    -webkit-transition: all 1s;
-    transition: all 1s;
-    background-image: url(img/back.jpg);
-    z-index: 1;
-}
+        box-shadow: 0 5px 2px 0px rgba(0,0,0,0.25);
+        position: absolute;
+        left: 0;
+        top: -420px;
+        width: 100%;
+        height: 400px;
+        padding: 30px; 
+        overflow: hidden;
+        -webkit-transition: all 1s;
+        transition: all 1s;
+        background-image: url(img/back.jpg);
+        z-index: 1;
+    }
 
-#about-game-text {
-    height: 240px;
-    width: 100%;
-    overflow: auto;
-    padding: 0 15px;
-}
+    #about-game-text {
+        height: 240px;
+        width: 100%;
+        overflow: auto;
+        padding: 0 15px;
+    }
 
-#about-game.about-game-down {
-    top: 0px;
-}
+    #about-game.about-game-down {
+        top: 0px;
+    }
     
     main {
         position: absolute;
@@ -411,5 +449,6 @@
         text-align: center;
         width: 100%;
     }
+  
 }
 
