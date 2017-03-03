@@ -714,7 +714,13 @@ function turn(col, line) {
 }
 
 function random() {
-    grid = [];
+    
+    for (let i = line-1; i >= 0; i--) {
+        for (let j = col-1; j >= 0; j--) { 
+            grid[i][j] = 0;
+        }
+    }
+    
     for (let i = line-1; i >= 0; i--) {
         for (let j = col-1; j >= 0; j--) { 
             rand = Math.random();
