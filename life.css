@@ -172,7 +172,7 @@ input {
     display: inline-block;
 }
 
-div[id$=alive]{
+.alive{
     background-color: #fff !important;
 }
 

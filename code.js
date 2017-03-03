@@ -671,7 +671,7 @@ function createGrid(col, line) {
         } else if (window.innerWidth < 1501 /*&& window.innerWidth >= 1025*/){
             allCells[i].style.width = (window.innerWidth*0.82/col) + "px";
             allCells[i].style.height = (window.innerWidth*0.82/col) + "px";
-        } 
+        }
     }
 }
 
