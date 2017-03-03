@@ -2,7 +2,9 @@
 
 var col = 50,
     line = 30,
-    actionVelocity = 50,    
+    actionVelocity = 5, 
+    grid = new Array(line),
+    tempGrid = new Array(line),
     getPresetPosition,     
     start,
     blink;
@@ -105,9 +107,6 @@ var col = 50,
                 //getting all the DOM presets and transform the nodeList to an array
                 allPresets = document.querySelectorAll(".preset-item");
                 allPresetsArray = Array.prototype.slice.call(allPresets);
-
-
-
                  //rearranging the id's
                 for (let i = 0; i < allPresetsArray.length; i++) {
                     allPresetsArray[i].id = "preset-" + (allPresetsArray.length - (i+1));            
@@ -147,32 +146,6 @@ var col = 50,
             }
         },
         
-        insertPreset: function(selectedPreset, initialPosition) { //preset method
-            //initial position is the id of the cell (remebering, I-J, or line-col)
-            var idSplit,
-                presetSplit,   
-                idLine,
-                idColumn,
-                presetNumber;
-
-            idSplit = initialPosition.split("-");
-            presetSplit = selectedPreset.split("-"); //presetsplit[0] is the word "preset" and presetSplit[1] is the index of the preset
-
-            idLine = Number(idSplit[0]);
-            idColumn = Number(idSplit[1]);
-            presetNumber = Number(presetSplit[1]); 
-
-
-            // generating the shape, based on the initial position
-            if (idColumn + presets.presetList[presetNumber].limits.dX <= col && idLine - presets.presetList[presetNumber].limits.dY > 0) {            
-                for (let i = 0; i < presets.presetList[presetNumber].coordinates.length; i++) {                
-                    document.getElementById((idLine + presets.presetList[presetNumber].coordinates[i][0]) + "-" + (idColumn + presets.presetList[presetNumber].coordinates[i][1])).classList.add("alive")
-                }
-            } else {
-                console.log("no room to insert this shape");
-            }
-        },
-        
         writePattern: function() { //preset method
             var newArrayCoord =[],
                 arrLines = [],
@@ -203,8 +176,8 @@ var col = 50,
             }
 
             // getting the recorded points
-            for(let i = 1; i <= line; i++) {
-                for (let j = 1; j <= col; j++) {
+            for(let i = 0; i < line; i++) {
+                for (let j = 0; j < col; j++) {
                     if (document.getElementById(i + "-" + j).classList.contains("alive")) {
                         newArrayCoord.push([i,j]);
                     }
@@ -353,7 +326,7 @@ var col = 50,
             presetNumber = Number(preset);
 
             if (presets.selectedPreset != "") {
-                if (idLine - presets.presetList[presetNumber].limits.dY > 0 && idColumn + presets.presetList[presetNumber].limits.dX <= col) {
+                if (idLine - presets.presetList[presetNumber].limits.dY >= 0 && idColumn + presets.presetList[presetNumber].limits.dX < col) {
                     for (let k = 0; k < presets.presetList[presetNumber].coordinates.length; k++) { //k loops across preset coordinates                
                         for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) { // i loops across possible colums (dX)
                             for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) { // j loops across possible lines (dY)
@@ -366,7 +339,7 @@ var col = 50,
                 } else {
                     for (let i = 0; i <= presets.presetList[presetNumber].limits.dX; i++) {
                         for (let j = 0; j <= presets.presetList[presetNumber].limits.dY; j++) {  
-                            if ((idLine - j > 0) && (idColumn + i <= col)) {
+                            if ((idLine - j >= 0) && (idColumn + i <= col)) {
                                 document.getElementById((idLine - j) + "-" + (idColumn + i)).classList.add("outboard");
                             }
                         }
@@ -406,8 +379,8 @@ var col = 50,
             presetNumber = Number(preset);
 
             if (presets.selectedPreset != "") { 
-                for (let i = 1; i <= line; i++) {
-                    for (let j = 1; j <= col; j++) { 
+                for (let i = 0; i < line; i++) {
+                    for (let j = 0; j < col; j++) { 
                         document.getElementById(i + "-" + j).classList.remove("inboard");
                         document.getElementById(i + "-" + j).classList.remove("outboard");
                     }
@@ -417,7 +390,34 @@ var col = 50,
                     document.getElementById(idLine + "-" + idColumn).classList.remove("inboard");
                 }
             }
-        }
+        },
+        
+        insertPreset: function(selectedPreset, initialPosition) { //preset method
+            //initial position is the id of the hovered cell (remebering, I-J, or line-col)
+            var idSplit,
+                presetSplit,   
+                idLine,
+                idColumn,
+                presetNumber;
+
+            idSplit = initialPosition.split("-");
+            presetSplit = selectedPreset.split("-"); //presetsplit[0] is the word "preset" and presetSplit[1] is the index of the preset
+
+            idLine = Number(idSplit[0]);
+            idColumn = Number(idSplit[1]);
+            presetNumber = Number(presetSplit[1]); 
+
+
+            // generating the shape, based on the initial position
+            if (idColumn + presets.presetList[presetNumber].limits.dX <= col && idLine - presets.presetList[presetNumber].limits.dY >= 0) {            
+                for (let i = 0; i < presets.presetList[presetNumber].coordinates.length; i++) {                
+                    document.getElementById((idLine + presets.presetList[presetNumber].coordinates[i][0]) + "-" + (idColumn + presets.presetList[presetNumber].coordinates[i][1])).classList.add("alive");
+                    grid[idLine + presets.presetList[presetNumber].coordinates[i][0]][idColumn + presets.presetList[presetNumber].coordinates[i][1]] = 1;
+                }
+            } else {
+                console.log("no room to insert this shape");
+            }
+        },
     };
 ///////////////////////////////LISTENERS//////////////////////////////
 //////////////////////////////////////////////////////////////////////
@@ -434,12 +434,18 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
     }
     
     if (presets.selectedPreset == "") { 
-        if (e.target.classList.contains("cell")) {        
-            e.target.classList.toggle("alive");        
+        if (e.target.classList.contains("cell")) {             
+            e.target.classList.toggle("alive");     
+            if (grid[clickedItem.id.split("-")[0]][clickedItem.id.split("-")[1]]) {
+                grid[clickedItem.id.split("-")[0]][clickedItem.id.split("-")[1]] = 0;
+            } else {
+                grid[clickedItem.id.split("-")[0]][clickedItem.id.split("-")[1]] = 1;
+            }
         }
     } else {
         presets.insertPreset(presets.selectedPreset, clickedItem.id);
     }
+   
 });
 
 //listener apply to windows, to detect resize
@@ -447,7 +453,7 @@ window.addEventListener("resize", function() {
     col = document.getElementById("cols").value;
     line = document.getElementById("lines").value;
     document.getElementById("gridContainer").innerHTML="";
-    grid(col, line);
+    createGrid(col, line);
     if (document.getElementById("start").classList.contains("hidden")) {
         clearInterval(start);
         document.getElementById("start").classList.toggle("hidden");
@@ -467,7 +473,7 @@ document.getElementById("gridContainer").addEventListener("mouseout", function(e
 
 //HAMBURGER MENU
 document.getElementById("hamb-menu").addEventListener("click", function(){
-    console.log("works!");
+    
     document.getElementById("operacional").classList.toggle("left");
     document.getElementById("title").classList.toggle("left");
     document.getElementById("preset").classList.toggle("left");
@@ -614,36 +620,48 @@ document.getElementById("main-navigation").addEventListener("click", function(e)
 document.getElementById("cols").addEventListener("change", function(){
     col = document.getElementById("cols").value;
     document.getElementById("gridContainer").innerHTML="";
-    grid(col, line);
+    createGrid(col, line);
 });
 
 //INPUT LINES - change the height of the matrix
 document.getElementById("lines").addEventListener("change", function(){
     line = document.getElementById("lines").value;
     document.getElementById("gridContainer").innerHTML="";
-    grid(col, line);
+    createGrid(col, line);
 });
 
 ///////////////////////////////FUNCTIONS///////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
 
-grid = function createGrid(col, line) {
+function createGrid(col, line) {
     var allCells;
-    for (let i = line; i >= 1; i--) {
-        for ( let j = col; j >= 1; j--) {            
-            
-            if (j == col) {
+    
+    grid = new Array(line);
+    for (let i = 0; i < line; i++) { 
+       grid[i] = new Array(line);
+    } 
+       
+    tempGrid = new Array(line);
+    for (let i = 0; i < line; i++) { 
+       tempGrid[i] = new Array(line);
+    } 
+    
+    for (let i = line-1; i >= 0; i--) {        
+        for ( let j = col-1; j >= 0; j--) { 
+            grid[i][j] = 0;
+            tempGrid[i][j] = 0;
+            if (j == (col-1)) {
                 document.getElementById("gridContainer").insertAdjacentHTML("afterbegin",'<div id = "' + i + '-' + j + '" class = "cell"></div><br>');
             } else {
                 document.getElementById("gridContainer").insertAdjacentHTML("afterbegin",'<div id = "' + i + '-' + j + '" class = "cell"></div>');
             }
         }
     }
-    document.getElementById("1-1").classList.add("firstRow-first");
-    document.getElementById("1-" + col).classList.add("firstRow-last");
-    document.getElementById(line + "-1").classList.add("lastRow-first");
-    document.getElementById(line + "-" + col).classList.add("lastRow-last");
+    document.getElementById("0-0").classList.add("firstRow-first");
+    document.getElementById("0-" + (col-1)).classList.add("firstRow-last");
+    document.getElementById((line-1) + "-0").classList.add("lastRow-first");
+    document.getElementById((line-1) + "-" + (col-1)).classList.add("lastRow-last");
     
     allCells = document.querySelectorAll(".cell");
     for (i = 0; i <allCells.length; i++) {
@@ -656,44 +674,53 @@ grid = function createGrid(col, line) {
         }
     }
 }
-marking = function newCicle(col, line) {
-    var adjacentLiveCells,    
-        idLine,
-        idColumn,        
-        idSplit;
-    for (let i = line; i >= 1; i--) { //i = y, j= x / i= linha, j = coluna
-        for (let j = col; j >= 1; j--) {            
+
+turn = function newCicle(col, line) {
+    var adjacentLiveCells;    
+    
+    for (let i = line-1; i >= 0; i--) { //i = y, j= x / i= linha, j = coluna
+        for (let j = col-1; j >= 0; j--) {            
             adjacentLiveCells = 0;
             
             for (let adjY = -1; adjY <= 1; adjY++) {
                 for (let adjX = -1; adjX <= 1; adjX++) {
-                    if (adjX != 0 || adjY != 0) {  
-                        idSplit = document.getElementById(i + "-" + j).id.split("-");
-                        idLine = Number(idSplit[0]);
-                        idColumn = Number(idSplit[1]);
-                        if ( (idLine + adjY > 0) && (idColumn + adjX > 0) && (idLine + adjY <= line) && (idColumn + adjX <= col) && document.getElementById((idLine + adjY) + "-" + (idColumn + adjX)).classList.contains("alive")) {
+                    if (adjX || adjY) {  // means adjX != 0 and adjY !=0, in a elegant way
+                        if ( (i + adjY >= 0) && (j + adjX >= 0) && (i + adjY < line) && (j + adjX < col) && (grid[i + adjY][j + adjX] == 1)) {
                             adjacentLiveCells++
                         } 
                     }
                 }
             }
-            
-            if (adjacentLiveCells < 2 || adjacentLiveCells > 3) {
-                document.getElementById(i + "-" + j).classList.add("willDie");    
-            } else if (adjacentLiveCells == 3) {
-                if (!document.getElementById(i + "-" + j).classList.contains("alive")); {
-                    document.getElementById(i + "-" + j).classList.add("becomeAlive");
-                }
+            if ((adjacentLiveCells === 2 || adjacentLiveCells === 3) && (grid[i][j] == 1)) {
+                tempGrid[i][j] = 1;
+            } else if (adjacentLiveCells === 3 && (grid[i][j] == 0)) {
+                tempGrid[i][j] = 1;
+            } else {
+                tempGrid[i][j] = 0;
+            }
+           
+        }
+    }
+    
+    for (let i = line-1; i >= 0; i--) { 
+        for (let j = col-1; j >= 0; j--) { 
+            grid[i][j] = tempGrid[i][j];
+            if (grid[i][j] == 1 && !document.getElementById(i + "-" + j).classList.contains("alive")) {
+                document.getElementById(i + "-" + j).classList.add("alive");
+            } else if (grid[i][j] == 0 && document.getElementById(i + "-" + j).classList.contains("alive")) {
+                document.getElementById(i + "-" + j).classList.remove("alive");
             }
         }
     }
 }
 
 function random() {
-    for (let i = line; i >= 1; i--) {
-        for (let j = col; j >= 1; j--) { 
+    grid = [];
+    for (let i = line-1; i >= 0; i--) {
+        for (let j = col-1; j >= 0; j--) { 
             rand = Math.random();
             if (rand > 0.5) {
+                grid[i][j] = 1;
                 document.getElementById(i + "-" + j).classList.add("alive");
             }
         }
@@ -701,37 +728,23 @@ function random() {
 }
 
 function remove() {
-    var cells = document.getElementById("gridContainer").children;    
-    for (let i = 0; i <= (cells.length-1); i++) {        
-        cells[i].classList.remove("alive");
-    }
-}
-
-function action(col, line) {
-    for (let i = line; i >= 1; i--) {
-        for (let j = col; j >= 1; j--) {            
-            
-            if (document.getElementById(i + "-" + j).classList.contains("willDie")) {
-                document.getElementById(i + "-" + j).classList.remove("alive");
-                document.getElementById(i + "-" + j).classList.remove("willDie");
-                
-            } else if (document.getElementById(i + "-" + j).classList.contains("becomeAlive")) {
-                document.getElementById(i + "-" + j).classList.add("alive");
-                document.getElementById(i + "-" + j).classList.remove("becomeAlive");
-            }
+    
+    for (let i = line-1; i >= 0; i--) {
+        for (let j = col-1; j >= 0; j--) { 
+            grid[i][j] = 0;
+           document.getElementById(i + "-" + j).classList.remove("alive");
         }
     }
 }
 
 function startPause() {
     start = setInterval(function() {
-        marking(col, line);
-        action(col, line);
+        turn(col, line);
     },actionVelocity);
 }
 
 function windowControl(itemId, action, idCommand) { //action must be "add" or "remove" idCommand should be "open" or "close". If itemId = all, all the windows wilçl be closed
-    console.log("funcionou!");
+    
     if (itemId == idCommand + "-options" || itemId == "all") {
         document.getElementById("options").classList[action]("options-down"); 
     }
@@ -743,7 +756,8 @@ function windowControl(itemId, action, idCommand) { //action must be "add" or "r
     }
 }
 
-grid(col, line);
+
+createGrid(col, line);
 
 //writing the default presets on DOM 
 (function(){
