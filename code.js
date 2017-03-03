@@ -1,14 +1,32 @@
 
 
-var col = 50,
-    line = 30,
+var col,
+    line,
     actionVelocity = 1, 
     grid = new Array(line),
     tempGrid = new Array(line),
     getPresetPosition,     
     start,
     blink;
+
+    if (window.innerWidth <= "450px") {
+        document.getElementById("cols").value = 20;
+        document.getElementById("lines").value = 40;
+        col=20;
+        line=40;
+    } else if (window.innerWidth > "450px" && window.innerWidth <= "768px") {
+        document.getElementById("cols").value = 30;
+        document.getElementById("lines").value = 60;
+        col=30;
+        line=60;
+    } else {
+        document.getElementById("cols").value = 47;
+        document.getElementById("lines").value = 39;
+        col=50;
+        line=30;
+    }
     
+
     var presets = {
         
         selectedPreset: "",  
