@@ -2,7 +2,7 @@
 
 var col = 50,
     line = 30,
-    actionVelocity = 5, 
+    actionVelocity = 1, 
     grid = new Array(line),
     tempGrid = new Array(line),
     getPresetPosition,     
@@ -675,7 +675,7 @@ function createGrid(col, line) {
     }
 }
 
-turn = function newCicle(col, line) {
+function turn(col, line) {
     var adjacentLiveCells;    
     
     for (let i = line-1; i >= 0; i--) { //i = y, j= x / i= linha, j = coluna
@@ -698,16 +698,15 @@ turn = function newCicle(col, line) {
             } else {
                 tempGrid[i][j] = 0;
             }
-           
         }
     }
     
     for (let i = line-1; i >= 0; i--) { 
         for (let j = col-1; j >= 0; j--) { 
             grid[i][j] = tempGrid[i][j];
-            if (grid[i][j] == 1 && !document.getElementById(i + "-" + j).classList.contains("alive")) {
+            if (grid[i][j] == 1) {
                 document.getElementById(i + "-" + j).classList.add("alive");
-            } else if (grid[i][j] == 0 && document.getElementById(i + "-" + j).classList.contains("alive")) {
+            } else {
                 document.getElementById(i + "-" + j).classList.remove("alive");
             }
         }
@@ -756,7 +755,6 @@ function windowControl(itemId, action, idCommand) { //action must be "add" or "r
     }
 }
 
-
 createGrid(col, line);
 
 //writing the default presets on DOM 
@@ -765,3 +763,5 @@ createGrid(col, line);
         document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + i + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[i].name + "</div>");
     }
 })();
+
+
