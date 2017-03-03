@@ -2,7 +2,7 @@
 
 var col,
     line,
-    actionVelocity = 1, 
+    actionVelocity = 75, 
     grid = new Array(line),
     tempGrid = new Array(line),
     getPresetPosition,     
