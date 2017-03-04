@@ -9,22 +9,8 @@ var col,
     start,
     blink;
 
-    if (window.innerWidth <= "450px") {
-        document.getElementById("cols").value = 20;
-        document.getElementById("lines").value = 40;
-        col=20;
-        line=40;
-    } else if (window.innerWidth > "450px" && window.innerWidth <= "768px") {
-        document.getElementById("cols").value = 30;
-        document.getElementById("lines").value = 60;
-        col=30;
-        line=60;
-    } else {
-        document.getElementById("cols").value = 47;
-        document.getElementById("lines").value = 39;
-        col=50;
-        line=30;
-    }
+
+
     
 
     var presets = {
@@ -154,6 +140,12 @@ var col,
             //clicking on an icon toggles the "select-preset" class
             if (selected.id != "presets-div-items") { //to exclude the DIV itself
                 selected.classList.toggle("preset-selected");
+                
+                //automatically closes the side bar (if applicable) to insert the preset
+                document.getElementById("operacional").classList.toggle("left");
+                document.getElementById("title").classList.toggle("left");
+                document.getElementById("preset").classList.toggle("left");
+                windowControl("all", "remove", "close");
             }
 
             //defining the selectedPreset object property
@@ -466,8 +458,8 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
    
 });
 
-//listener apply to windows, to detect resize
-window.addEventListener("resize", function() {
+//listener apply to window, to detect resize
+/*window.addEventListener("resize", function() {
     col = document.getElementById("cols").value;
     line = document.getElementById("lines").value;
     document.getElementById("gridContainer").innerHTML="";
@@ -477,7 +469,7 @@ window.addEventListener("resize", function() {
         document.getElementById("start").classList.toggle("hidden");
         document.getElementById("pause").classList.toggle("hidden");
     }
-});
+});*/
 
 // to change the color of the cells when hovering to insert pattern
 document.getElementById("gridContainer").addEventListener("mouseover", function(e){
@@ -495,6 +487,8 @@ document.getElementById("hamb-menu").addEventListener("click", function(){
     document.getElementById("operacional").classList.toggle("left");
     document.getElementById("title").classList.toggle("left");
     document.getElementById("preset").classList.toggle("left");
+    document.getElementById("mobile-title").classList.toggle("left");
+    
 });
 
 
@@ -766,7 +760,7 @@ function startPause() {
     },actionVelocity);
 }
 
-function windowControl(itemId, action, idCommand) { //action must be "add" or "remove" idCommand should be "open" or "close". If itemId = all, all the windows wilçl be closed
+function windowControl(itemId, action, idCommand) { //If itemId = all, all the windows will be closed. ACTION must be "add" or "remove" idCommand should be "open" or "close". 
     
     if (itemId == idCommand + "-options" || itemId == "all") {
         document.getElementById("options").classList[action]("options-down"); 
@@ -779,6 +773,42 @@ function windowControl(itemId, action, idCommand) { //action must be "add" or "r
     }
 }
 
+function scrSize() {
+    var width = (window.innerWidth > 0) ? window.innerWidth : width;
+    
+    if (width <= "450px" && width < screen.height ) {
+        document.getElementById("cols").value = 20;
+        document.getElementById("lines").value = 40;
+        col=20;
+        line=40;
+    } else if (width <= "450px" && width > screen.height ) {
+         document.getElementById("cols").value = 40;
+        document.getElementById("lines").value = 20;
+        col = 40;
+        line = 20;
+
+    } else if (width > "450px" && width <= "768px" && width < screen.height) {
+        document.getElementById("cols").value = 30;
+        document.getElementById("lines").value = 60;
+        col = 30;
+        line = 60;
+    } else if (width > "450px" && width <= "768px" && width < screen.height) {
+        document.getElementById("cols").value = 60;
+        document.getElementById("lines").value = 30;
+        col = 60;
+        line = 30;
+    } else {
+        document.getElementById("cols").value = 47;
+        document.getElementById("lines").value = 39;
+        col=50;
+        line=30;
+    }
+    console.log(width);
+    
+}
+
+//initializing
+scrSize();
 createGrid(col, line);
 
 //writing the default presets on DOM 

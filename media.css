@@ -74,34 +74,40 @@
     -ms-flex-line-pack: start;  
         align-content: flex-start;
     width: 100%;
-    height: 700px;
-        min-height: auto;
+    height: 100vh;
+    min-height: auto;
+    padding-bottom: 80px;
     top: 0;
     left: 0;
     -ms-flex-preferred-size: auto;
         flex-basis: auto;
     box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
-        -webkit-transition: all 0.2s;
-        transition: all 0.2s;
+        -webkit-transition: all 1s;
+        transition: all 1s;
+        overflow: hidden;
     }
     
     #operacional.left {
         position: absolute;
         -webkit-transition: all 0.5s;
-        left: -0px;
+        left: 0;
         min-height: auto;
-        height: 60px;
+        height: 5px;
         overflow: hidden;
     }
     
     #operacional .fa-bars {
         display: inline;
-        position: fixed;
+        position: absolute;
         top: 20px;
-        left: 20px;
-        color: #fff;
+        right: 20px;
+        color: #ddd;
         font-size: 1.5em;
         z-index: 3;
+    }
+    
+    #title {
+        height: 150px;
     }
     
     #title.left {
@@ -109,35 +115,55 @@
         box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     }
     
+    #mobile-title {
+        display: none;
+        
+    }
+    
+    #mobile-title.left {
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        opacity: 1;
+        
+    }
+    
     #options.left {
-        opacity: 0;
+        opacity: 1;
         box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     }
     
+    #about-game {
+        top: -400px;
+        height: 400px;
+        z-index: 1;
+    }
+    
+    #about-game-text {
+        height: 230px;
+        width: 100%;
+        overflow: auto;
+        padding: 0 15px;
+    }
+
+    #about-game.about-game-down {
+        top: 0px;
+    }
     
     #preset {
         display: none;
     }
-    
-    #presets-div.fade {
-        
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        opacity: 1;
-    }
-    
     main {
         position: absolute;
         left: 0px;
         right: 0px;
-        top: 0px;
+        top: 25px;
         margin: 0 auto;
         -ms-flex-preferred-size: auto;
             flex-basis: auto;
         padding-top: 50px;
         width: 100%;
-        
         overflow: hidden;
     }
     
@@ -150,7 +176,17 @@
     
     #presets-div {
         position: absolute;
-        top: 440px;
+        bottom: 20px;
+        
+    }
+    
+    #presets-div.fade {
+        
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        opacity: 1;
+        z-index: 0;
     }
 }
 
@@ -175,6 +211,7 @@
     height: 100%;
     top: 0;
     left: 0;
+    
     -ms-flex-preferred-size: auto;
         flex-basis: auto;
     box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
@@ -183,19 +220,25 @@
     }
     
     #operacional.left {
-        position: absolute;
-        -webkit-transition: all 0.5s;
-        left: -340px;
+        position: absolute;        
+        left: -355px;
     }
     
     #operacional .fa-bars {
         display: inline;
         position: absolute;
         top: 20px;
-        right: 20px;
+        right: 13px;
         color: #ddd;
         font-size: 1.5em;
         z-index: 3;
+    }
+    
+    #main-navigation {
+        
+        height: 650px;
+        background-image: url(img/back.jpg);
+        z-index: 1;
     }
     
     #title.left {
@@ -208,9 +251,35 @@
         box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     }
     
+    #options input {
+        width: 30px;
+    }
+    
+    #about-game {
+        top: -400px;
+        height: 400px;
+        z-index: 1;
+    }
+    
+    #about-game-text {
+        height: 230px;
+        width: 100%;
+        overflow: auto;
+        padding: 0 15px;
+    }
+
+    #about-game.about-game-down {
+        top: 0px;
+    }
+    
     
     #preset {
         display: none;
+    }
+    
+    #presets-div {
+        position: absolute;
+        
     }
     
     #presets-div.fade {
@@ -219,6 +288,7 @@
         display: -ms-flexbox;
         display: flex;
         opacity: 1;
+        
     }
     
     main {
