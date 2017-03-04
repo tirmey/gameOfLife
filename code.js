@@ -100,13 +100,13 @@ var col,
             if (e.target.classList.contains("fa-trash")) {
 
                 //getting the index of the clicked preset on the object arrayList    
-                arrIndex = e.target.parentElement.parentElement.id.split("-")[1];
+                arrIndex = e.target.parentElement.id.split("-")[1];
 
                 //erasing the preset from object
                 presets.presetList.splice(arrIndex, 1);
 
                 //erasing object from DOM
-                e.target.parentElement.parentElement.outerHTML = "";
+                e.target.parentElement.outerHTML = "";
 
                 //getting all the DOM presets and transform the nodeList to an array
                 allPresets = document.querySelectorAll(".preset-item");
@@ -120,10 +120,8 @@ var col,
             }
 
             //selecting presets
-            if (e.target.classList.contains("icon-cluster")) {
-                selected = e.target.parentElement
-            } else if (e.target.classList.contains("fa")) {
-                selected = e.target.parentElement.parentElement; 
+            if (e.target.id == "preset-icon" || e.target.id == "preset-text") {
+                selected = e.target.parentElement;
             } else if (e.target.classList.contains("preset-item")) {
                 selected = e.target;
             }
@@ -145,6 +143,7 @@ var col,
                 document.getElementById("operacional").classList.toggle("left");
                 document.getElementById("title").classList.toggle("left");
                 document.getElementById("preset").classList.toggle("left");
+                document.getElementById("mobile-title").classList.toggle("left");
                 windowControl("all", "remove", "close");
             }
 
@@ -239,7 +238,7 @@ var col,
                         }   
                 };
                 presets.presetList.push(newPreset); 
-                document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-trash' aria-hidden='true' class = 'fade'></i></div>" + presets.presetList[presets.presetList.length - 1].name + "</div>");
+                document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + (presets.presetList.length - 1) + "' class='preset-item'><img id='preset-icon' src='img/presets.png'><i class='fa fa-trash' aria-hidden='true' class = 'fade'></i><p id='preset-text'>" + presets.presetList[presets.presetList.length - 1].name + "</p></div>");
 
             } else {
                 alert("draw some cells first to record a new preset");
@@ -814,7 +813,7 @@ createGrid(col, line);
 //writing the default presets on DOM 
 (function(){
     for (let i = 0; i < presets.presetList.length; i++) {
-        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + i + "' class='preset-item'><div class='icon-cluster'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i><i class='fa fa-ellipsis-v' aria-hidden='true'></i></div>" + presets.presetList[i].name + "</div>");
+        document.getElementById("presets-div-items").insertAdjacentHTML("afterbegin", "<div id = 'preset-" + i + "' class='preset-item'><img id='preset-icon' src='img/presets.png'><p id='preset-text'>" + presets.presetList[i].name + "</p></div>");
     }
 })();
 

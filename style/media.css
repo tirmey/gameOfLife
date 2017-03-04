@@ -27,7 +27,6 @@
     .controls {
         
         -ms-flex-pack: distribute;
-        
             justify-content: space-around;
         width: 100%;
     }
@@ -84,7 +83,7 @@
     box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
         -webkit-transition: all 1s;
         transition: all 1s;
-        overflow: hidden;
+        overflow:auto
     }
     
     #operacional.left {
