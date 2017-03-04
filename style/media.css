@@ -1,77 +1,64 @@
 @media screen and (max-width: 450px) {
-    
-    h1 {
-        font-size: 3em;
-        font-family: 'Changa One', cursive;
-        width: 100%
-    }
-    
-    hr {
-        width: 50%;
-        margin: 0 auto;
-        height: 2px;
-        background-color: #ddd;
-    }
-    
-    h2 {
-        font-size: 1.5em;
-        margin: 20px 0 10px 0;
-        font-family: 'Changa One', cursive;
-    }
-    
-    .cell {
-        width: 3vmin;
-        height: 3vmin;
-    }
-    
-    .controls {
-        
-        -ms-flex-pack: distribute;
-            justify-content: space-around;
-        width: 100%;
-    }
-    
-    button {
-        font-size: 0.5em;
-        font-weight: 700;
-        padding: 10px 15px;
-        margin: 1.5vmin 0;    
-    }
-
-    #grid-control {
-        width: 400px;
-        margin-top: 10px; 
-        -webkit-box-pack:; 
-            -ms-flex-pack:; 
-                justify-content: 
-    }
-    
-    label {
-        font-size: 1em;
-        margin-right: 1vmin;
-    }
-
-    input {
-        padding: 0.6em 1em;
-        margin: 1vmin 0.4vmin; 
-        width: 30px;
-        border-radius: 3px;
-    }
-    
-    #operacional {
+  /* line 6, D:/OneDrive/web/GOL/style/media.scss */
+  h1 {
+    font-size: 3em;
+    font-family: 'Changa One', cursive;
+    width: 100%; }
+  /* line 12, D:/OneDrive/web/GOL/style/media.scss */
+  hr {
+    width: 50%;
+    margin: 0 auto;
+    height: 2px;
+    background-color: #ddd; }
+  /* line 19, D:/OneDrive/web/GOL/style/media.scss */
+  h2 {
+    font-size: 1.5em;
+    margin: 20px 0 10px 0;
+    font-family: 'Changa One', cursive; }
+  /* line 25, D:/OneDrive/web/GOL/style/media.scss */
+  .cell {
+    width: 3vmin;
+    height: 3vmin; }
+  /* line 30, D:/OneDrive/web/GOL/style/media.scss */
+  .controls {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    width: 100%; }
+  /* line 37, D:/OneDrive/web/GOL/style/media.scss */
+  button {
+    font-size: 0.5em;
+    font-weight: 700;
+    padding: 10px 15px;
+    margin: 1.5vmin 0; }
+  /* line 44, D:/OneDrive/web/GOL/style/media.scss */
+  #grid-control {
+    width: 400px;
+    margin-top: 10px; }
+  /* line 50, D:/OneDrive/web/GOL/style/media.scss */
+  label {
+    font-size: 1em;
+    margin-right: 1vmin; }
+  /* line 55, D:/OneDrive/web/GOL/style/media.scss */
+  input {
+    padding: 0.6em 1em;
+    margin: 1vmin 0.4vmin;
+    width: 30px;
+    border-radius: 3px; }
+  /* line 62, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;  
-    -ms-flex-line-pack: start;  
-        align-content: flex-start;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
     width: 100%;
     height: 100vh;
     min-height: auto;
@@ -79,445 +66,509 @@
     top: 0;
     left: 0;
     -ms-flex-preferred-size: auto;
-        flex-basis: auto;
-    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
-        -webkit-transition: all 1s;
-        transition: all 1s;
-        overflow:auto
-    }
-    
-    #operacional.left {
-        position: absolute;
-        -webkit-transition: all 0.5s;
-        left: 0;
-        min-height: auto;
-        height: 5px;
-        overflow: hidden;
-    }
-    
-    #operacional .fa-bars {
-        display: inline;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        color: #ddd;
-        font-size: 1.5em;
-        z-index: 3;
-    }
-    
-    #title {
-        height: 150px;
-    }
-    
-    #title.left {
-        opacity: 0;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-    }
-    
-    #mobile-title {
-        display: none;
-        
-    }
-    
-    #mobile-title.left {
-        display: block;
-        position: absolute;
-        left: 10px;
-        top: 10px;
-        opacity: 1;
-        
-    }
-    
-    #options.left {
-        opacity: 1;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-    }
-    
-    #about-game {
-        top: -400px;
-        height: 400px;
-        z-index: 1;
-    }
-    
-    #about-game-text {
-        height: 230px;
-        width: 100%;
-        overflow: auto;
-        padding: 0 15px;
-    }
-
-    #about-game.about-game-down {
-        top: 0px;
-    }
-    
-    #preset {
-        display: none;
-    }
-    main {
-        position: absolute;
-        left: 0px;
-        right: 0px;
-        top: 25px;
-        margin: 0 auto;
-        -ms-flex-preferred-size: auto;
-            flex-basis: auto;
-        padding-top: 50px;
-        width: 100%;
-        overflow: hidden;
-    }
-    
-    #gridContainer {
-        line-height: 0px;
-        margin: 30px auto 10px; 
-        text-align: center;
-        width: 100%;
-    }
-    
-    #presets-div {
-        position: absolute;
-        bottom: 20px;
-        
-    }
-    
-    #presets-div.fade {
-        
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        opacity: 1;
-        z-index: 0;
-    }
-}
+    flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0, 0, 0, 0.75);
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    overflow: auto; }
+  /* line 90, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional.left {
+    position: absolute;
+    -webkit-transition: all 0.5s;
+    left: 0;
+    min-height: auto;
+    height: 5px;
+    overflow: hidden; }
+  /* line 99, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional .fa-bars {
+    display: inline;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #ddd;
+    font-size: 1.5em;
+    z-index: 3; }
+  /* line 109, D:/OneDrive/web/GOL/style/media.scss */
+  #title {
+    height: 190px; }
+  /* line 113, D:/OneDrive/web/GOL/style/media.scss */
+  #title.left {
+    opacity: 0;
+    box-shadow: 0px 0px 0px 0px transparent; }
+  /* line 118, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title {
+    display: block;
+    position: absolute;
+    opacity: 0;
+    transition: all 1s;
+    left: 20px;
+    top: 20px; }
+  /* line 128, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title.left {
+    opacity: 1; }
+  /* line 132, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div {
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    position: absolute;
+    border: 1px solid #aaa;
+    border-radius: 2px; }
+  /* line 141, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(2) {
+    top: 10px; }
+  /* line 145, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(3) {
+    top: 20px; }
+  /* line 149, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(4) {
+    top: 30px; }
+  /* line 154, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(5) {
+    top: 30px;
+    left: 10px; }
+  /* line 159, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(6) {
+    top: 30px;
+    left: 20px; }
+  /* line 164, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(7) {
+    left: 35px; }
+  /* line 168, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(8) {
+    top: 10px;
+    left: 35px; }
+  /* line 173, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(9) {
+    top: 20px;
+    left: 35px; }
+  /* line 178, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(10) {
+    top: 30px;
+    left: 35px; }
+  /* line 183, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(11) {
+    left: 50px; }
+  /* line 187, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(12) {
+    left: 50px;
+    top: 10px; }
+  /* line 192, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(13) {
+    left: 50px;
+    top: 20px; }
+  /* line 197, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(14) {
+    left: 50px;
+    top: 30px; }
+  /* line 202, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(15) {
+    left: 60px; }
+  /* line 206, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(16) {
+    left: 70px; }
+  /* line 210, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(17) {
+    top: 15px;
+    left: 60px; }
+  /* line 215, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(18) {
+    left: 85px; }
+  /* line 219, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(19) {
+    top: 10px;
+    left: 85px; }
+  /* line 224, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(20) {
+    top: 20px;
+    left: 85px; }
+  /* line 229, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(21) {
+    top: 30px;
+    left: 85px; }
+  /* line 234, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(22) {
+    top: 30px;
+    left: 95px; }
+  /* line 239, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(23) {
+    left: 95px; }
+  /* line 243, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(24) {
+    top: 15px;
+    left: 95px; }
+  /* line 248, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(25) {
+    top: 30px;
+    left: 105px; }
+  /* line 253, D:/OneDrive/web/GOL/style/media.scss */
+  #mobile-title div:nth-of-type(26) {
+    top: 0;
+    left: 105px; }
+  /* line 258, D:/OneDrive/web/GOL/style/media.scss */
+  #options.left {
+    opacity: 1;
+    box-shadow: 0px 0px 0px 0px transparent; }
+  /* line 263, D:/OneDrive/web/GOL/style/media.scss */
+  #about-game {
+    top: -400px;
+    height: 400px;
+    z-index: 1; }
+  /* line 269, D:/OneDrive/web/GOL/style/media.scss */
+  #about-game-text {
+    height: 230px;
+    width: 100%;
+    overflow: auto;
+    padding: 0 15px; }
+  /* line 276, D:/OneDrive/web/GOL/style/media.scss */
+  #about-game.about-game-down {
+    top: 0px; }
+  /* line 280, D:/OneDrive/web/GOL/style/media.scss */
+  #preset {
+    display: none; }
+  /* line 283, D:/OneDrive/web/GOL/style/media.scss */
+  main {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 25px;
+    margin: 0 auto;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    padding-top: 50px;
+    width: 100%;
+    overflow: hidden; }
+  /* line 296, D:/OneDrive/web/GOL/style/media.scss */
+  #gridContainer {
+    line-height: 0px;
+    margin: 30px auto 10px;
+    text-align: center;
+    width: 100%; }
+  /* line 303, D:/OneDrive/web/GOL/style/media.scss */
+  #presets-div {
+    position: absolute;
+    bottom: 20px; }
+  /* line 309, D:/OneDrive/web/GOL/style/media.scss */
+  #presets-div.fade {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    opacity: 1;
+    z-index: 0; } }
 
 @media screen and (min-width: 451px) and (max-width: 768px) {
-    
-     #operacional {
+  /* line 321, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;  
-    -ms-flex-line-pack: start;  
-        align-content: flex-start;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
     width: 400px;
     min-height: 100vh;
     height: 100%;
     top: 0;
     left: 0;
-    
     -ms-flex-preferred-size: auto;
-        flex-basis: auto;
-    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
-        -webkit-transition: all 0.5s;
-        transition: all 0.5s;
-    }
-    
-    #operacional.left {
-        position: absolute;        
-        left: -355px;
-    }
-    
-    #operacional .fa-bars {
-        display: inline;
-        position: absolute;
-        top: 20px;
-        right: 13px;
-        color: #ddd;
-        font-size: 1.5em;
-        z-index: 3;
-    }
-    
-    #main-navigation {
-        
-        height: 650px;
-        background-image: url(img/back.jpg);
-        z-index: 1;
-    }
-    
-    #title.left {
-        opacity: 0;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-    }
-    
-    #options.left {
-        opacity: 0;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-    }
-    
-    #options input {
-        width: 30px;
-    }
-    
-    #about-game {
-        top: -400px;
-        height: 400px;
-        z-index: 1;
-    }
-    
-    #about-game-text {
-        height: 230px;
-        width: 100%;
-        overflow: auto;
-        padding: 0 15px;
-    }
-
-    #about-game.about-game-down {
-        top: 0px;
-    }
-    
-    
-    #preset {
-        display: none;
-    }
-    
-    #presets-div {
-        position: absolute;
-        
-    }
-    
-    #presets-div.fade {
-        
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        opacity: 1;
-        
-    }
-    
-    main {
-        position: absolute;
-        left: 50px;
-        right: 30px;
-        top: 0px;
-        margin: 0 auto;
-        -ms-flex-preferred-size: auto;
-            flex-basis: auto;
-        padding-top: 50px;
-        width: auto;
-    }
-    
-    #gridContainer {
-        line-height: 0px;
-        margin: 30px auto 10px; 
-        text-align: center;
-        width: 100%;
-    }
-    
-    .cell {
-        width: 15px;
-        height: 15px;
-    }
-}
+    flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0, 0, 0, 0.75);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
+  /* line 348, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional.left {
+    position: absolute;
+    left: -355px; }
+  /* line 353, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional.left:hover {
+    transform: translate(5px, 0); }
+  /* line 357, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional .fa-bars {
+    display: inline;
+    position: absolute;
+    top: 20px;
+    right: 13px;
+    color: #ddd;
+    font-size: 1.5em;
+    z-index: 3; }
+  /* line 367, D:/OneDrive/web/GOL/style/media.scss */
+  #control-panel {
+    opacity: 0;
+    position: absolute;
+    top: 300px;
+    right: 5px;
+    writing-mode: vertical-rl; }
+  /* line 375, D:/OneDrive/web/GOL/style/media.scss */
+  #control-panel.left {
+    opacity: 1; }
+  /* line 380, D:/OneDrive/web/GOL/style/media.scss */
+  #main-navigation {
+    height: 650px;
+    background-image: url(img/back.jpg);
+    z-index: 1; }
+  /* line 387, D:/OneDrive/web/GOL/style/media.scss */
+  #title.left {
+    opacity: 0;
+    box-shadow: 0px 0px 0px 0px transparent; }
+  /* line 392, D:/OneDrive/web/GOL/style/media.scss */
+  #options.left {
+    opacity: 0;
+    box-shadow: 0px 0px 0px 0px transparent; }
+  /* line 397, D:/OneDrive/web/GOL/style/media.scss */
+  #options input {
+    width: 30px; }
+  /* line 401, D:/OneDrive/web/GOL/style/media.scss */
+  #about-game {
+    top: -420px;
+    height: 400px;
+    z-index: 1; }
+  /* line 407, D:/OneDrive/web/GOL/style/media.scss */
+  #about-game-text {
+    height: 230px;
+    width: 100%;
+    overflow: auto;
+    padding: 0 15px; }
+  /* line 414, D:/OneDrive/web/GOL/style/media.scss */
+  #about-game.about-game-down {
+    top: 0px; }
+  /* line 419, D:/OneDrive/web/GOL/style/media.scss */
+  #preset {
+    display: none; }
+  /* line 423, D:/OneDrive/web/GOL/style/media.scss */
+  #presets-div {
+    position: absolute; }
+  /* line 428, D:/OneDrive/web/GOL/style/media.scss */
+  #presets-div.fade {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    opacity: 1; }
+  /* line 437, D:/OneDrive/web/GOL/style/media.scss */
+  main {
+    position: absolute;
+    left: 50px;
+    right: 30px;
+    top: 0px;
+    margin: 0 auto;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    padding-top: 50px;
+    width: auto; }
+  /* line 449, D:/OneDrive/web/GOL/style/media.scss */
+  #gridContainer {
+    line-height: 0px;
+    margin: 30px auto 10px;
+    text-align: center;
+    width: 100%; }
+  /* line 456, D:/OneDrive/web/GOL/style/media.scss */
+  .cell {
+    width: 15px;
+    height: 15px; } }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-    
-     #operacional {
+  /* line 464, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;  
-    -ms-flex-line-pack: start;  
-        align-content: flex-start;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
     width: 400px;
     min-height: 100vh;
     height: 100%;
     top: 0;
     left: 0;
     -ms-flex-preferred-size: auto;
-        flex-basis: auto;
-    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
-        -webkit-transition: all 0.5s;
-        transition: all 0.5s;
-    }
-    
-    #operacional.left {
-        position: absolute;
-        -webkit-transition: all 0.5s;
-        left: -340px;
-    }
-    
-    #operacional .fa-bars {
-        display: inline;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        color: #ddd;
-        font-size: 1.5em;
-        z-index: 3;
-    }
-    
-    #title.left {
-        opacity: 0;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-    }
-    
-    #options.left {
-        opacity: 0;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-    }
-    
-    
-    #preset {
-        display: none;
-    }
-    
-    #presets-div.fade {
-        
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        opacity: 1;
-    }
-    
-    main {
-        position: absolute;
-        left: 50px;
-        right: 30px;
-        top: 0px;
-        margin: 0 auto;
-        -ms-flex-preferred-size: auto;
-            flex-basis: auto;
-        padding-top: 50px;
-        width: auto;
-    }
-    
-    #gridContainer {
-        line-height: 0px;
-        margin: 30px auto 10px; 
-        text-align: center;
-        width: 100%;
-    }
-    
-    .cell {
-        width: 15px;
-        height: 15px;
-    }
-    
-}
+    flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0, 0, 0, 0.75);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
+  /* line 490, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional.left {
+    position: absolute;
+    left: -355px; }
+  /* line 495, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional.left:hover {
+    transform: translate(5px, 0); }
+  /* line 499, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional .fa-bars {
+    display: inline;
+    position: absolute;
+    top: 20px;
+    right: 13px;
+    color: #ddd;
+    font-size: 1.5em;
+    z-index: 3; }
+  /* line 509, D:/OneDrive/web/GOL/style/media.scss */
+  #control-panel {
+    opacity: 0;
+    position: absolute;
+    top: 300px;
+    right: 5px;
+    writing-mode: vertical-rl; }
+  /* line 517, D:/OneDrive/web/GOL/style/media.scss */
+  #control-panel.left {
+    opacity: 1; }
+  /* line 522, D:/OneDrive/web/GOL/style/media.scss */
+  #title.left {
+    opacity: 0;
+    box-shadow: 0px 0px 0px 0px transparent; }
+  /* line 527, D:/OneDrive/web/GOL/style/media.scss */
+  #options.left {
+    opacity: 0;
+    box-shadow: 0px 0px 0px 0px transparent; }
+  /* line 533, D:/OneDrive/web/GOL/style/media.scss */
+  #preset {
+    display: none; }
+  /* line 537, D:/OneDrive/web/GOL/style/media.scss */
+  #presets-div.fade {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    opacity: 1; }
+  /* line 545, D:/OneDrive/web/GOL/style/media.scss */
+  main {
+    position: absolute;
+    left: 50px;
+    right: 30px;
+    top: 0px;
+    margin: 0 auto;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    padding-top: 50px;
+    width: auto; }
+  /* line 557, D:/OneDrive/web/GOL/style/media.scss */
+  #gridContainer {
+    line-height: 0px;
+    margin: 30px auto 10px;
+    text-align: center;
+    width: 100%; }
+  /* line 564, D:/OneDrive/web/GOL/style/media.scss */
+  .cell {
+    width: 15px;
+    height: 15px; } }
 
 @media screen and (min-width: 1025px) and (max-width: 1500px) {
-    
-    
-    #operacional {
+  /* line 574, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;  
-    -ms-flex-line-pack: start;  
-        align-content: flex-start;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
     width: 400px;
     top: 0;
     left: 0;
     -ms-flex-preferred-size: auto;
-        flex-basis: auto;
-    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
-        -webkit-transition: all 0.5s;
-        transition: all 0.5s;
-    }
-    
-    #operacional.left {
-        position: absolute;
-        -webkit-transition: all 0.5s;
-        left: -340px;
-    }
-    
-    #operacional .fa-bars {
-        display: inline;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        color: #ddd;
-        font-size: 1.5em;
-        z-index: 3;
-    }
-    
-    #title.left {
-        opacity: 0;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-    }
-    
-    #options.left {
-        opacity: 0;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-    }
-    
-    
-    #preset {
-        display: none;
-    }
-    
-    #presets-div.fade {
-        
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        opacity: 1;
-    }
-    
-    #about-game {
-        box-shadow: 0 5px 2px 0px rgba(0,0,0,0.25);
-        position: absolute;
-        left: 0;
-        top: -420px;
-        width: 100%;
-        height: 400px;
-        padding: 30px; 
-        overflow: hidden;
-        -webkit-transition: all 1s;
-        transition: all 1s;
-        background-image: url(img/back.jpg);
-        z-index: 1;
-    }
+    flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0, 0, 0, 0.75);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
+  /* line 598, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional.left {
+    position: absolute;
+    left: -355px; }
+  /* line 603, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional.left:hover {
+    transform: translate(5px, 0); }
+  /* line 607, D:/OneDrive/web/GOL/style/media.scss */
+  #operacional .fa-bars {
+    display: inline;
+    position: absolute;
+    top: 20px;
+    right: 13px;
+    color: #ddd;
+    font-size: 1.5em;
+    z-index: 3; }
+  /* line 617, D:/OneDrive/web/GOL/style/media.scss */
+  #control-panel {
+    opacity: 0;
+    position: absolute;
+    top: 300px;
+    right: 5px;
+    writing-mode: vertical-rl; }
+  /* line 625, D:/OneDrive/web/GOL/style/media.scss */
+  #control-panel.left {
+    opacity: 1; }
+  /* line 630, D:/OneDrive/web/GOL/style/media.scss */
+  #title.left {
+    opacity: 0;
+    box-shadow: 0px 0px 0px 0px transparent; }
+  /* line 635, D:/OneDrive/web/GOL/style/media.scss */
+  #options.left {
+    opacity: 0;
+    box-shadow: 0px 0px 0px 0px transparent; }
+  /* line 641, D:/OneDrive/web/GOL/style/media.scss */
+  #preset {
+    display: none; }
+  /* line 645, D:/OneDrive/web/GOL/style/media.scss */
+  #presets-div.fade {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    opacity: 1; }
+  /* line 653, D:/OneDrive/web/GOL/style/media.scss */
+  #about-game {
+    box-shadow: 0 5px 2px 0px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    left: 0;
+    top: -420px;
+    width: 100%;
+    height: 400px;
+    padding: 30px;
+    overflow: hidden;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    background-image: url(img/back.jpg);
+    z-index: 1; }
+  /* line 668, D:/OneDrive/web/GOL/style/media.scss */
+  #about-game-text {
+    height: 240px;
+    width: 100%;
+    overflow: auto;
+    padding: 0 15px; }
+  /* line 675, D:/OneDrive/web/GOL/style/media.scss */
+  #about-game.about-game-down {
+    top: 0px; }
+  /* line 679, D:/OneDrive/web/GOL/style/media.scss */
+  main {
+    position: absolute;
+    left: 50px;
+    right: 30px;
+    top: 0px;
+    margin: 0 auto;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    padding-top: 50px;
+    width: auto; }
+  /* line 691, D:/OneDrive/web/GOL/style/media.scss */
+  #gridContainer {
+    line-height: 0px;
+    margin: 30px auto 10px;
+    text-align: center;
+    width: 100%; } }
 
-    #about-game-text {
-        height: 240px;
-        width: 100%;
-        overflow: auto;
-        padding: 0 15px;
-    }
-
-    #about-game.about-game-down {
-        top: 0px;
-    }
-    
-    main {
-        position: absolute;
-        left: 50px;
-        right: 30px;
-        top: 0px;
-        margin: 0 auto;
-        -ms-flex-preferred-size: auto;
-            flex-basis: auto;
-        padding-top: 50px;
-        width: auto;
-    }
-    
-    #gridContainer {
-        line-height: 0px;
-        margin: 30px auto 10px; 
-        text-align: center;
-        width: 100%;
-    }
-  
-}
-
+/*# sourceMappingURL=media.css.map */

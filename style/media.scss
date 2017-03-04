@@ -1,0 +1,699 @@
+$life-size: 20px;
+$life-size-reduced: $life-size/2;
+
+@media screen and (max-width: 450px) {
+    
+    h1 {
+        font-size: 3em;
+        font-family: 'Changa One', cursive;
+        width: 100%
+    }
+    
+    hr {
+        width: 50%;
+        margin: 0 auto;
+        height: 2px;
+        background-color: #ddd;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+        margin: 20px 0 10px 0;
+        font-family: 'Changa One', cursive;
+    }
+    
+    .cell {
+        width: 3vmin;
+        height: 3vmin;
+    }
+    
+    .controls {
+        
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+        width: 100%;
+    }
+    
+    button {
+        font-size: 0.5em;
+        font-weight: 700;
+        padding: 10px 15px;
+        margin: 1.5vmin 0;    
+    }
+
+    #grid-control {
+        width: 400px;
+        margin-top: 10px; 
+        
+    }
+    
+    label {
+        font-size: 1em;
+        margin-right: 1vmin;
+    }
+
+    input {
+        padding: 0.6em 1em;
+        margin: 1vmin 0.4vmin; 
+        width: 30px;
+        border-radius: 3px;
+    }
+    
+    #operacional {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;  
+    -ms-flex-line-pack: start;  
+        align-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    min-height: auto;
+    padding-bottom: 80px;
+    top: 0;
+    left: 0;
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
+        -webkit-transition: all 1s;
+        transition: all 1s;
+        overflow:auto
+    }
+    
+    #operacional.left {
+        position: absolute;
+        -webkit-transition: all 0.5s;
+        left: 0;
+        min-height: auto;
+        height: 5px;
+        overflow: hidden;
+    }
+    
+    #operacional .fa-bars {
+        display: inline;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #ddd;
+        font-size: 1.5em;
+        z-index: 3;
+    }
+    
+    #title {
+        height: 190px;
+    }
+    
+    #title.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    #mobile-title {
+        display: block;
+        position: absolute;
+        opacity: 0;
+        transition: all 1s;
+        left: 20px;
+        top: 20px;
+        
+    }
+    
+    #mobile-title.left {
+        opacity: 1;
+    }
+    
+    #mobile-title div {
+        width: $life-size-reduced;
+        height: $life-size-reduced;
+        background-color: #ddd;
+        position: absolute;
+        border: 1px solid #aaa;
+        border-radius: 2px;
+    }
+
+    #mobile-title div:nth-of-type(2) {
+        top: $life-size-reduced;
+    }
+
+    #mobile-title div:nth-of-type(3) {
+        top: ($life-size-reduced * 2) ;
+    }
+
+    #mobile-title div:nth-of-type(4) {
+        top: ($life-size-reduced * 3);
+
+    }
+
+    #mobile-title div:nth-of-type(5) {
+        top: ($life-size-reduced * 3);
+        left: $life-size-reduced;
+    }
+
+    #mobile-title div:nth-of-type(6) {
+        top: ($life-size-reduced * 3);
+        left: ($life-size-reduced * 2);
+    }
+
+    #mobile-title div:nth-of-type(7) {
+        left: $life-size-reduced * 3.5;
+    }
+
+    #mobile-title div:nth-of-type(8) {
+        top: $life-size-reduced;
+        left: $life-size-reduced * 3.5;
+    }
+
+    #mobile-title div:nth-of-type(9) {
+        top: $life-size-reduced *2;
+        left: $life-size-reduced * 3.5;
+    }
+
+    #mobile-title div:nth-of-type(10) {
+       top: $life-size-reduced *3;
+        left: $life-size-reduced * 3.5;
+    }
+
+    #mobile-title div:nth-of-type(11) {
+        left: $life-size-reduced * 5;
+    }
+
+    #mobile-title div:nth-of-type(12) {
+        left: $life-size-reduced * 5;
+        top: $life-size-reduced;
+    }
+
+    #mobile-title div:nth-of-type(13) {
+        left: $life-size-reduced * 5;
+        top: $life-size-reduced * 2;
+    }
+
+    #mobile-title div:nth-of-type(14) {
+        left: $life-size-reduced * 5;
+        top: $life-size-reduced * 3;
+    }
+
+    #mobile-title div:nth-of-type(15) {
+        left: $life-size-reduced * 6;
+    }
+
+    #mobile-title div:nth-of-type(16) {
+        left: $life-size-reduced * 7;
+    }
+
+    #mobile-title div:nth-of-type(17) {
+        top: $life-size-reduced * 1.5;
+        left: $life-size-reduced * 6;
+    }
+
+    #mobile-title div:nth-of-type(18) {
+        left: $life-size-reduced * 8.5;
+    }
+
+    #mobile-title div:nth-of-type(19) {
+        top: $life-size-reduced;
+        left: $life-size-reduced * 8.5;
+    }
+
+    #mobile-title div:nth-of-type(20) {
+        top: $life-size-reduced*2;
+        left: $life-size-reduced * 8.5;
+    }
+
+    #mobile-title div:nth-of-type(21) {
+        top: $life-size-reduced*3;
+        left: $life-size-reduced * 8.5;
+    }
+
+    #mobile-title div:nth-of-type(22) {    
+        top: $life-size-reduced * 3;
+        left: $life-size-reduced * 9.5;
+    }
+
+    #mobile-title div:nth-of-type(23) {    
+        left: $life-size-reduced * 9.5;
+    }
+
+    #mobile-title div:nth-of-type(24) {
+        top: $life-size-reduced * 1.5;
+        left: $life-size-reduced * 9.5;
+    }
+
+    #mobile-title div:nth-of-type(25) {
+        top: $life-size-reduced * 3;
+        left: $life-size-reduced * 10.5;
+    }
+
+    #mobile-title div:nth-of-type(26) {
+        top: 0;
+        left: $life-size-reduced * 10.5;
+    }
+    
+    #options.left {
+        opacity: 1;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    #about-game {
+        top: -400px;
+        height: 400px;
+        z-index: 1;
+    }
+    
+    #about-game-text {
+        height: 230px;
+        width: 100%;
+        overflow: auto;
+        padding: 0 15px;
+    }
+
+    #about-game.about-game-down {
+        top: 0px;
+    }
+    
+    #preset {
+        display: none;
+    }
+    main {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 25px;
+        margin: 0 auto;
+        -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+        padding-top: 50px;
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    #gridContainer {
+        line-height: 0px;
+        margin: 30px auto 10px; 
+        text-align: center;
+        width: 100%;
+    }
+    
+    #presets-div {
+        position: absolute;
+        bottom: 20px;
+        
+    }
+    
+    #presets-div.fade {
+        
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        opacity: 1;
+        z-index: 0;
+    }
+}
+
+@media screen and (min-width: 451px) and (max-width: 768px) {
+    
+     #operacional {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;  
+    -ms-flex-line-pack: start;  
+        align-content: flex-start;
+    width: 400px;
+    min-height: 100vh;
+    height: 100%;
+    top: 0;
+    left: 0;
+    
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+    
+    #operacional.left {
+        position: absolute;
+        left: -355px;
+    }
+    
+    #operacional.left:hover {
+        transform: translate(5px, 0);
+    }
+    
+    #operacional .fa-bars {
+        display: inline;
+        position: absolute;
+        top: 20px;
+        right: 13px;
+        color: #ddd;
+        font-size: 1.5em;
+        z-index: 3;
+    }
+    
+   #control-panel {
+        opacity: 0;
+        position: absolute;
+        top: 300px;
+        right: 5px;
+        writing-mode: vertical-rl;
+    }
+    
+     #control-panel.left {
+        opacity: 1;
+        
+    }
+    
+    #main-navigation {
+        
+        height: 650px;
+        background-image: url(img/back.jpg);
+        z-index: 1;
+    }
+    
+    #title.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    #options.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    #options input {
+        width: 30px;
+    }
+    
+    #about-game {
+        top: -420px;
+        height: 400px;
+        z-index: 1;
+    }
+    
+    #about-game-text {
+        height: 230px;
+        width: 100%;
+        overflow: auto;
+        padding: 0 15px;
+    }
+
+    #about-game.about-game-down {
+        top: 0px;
+    }
+    
+    
+    #preset {
+        display: none;
+    }
+    
+    #presets-div {
+        position: absolute;
+        
+    }
+    
+    #presets-div.fade {
+        
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        opacity: 1;
+        
+    }
+    
+    main {
+        position: absolute;
+        left: 50px;
+        right: 30px;
+        top: 0px;
+        margin: 0 auto;
+        -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+        padding-top: 50px;
+        width: auto;
+    }
+    
+    #gridContainer {
+        line-height: 0px;
+        margin: 30px auto 10px; 
+        text-align: center;
+        width: 100%;
+    }
+    
+    .cell {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    
+     #operacional {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;  
+    -ms-flex-line-pack: start;  
+        align-content: flex-start;
+    width: 400px;
+    min-height: 100vh;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+    
+    #operacional.left {
+        position: absolute;
+        left: -355px;
+    }
+    
+    #operacional.left:hover {
+        transform: translate(5px, 0);
+    }
+    
+    #operacional .fa-bars {
+        display: inline;
+        position: absolute;
+        top: 20px;
+        right: 13px;
+        color: #ddd;
+        font-size: 1.5em;
+        z-index: 3;
+    }
+    
+    #control-panel {
+        opacity: 0;
+        position: absolute;
+        top: 300px;
+        right: 5px;
+        writing-mode: vertical-rl;
+    }
+    
+     #control-panel.left {
+        opacity: 1;
+        
+    }
+    
+    #title.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    #options.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    
+    #preset {
+        display: none;
+    }
+    
+    #presets-div.fade {
+        
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        opacity: 1;
+    }
+    
+    main {
+        position: absolute;
+        left: 50px;
+        right: 30px;
+        top: 0px;
+        margin: 0 auto;
+        -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+        padding-top: 50px;
+        width: auto;
+    }
+    
+    #gridContainer {
+        line-height: 0px;
+        margin: 30px auto 10px; 
+        text-align: center;
+        width: 100%;
+    }
+    
+    .cell {
+        width: 15px;
+        height: 15px;
+    }
+    
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1500px) {
+    
+    
+    #operacional {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;  
+    -ms-flex-line-pack: start;  
+        align-content: flex-start;
+    width: 400px;
+    top: 0;
+    left: 0;
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+    
+    #operacional.left {
+        position: absolute;
+        left: -355px;
+    }
+    
+    #operacional.left:hover {
+        transform: translate(5px, 0);
+    }
+    
+    #operacional .fa-bars {
+        display: inline;
+        position: absolute;
+        top: 20px;
+        right: 13px;
+        color: #ddd;
+        font-size: 1.5em;
+        z-index: 3;
+    }
+    
+   #control-panel {
+        opacity: 0;
+        position: absolute;
+        top: 300px;
+        right: 5px;
+        writing-mode: vertical-rl;
+    }
+    
+     #control-panel.left {
+        opacity: 1;
+        
+    }
+    
+    #title.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    #options.left {
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    
+    #preset {
+        display: none;
+    }
+    
+    #presets-div.fade {
+        
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        opacity: 1;
+    }
+    
+    #about-game {
+        box-shadow: 0 5px 2px 0px rgba(0,0,0,0.25);
+        position: absolute;
+        left: 0;
+        top: -420px;
+        width: 100%;
+        height: 400px;
+        padding: 30px; 
+        overflow: hidden;
+        -webkit-transition: all 1s;
+        transition: all 1s;
+        background-image: url(img/back.jpg);
+        z-index: 1;
+    }
+
+    #about-game-text {
+        height: 240px;
+        width: 100%;
+        overflow: auto;
+        padding: 0 15px;
+    }
+
+    #about-game.about-game-down {
+        top: 0px;
+    }
+    
+    main {
+        position: absolute;
+        left: 50px;
+        right: 30px;
+        top: 0px;
+        margin: 0 auto;
+        -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+        padding-top: 50px;
+        width: auto;
+    }
+    
+    #gridContainer {
+        line-height: 0px;
+        margin: 30px auto 10px; 
+        text-align: center;
+        width: 100%;
+    }
+  
+}
+
