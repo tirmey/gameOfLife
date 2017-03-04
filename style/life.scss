@@ -72,6 +72,7 @@ box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
 
 #control-panel {
     opacity: 0;
+    z-index: -1;
     position: absolute;
     font-family: 'Changa One', cursive;
     font-weight: 100;
@@ -322,7 +323,7 @@ a {
 }
 
 .cell {
-    border: 0.1em solid rgba(180, 218, 250, 0.15);
+    border: 0.05em solid rgba(180, 218, 250, 0.15);
     display: inline-block;
     width: 1em;
     height: 1em;

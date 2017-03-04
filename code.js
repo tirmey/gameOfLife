@@ -478,10 +478,10 @@ document.getElementById("gridContainer").addEventListener("mouseout", function(e
 });
 
 //HAMBURGER MENU
-document.getElementById("operacional").addEventListener("click", function(e){
+document.getElementById("hamb-menu").addEventListener("click", function(e) {
     
-    if (e.target !== e.currentTarget) {
-        clickedItem = e.target;                    
+    if (e.target !== e.currentTarget || e.target.id == "control-panel")  {
+        clickedItem = e.currentTarget;  //all clicks should be diretioned to the hamburguer icon                  
     }
     e.stopPropagation();
     
@@ -592,13 +592,14 @@ document.getElementById("menu").addEventListener("click", function(e){
     e.stopPropagation();
     
     if (clickedItem.id != "menu") {
-        document.getElementById("presets-div").classList.add("fade"); 
+        //document.getElementById("presets-div").classList.add("fade"); 
         for (let i = 0; i < removeAll.length; i++) {        
             removeAll[i].classList.remove("preset-selected");
             presets.selectedPreset = "";
         }
     } 
     windowControl(clickedItem.id, "add", "open");
+    
 });
 
 //CLOSE MENUS - closing windows - closing the menu items windows 
@@ -762,8 +763,7 @@ function windowControl(itemId, action, idCommand) { //If itemId = all, all the w
         document.getElementById("operacional").classList.toggle("left");
         document.getElementById("title").classList.toggle("left");    
         document.getElementById("mobile-title").classList.toggle("left");
-        document.getElementById("control-panel").classList.toggle("left");
-        console.log("fazisso");
+        document.getElementById("control-panel").classList.toggle("left");        
     }
 }
 
@@ -771,9 +771,9 @@ function scrSize() {
     var width = (window.innerWidth > 0) ? window.innerWidth : width;
     
     if (width <= 450 && width < screen.height ) {
-        document.getElementById("cols").value = 20;
+        document.getElementById("cols").value = 30;
         document.getElementById("lines").value = 40;
-        col=20;
+        col=30;
         line=40;
     } else if (width <= 450 && width > screen.height ) {
          document.getElementById("cols").value = 40;
@@ -781,21 +781,16 @@ function scrSize() {
         col = 40;
         line = 20;
 
-    } else if (width > 450 && width <= 768 && width < screen.height) {
-        document.getElementById("cols").value = 30;
-        document.getElementById("lines").value = 60;
-        col = 30;
-        line = 60;
-    } else if (width > 450 && width <= 768 && width > screen.height) {
-        document.getElementById("cols").value = 60;
-        document.getElementById("lines").value = 30;
-        col = 60;
-        line = 30;
+    } else if (width > 450 && width <= 1024) {
+        document.getElementById("cols").value = 40;
+        document.getElementById("lines").value = 40;
+        col = 40;
+        line = 40;
     } else {
-        document.getElementById("cols").value = 47;
-        document.getElementById("lines").value = 39;
-        col=47;
-        line=39;
+        document.getElementById("cols").value = 40;
+        document.getElementById("lines").value = 50;
+        col=40;
+        line=50;
     }
     console.log("width: ");
     console.log(width);

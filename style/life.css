@@ -1,4 +1,3 @@
-/* line 7, D:/OneDrive/web/GOL/style/life.scss */
 body {
   position: relative;
   display: -webkit-box;
@@ -16,19 +15,18 @@ body {
   -ms-flex-align: center;
   align-items: center;
   /*omitted to get the new presets coordinates on screen    
-/*-webkit-touch-callout: none; 
-/* iOS Safari */
+  /*-webkit-touch-callout: none; 
+  /* iOS Safari */
   /*-webkit-user-select: none; 
-/* Chrome/Safari/Opera */
+  /* Chrome/Safari/Opera */
   /* Konqueror */
   /*-moz-user-select: none; 
-/* Firefox */
+  /* Firefox */
   /*-ms-user-select: none; 
-/* Internet Explorer/Edge */
+  /* Internet Explorer/Edge */
   /*user-select: none; 
-/* Non-prefixed version, currently not supported by any browser */ }
+  /* Non-prefixed version, currently not supported by any browser */ }
 
-/* line 41, D:/OneDrive/web/GOL/style/life.scss */
 #operacional {
   position: absolute;
   display: -webkit-box;
@@ -56,13 +54,12 @@ body {
   background-image: url(../img/back.jpg);
   z-index: 2; }
 
-/* line 69, D:/OneDrive/web/GOL/style/life.scss */
 #operacional .fa-bars {
   display: none; }
 
-/* line 73, D:/OneDrive/web/GOL/style/life.scss */
 #control-panel {
   opacity: 0;
+  z-index: -1;
   position: absolute;
   font-family: 'Changa One', cursive;
   font-weight: 100;
@@ -71,11 +68,9 @@ body {
   letter-spacing: 0.1em;
   transition: all 0.3s; }
 
-/* line 84, D:/OneDrive/web/GOL/style/life.scss */
 #control.panel.left {
   opacity: 0; }
 
-/* line 88, D:/OneDrive/web/GOL/style/life.scss */
 #title {
   width: 100%;
   height: 210px;
@@ -85,7 +80,6 @@ body {
   z-index: 2;
   transition: all 0.5s; }
 
-/* line 98, D:/OneDrive/web/GOL/style/life.scss */
 #life {
   opacity: 1;
   position: absolute;
@@ -93,17 +87,15 @@ body {
   margin-top: 20px;
   transition: all 1s; }
 
-/* line 106, D:/OneDrive/web/GOL/style/life.scss */
 main {
   position: relative;
   left: 170px;
-  top: 0 margin 0 10px;
+  top: 0 margin 0 10px;
   -ms-flex-preferred-size: 75%;
   flex-basis: 75%;
   padding-top: 50px;
   width: 1300px; }
 
-/* line 118, D:/OneDrive/web/GOL/style/life.scss */
 #gridContainer {
   line-height: 0px;
   margin: 30px auto;
@@ -119,13 +111,11 @@ main {
     font-weight: 100;
     letter-spacing: 0.05em;
 }*/
-/* line 135, D:/OneDrive/web/GOL/style/life.scss */
 #life {
   width: 230px;
   margin: 10px auto;
   position: relative; }
 
-/* line 141, D:/OneDrive/web/GOL/style/life.scss */
 #life div {
   width: 20px;
   height: 20px;
@@ -134,123 +124,97 @@ main {
   border: 1px solid #aaa;
   border-radius: 2px; }
 
-/* line 150, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(2) {
   top: 20px; }
 
-/* line 154, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(3) {
   top: 40px; }
 
-/* line 158, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(4) {
   top: 60px; }
 
-/* line 163, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(5) {
   top: 60px;
   left: 20px; }
 
-/* line 168, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(6) {
   top: 60px;
   left: 40px; }
 
-/* line 173, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(7) {
   left: 70px; }
 
-/* line 177, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(8) {
   top: 20px;
   left: 70px; }
 
-/* line 182, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(9) {
   top: 40px;
   left: 70px; }
 
-/* line 187, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(10) {
   top: 60px;
   left: 70px; }
 
-/* line 192, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(11) {
   left: 100px; }
 
-/* line 196, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(12) {
   left: 100px;
   top: 20px; }
 
-/* line 201, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(13) {
   left: 100px;
   top: 40px; }
 
-/* line 206, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(14) {
   left: 100px;
   top: 60px; }
 
-/* line 211, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(15) {
   left: 120px; }
 
-/* line 215, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(16) {
   left: 140px; }
 
-/* line 219, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(17) {
   top: 30px;
   left: 120px; }
 
-/* line 224, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(18) {
   left: 170px; }
 
-/* line 228, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(19) {
   top: 20px;
   left: 170px; }
 
-/* line 233, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(20) {
   top: 40px;
   left: 170px; }
 
-/* line 238, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(21) {
   top: 60px;
   left: 170px; }
 
-/* line 243, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(22) {
   top: 60px;
   left: 190px; }
 
-/* line 248, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(23) {
   left: 190px; }
 
-/* line 252, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(24) {
   top: 30px;
   left: 190px; }
 
-/* line 257, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(25) {
   top: 60px;
   left: 210px; }
 
-/* line 262, D:/OneDrive/web/GOL/style/life.scss */
 #life div:nth-of-type(26) {
   top: 0;
   left: 210px; }
 
-/* line 267, D:/OneDrive/web/GOL/style/life.scss */
 .divider {
   width: 250px;
   margin: 0 auto;
@@ -259,13 +223,11 @@ main {
   justify-content: space-around;
   align-items: center; }
 
-/* line 276, D:/OneDrive/web/GOL/style/life.scss */
 .divider hr {
   width: 100px;
   height: 2px;
   background-color: #ddd; }
 
-/* line 283, D:/OneDrive/web/GOL/style/life.scss */
 h2 {
   text-align: center;
   color: #ddd;
@@ -276,7 +238,6 @@ h2 {
   font-family: 'Changa One', cursive;
   text-transform: uppercase; }
 
-/* line 294, D:/OneDrive/web/GOL/style/life.scss */
 h3 {
   text-align: center;
   color: #ddd;
@@ -286,54 +247,43 @@ h3 {
   letter-spacing: 0.1em;
   font-family: 'Changa One', cursive; }
 
-/* line 304, D:/OneDrive/web/GOL/style/life.scss */
 h3 span {
   display: inline-block;
   width: 100%; }
 
-/* line 309, D:/OneDrive/web/GOL/style/life.scss */
 p {
   font-family: 'Ubuntu', sans-serif;
   letter-spacing: 0;
   font-size: 0.9em;
   line-height: 1.4em; }
 
-/* line 316, D:/OneDrive/web/GOL/style/life.scss */
 a {
   color: #aaa; }
 
-/* line 324, D:/OneDrive/web/GOL/style/life.scss */
 .cell {
-  border: 0.1em solid rgba(180, 218, 250, 0.15);
+  border: 0.05em solid rgba(180, 218, 250, 0.15);
   display: inline-block;
   width: 1em;
   height: 1em; }
 
-/* line 331, D:/OneDrive/web/GOL/style/life.scss */
 input {
   display: inline-block; }
 
-/* line 335, D:/OneDrive/web/GOL/style/life.scss */
 .alive {
   background-color: #fff !important; }
 
-/* line 339, D:/OneDrive/web/GOL/style/life.scss */
 .firstRow-first {
   border-radius: 10px 0 0 0; }
 
-/* line 343, D:/OneDrive/web/GOL/style/life.scss */
 .firstRow-last {
   border-radius: 0 10px 0 0; }
 
-/* line 347, D:/OneDrive/web/GOL/style/life.scss */
 .lastRow-first {
   border-radius: 0 0 0 10px; }
 
-/* line 351, D:/OneDrive/web/GOL/style/life.scss */
 .lastRow-last {
   border-radius: 0 0 10px 0; }
 
-/* line 355, D:/OneDrive/web/GOL/style/life.scss */
 .controls {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -349,7 +299,6 @@ input {
   width: 400px;
   margin: 0 auto; }
 
-/* line 371, D:/OneDrive/web/GOL/style/life.scss */
 button {
   cursor: pointer;
   font-family: 'Ubuntu', sans-serif;
@@ -364,31 +313,25 @@ button {
   margin: 20px 0;
   width: 75px; }
 
-/* line 386, D:/OneDrive/web/GOL/style/life.scss */
 .fa {
   font-size: 2.1em;
   width: 20px;
   margin-bottom: 5px; }
 
-/* line 392, D:/OneDrive/web/GOL/style/life.scss */
 .controls .fa {
   width: 50%; }
 
-/* line 396, D:/OneDrive/web/GOL/style/life.scss */
 .controls img {
   padding: 5px; }
 
-/* line 400, D:/OneDrive/web/GOL/style/life.scss */
 #start {
   background-color: #279027;
   color: #ddd; }
 
-/* line 405, D:/OneDrive/web/GOL/style/life.scss */
 #pause {
   background-color: #ba2525;
   color: #ddd; }
 
-/* line 410, D:/OneDrive/web/GOL/style/life.scss */
 nav {
   width: 100%;
   display: -webkit-box;
@@ -417,7 +360,6 @@ nav {
   overflow: hidden;
   z-index: 1; }
 
-/* line 439, D:/OneDrive/web/GOL/style/life.scss */
 #menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -441,34 +383,28 @@ nav {
   transition: all 0.5s;
   z-index: 1; }
 
-/* line 464, D:/OneDrive/web/GOL/style/life.scss */
 li {
   width: 100%;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   cursor: pointer; }
 
-/* line 471, D:/OneDrive/web/GOL/style/life.scss */
 li:hover {
   -webkit-transform: scale(1.05, 1.05) translateX(20px);
   transform: scale(1.05, 1.05) translateX(20px); }
 
-/* line 477, D:/OneDrive/web/GOL/style/life.scss */
 ::-webkit-scrollbar {
   width: 0.25em;
   height: 0.4em; }
 
-/* line 482, D:/OneDrive/web/GOL/style/life.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 0 transparent; }
 
-/* line 487, D:/OneDrive/web/GOL/style/life.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #ddd;
   border-radius: 0px;
   width: 0.5em; }
 
-/* line 493, D:/OneDrive/web/GOL/style/life.scss */
 nav div .fa {
   position: absolute;
   display: inline;
@@ -477,7 +413,6 @@ nav div .fa {
   font-size: 1.3em;
   cursor: pointer; }
 
-/* line 502, D:/OneDrive/web/GOL/style/life.scss */
 #options {
   -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.25);
@@ -492,11 +427,9 @@ nav div .fa {
   background-image: url(../img/back.jpg);
   z-index: 1; }
 
-/* line 517, D:/OneDrive/web/GOL/style/life.scss */
 #options.options-down {
   top: 0px; }
 
-/* line 521, D:/OneDrive/web/GOL/style/life.scss */
 form div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -512,12 +445,10 @@ form div {
   z-index: 1;
   margin: 0 20%; }
 
-/* line 537, D:/OneDrive/web/GOL/style/life.scss */
 label {
   color: #ddd;
   font-size: 1em; }
 
-/* line 542, D:/OneDrive/web/GOL/style/life.scss */
 input {
   padding: 0.5em 0.7em;
   margin: 0.8em 0.3em;
@@ -529,14 +460,12 @@ input {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1em; }
 
-/* line 554, D:/OneDrive/web/GOL/style/life.scss */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   display: none;
   margin: 0; }
 
-/* line 562, D:/OneDrive/web/GOL/style/life.scss */
 #about-game {
   -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.25);
@@ -552,18 +481,15 @@ input[type=number]::-webkit-outer-spin-button {
   background-image: url(../img/back.jpg);
   z-index: 1; }
 
-/* line 578, D:/OneDrive/web/GOL/style/life.scss */
 #about-game-text {
   height: 240px;
   width: 100%;
   overflow: auto;
   padding: 0 15px; }
 
-/* line 585, D:/OneDrive/web/GOL/style/life.scss */
 #about-game.about-game-down {
   top: 0px; }
 
-/* line 589, D:/OneDrive/web/GOL/style/life.scss */
 #about-author {
   -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.25);
@@ -578,11 +504,9 @@ input[type=number]::-webkit-outer-spin-button {
   background-image: url(../img/back.jpg);
   z-index: 1; }
 
-/* line 604, D:/OneDrive/web/GOL/style/life.scss */
 #about-author.about-author-down {
   top: 0; }
 
-/* line 608, D:/OneDrive/web/GOL/style/life.scss */
 #presets-div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -600,16 +524,13 @@ input[type=number]::-webkit-outer-spin-button {
   transition: all 0.5s;
   z-index: 1; }
 
-/* line 626, D:/OneDrive/web/GOL/style/life.scss */
 #presets-div-header {
   width: 100%; }
 
-/* line 631, D:/OneDrive/web/GOL/style/life.scss */
 #presets-div h3 {
   text-align: left;
   margin: 5px 0; }
 
-/* line 636, D:/OneDrive/web/GOL/style/life.scss */
 #presets-div-new {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -622,14 +543,12 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-transition: all 0.3s;
   transition: all 0.3s; }
 
-/* line 649, D:/OneDrive/web/GOL/style/life.scss */
 #presets-div-new i {
   color: #ddd;
   font-size: 1em;
   margin-right: -5px !important;
   padding-top: 5px; }
 
-/* line 656, D:/OneDrive/web/GOL/style/life.scss */
 #presets-div p {
   display: inline-block;
   font-family: 'Changa One', cursive;
@@ -637,23 +556,19 @@ input[type=number]::-webkit-outer-spin-button {
   color: #ddd;
   font-size: 1em; }
 
-/* line 664, D:/OneDrive/web/GOL/style/life.scss */
 #presets-div-new:hover {
   -webkit-transform: scale(1.1, 1.1);
   transform: scale(1.1, 1.1); }
 
-/* line 669, D:/OneDrive/web/GOL/style/life.scss */
 #preset-name {
   -webkit-transition: all 0.5s;
   transition: all 0.5;
   overflow: hidden;
   height: 50px; }
 
-/* line 676, D:/OneDrive/web/GOL/style/life.scss */
 #input-preset-name {
   width: 120px; }
 
-/* line 680, D:/OneDrive/web/GOL/style/life.scss */
 #preset-name > p {
   padding: 5px 5px;
   margin-left: 10px;
@@ -661,7 +576,6 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 4px;
   cursor: pointer; }
 
-/* line 688, D:/OneDrive/web/GOL/style/life.scss */
 #presets-div-items {
   display: -web it-box;
   display: -ms-flexbox;
@@ -678,7 +592,6 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   overflow: auto; }
 
-/* line 705, D:/OneDrive/web/GOL/style/life.scss */
 .preset-item {
   width: 60px;
   height: 55px;
@@ -699,11 +612,9 @@ input[type=number]::-webkit-outer-spin-button {
   background: linear-gradient(to bottom, #ddd 0%, #ddd 60%, #0b39d0 60%, #0b39d0 100%);
   position: relative; }
 
-/* line 726, D:/OneDrive/web/GOL/style/life.scss */
 #preset-icon {
   width: 2.5em; }
 
-/* line 730, D:/OneDrive/web/GOL/style/life.scss */
 #presets-div-items p {
   width: 100%;
   margin-top: 10px;
@@ -711,13 +622,11 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 1em;
   font-family: 'Ubuntu', sans-serif; }
 
-/* line 738, D:/OneDrive/web/GOL/style/life.scss */
 .preset-item .fa {
   width: 15%;
   margin-bottom: 10px;
   color: #444; }
 
-/* line 744, D:/OneDrive/web/GOL/style/life.scss */
 .preset-item .fa-trash {
   font-size: 1.5em;
   position: absolute;
@@ -726,37 +635,29 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-transition: all 0.3s;
   transition: all 0.3s; }
 
-/* line 753, D:/OneDrive/web/GOL/style/life.scss */
 .preset-item:hover {
   -webkit-transform: scale(1.1, 1.1);
   transform: scale(1.1, 1.1); }
 
-/* line 758, D:/OneDrive/web/GOL/style/life.scss */
 .preset-selected {
   border: 3px solid #0b39d0; }
 
-/* line 762, D:/OneDrive/web/GOL/style/life.scss */
 .hidden {
   display: none; }
 
-/* line 766, D:/OneDrive/web/GOL/style/life.scss */
 .fade {
   opacity: 0;
   z-index: -2; }
 
-/* line 771, D:/OneDrive/web/GOL/style/life.scss */
 .zero-height {
   height: 0 !important; }
 
-/* line 774, D:/OneDrive/web/GOL/style/life.scss */
 .blink {
   opacity: 0.2; }
 
-/* line 778, D:/OneDrive/web/GOL/style/life.scss */
 .inboard {
   background-color: rgba(50, 193, 89, 0.45); }
 
-/* line 782, D:/OneDrive/web/GOL/style/life.scss */
 .outboard {
   background-color: rgba(193, 50, 50, 0.45); }
 
