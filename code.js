@@ -140,7 +140,7 @@ var col,
                 selected.classList.toggle("preset-selected");
                 
                 //automatically closes the side bar (if applicable) to insert the preset
-                console.log("heyy!!!!");
+                
                 windowControl("all", "remove", "close");
             }
 
@@ -751,6 +751,7 @@ function windowControl(itemId, action, idCommand) { //If itemId = all, all the w
     
     if (itemId == idCommand + "-options" || itemId == "all") {
         document.getElementById("options").classList[action]("options-down"); 
+        console.log("dual");
     }
     if (itemId == idCommand + "-about-game" || itemId == "all") {
         document.getElementById("about-game").classList[action]("about-game-down");

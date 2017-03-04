@@ -1,5 +1,6 @@
-$life-size: 20px;
-$life-size-reduced: $life-size/2;
+$life-size: 10px;
+$life-size-reduced: $life-size;
+$life-padding: 20px;
 
 @media screen and (max-width: 450px) {
     
@@ -35,7 +36,7 @@ $life-size-reduced: $life-size/2;
     }
     
     button {
-        font-size: 0.5em;
+        font-size: 0.6em;
         font-weight: 700;
         padding: 10px 15px;
         margin: 1.5vmin 0;    
@@ -57,6 +58,168 @@ $life-size-reduced: $life-size/2;
         margin: 1vmin 0.4vmin; 
         width: 30px;
         border-radius: 3px;
+    }
+    
+     #title {
+        position: absolute;
+        top: 0px;
+        height: 190px;
+         background-image: url(../img/back.jpg);
+        z-index: 4;
+    }
+    
+    #title.left {
+        top: -190px;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    }
+    
+    #mobile-title {
+        display: block;
+        position: absolute;
+        
+        transition: all 1s;
+        height: 80px;
+        width: 100%;
+        left: 0px;
+        top: -80px;
+        padding-top: 10px;
+        background-image: url(../img/back.jpg);
+        z-index: 3;
+    }
+    
+    #mobile-title.left {        
+        box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.55);
+        top: 0px;
+    }
+    
+    #mobile-title div {
+        width: $life-size;
+        height: $life-size;
+        background-color: #ddd;
+        position: absolute;
+        border: 1px solid #aaa;
+        border-radius: 2px;
+        left: $life-padding;
+        top: $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(2) {
+        top: $life-size-reduced + $life-padding;
+        left: $life-padding
+    }
+
+    #mobile-title div:nth-of-type(3) {
+        top: ($life-size-reduced * 2) + $life-padding ;
+        left: $life-padding
+    }
+
+    #mobile-title div:nth-of-type(4) {
+        top: ($life-size-reduced * 3) + $life-padding;
+        left: $life-padding
+    }
+
+    #mobile-title div:nth-of-type(5) {
+        top: ($life-size-reduced * 3) + $life-padding;
+        left: $life-size-reduced + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(6) {
+        top: ($life-size-reduced * 3) + $life-padding;
+        left: ($life-size-reduced * 2) + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(7) {
+        left: $life-size-reduced * 3.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(8) {
+        top: $life-size-reduced + $life-padding;
+        left: $life-size-reduced * 3.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(9) {
+        top: $life-size-reduced *2 + $life-padding;
+        left: $life-size-reduced * 3.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(10) {
+       top: $life-size-reduced *3 + $life-padding;
+        left: $life-size-reduced * 3.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(11) {
+        left: $life-size-reduced * 5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(12) {
+        left: $life-size-reduced * 5 + $life-padding;
+        top: $life-size-reduced + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(13) {
+        left: $life-size-reduced * 5 + $life-padding;
+        top: $life-size-reduced * 2 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(14) {
+        left: $life-size-reduced * 5 + $life-padding;
+        top: $life-size-reduced * 3 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(15) {
+        left: $life-size-reduced * 6 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(16) {
+        left: $life-size-reduced * 7 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(17) {
+        top: $life-size-reduced * 1.5 + $life-padding;
+        left: $life-size-reduced * 6 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(18) {
+        left: $life-size-reduced * 8.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(19) {
+        top: $life-size-reduced + $life-padding;
+        left: $life-size-reduced * 8.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(20) {
+        top: $life-size-reduced*2 + $life-padding;
+        left: $life-size-reduced * 8.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(21) {
+        top: $life-size-reduced*3 + $life-padding;
+        left: $life-size-reduced * 8.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(22) {    
+        top: $life-size-reduced * 3 + $life-padding;
+        left: $life-size-reduced * 9.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(23) {    
+        left: $life-size-reduced * 9.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(24) {
+        top: $life-size-reduced * 1.5 + $life-padding;
+        left: $life-size-reduced * 9.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(25) {
+        top: $life-size-reduced * 3 + $life-padding;
+        left: $life-size-reduced * 10.5 + $life-padding;
+    }
+
+    #mobile-title div:nth-of-type(26) {
+        top: + $life-padding;
+        left: $life-size-reduced * 10.5 + $life-padding;
     }
     
     #operacional {
@@ -84,176 +247,36 @@ $life-size-reduced: $life-size/2;
     box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
         -webkit-transition: all 1s;
         transition: all 1s;
-        overflow:auto
+        overflow: auto;
+        z-index: 2;
     }
     
     #operacional.left {
-        position: absolute;
-        -webkit-transition: all 0.5s;
-        left: 0;
-        min-height: auto;
-        height: 5px;
+        opacity: 1;
+        top: -100vh;
         overflow: hidden;
     }
     
-    #operacional .fa-bars {
+    #hamb-menu {
         display: inline;
         position: absolute;
         top: 20px;
         right: 20px;
         color: #ddd;
         font-size: 1.5em;
-        z-index: 3;
+        z-index: 5;
     }
     
-    #title {
-        height: 190px;
+    nav {
+        position: relative;
+        top: 190px;
+        z-index: 0;
     }
     
-    #title.left {
+    nav.left {
         opacity: 0;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     }
-    
-    #mobile-title {
-        display: block;
-        position: absolute;
-        opacity: 0;
-        transition: all 1s;
-        left: 20px;
-        top: 20px;
-        
-    }
-    
-    #mobile-title.left {
-        opacity: 1;
-    }
-    
-    #mobile-title div {
-        width: $life-size-reduced;
-        height: $life-size-reduced;
-        background-color: #ddd;
-        position: absolute;
-        border: 1px solid #aaa;
-        border-radius: 2px;
-    }
-
-    #mobile-title div:nth-of-type(2) {
-        top: $life-size-reduced;
-    }
-
-    #mobile-title div:nth-of-type(3) {
-        top: ($life-size-reduced * 2) ;
-    }
-
-    #mobile-title div:nth-of-type(4) {
-        top: ($life-size-reduced * 3);
-
-    }
-
-    #mobile-title div:nth-of-type(5) {
-        top: ($life-size-reduced * 3);
-        left: $life-size-reduced;
-    }
-
-    #mobile-title div:nth-of-type(6) {
-        top: ($life-size-reduced * 3);
-        left: ($life-size-reduced * 2);
-    }
-
-    #mobile-title div:nth-of-type(7) {
-        left: $life-size-reduced * 3.5;
-    }
-
-    #mobile-title div:nth-of-type(8) {
-        top: $life-size-reduced;
-        left: $life-size-reduced * 3.5;
-    }
-
-    #mobile-title div:nth-of-type(9) {
-        top: $life-size-reduced *2;
-        left: $life-size-reduced * 3.5;
-    }
-
-    #mobile-title div:nth-of-type(10) {
-       top: $life-size-reduced *3;
-        left: $life-size-reduced * 3.5;
-    }
-
-    #mobile-title div:nth-of-type(11) {
-        left: $life-size-reduced * 5;
-    }
-
-    #mobile-title div:nth-of-type(12) {
-        left: $life-size-reduced * 5;
-        top: $life-size-reduced;
-    }
-
-    #mobile-title div:nth-of-type(13) {
-        left: $life-size-reduced * 5;
-        top: $life-size-reduced * 2;
-    }
-
-    #mobile-title div:nth-of-type(14) {
-        left: $life-size-reduced * 5;
-        top: $life-size-reduced * 3;
-    }
-
-    #mobile-title div:nth-of-type(15) {
-        left: $life-size-reduced * 6;
-    }
-
-    #mobile-title div:nth-of-type(16) {
-        left: $life-size-reduced * 7;
-    }
-
-    #mobile-title div:nth-of-type(17) {
-        top: $life-size-reduced * 1.5;
-        left: $life-size-reduced * 6;
-    }
-
-    #mobile-title div:nth-of-type(18) {
-        left: $life-size-reduced * 8.5;
-    }
-
-    #mobile-title div:nth-of-type(19) {
-        top: $life-size-reduced;
-        left: $life-size-reduced * 8.5;
-    }
-
-    #mobile-title div:nth-of-type(20) {
-        top: $life-size-reduced*2;
-        left: $life-size-reduced * 8.5;
-    }
-
-    #mobile-title div:nth-of-type(21) {
-        top: $life-size-reduced*3;
-        left: $life-size-reduced * 8.5;
-    }
-
-    #mobile-title div:nth-of-type(22) {    
-        top: $life-size-reduced * 3;
-        left: $life-size-reduced * 9.5;
-    }
-
-    #mobile-title div:nth-of-type(23) {    
-        left: $life-size-reduced * 9.5;
-    }
-
-    #mobile-title div:nth-of-type(24) {
-        top: $life-size-reduced * 1.5;
-        left: $life-size-reduced * 9.5;
-    }
-
-    #mobile-title div:nth-of-type(25) {
-        top: $life-size-reduced * 3;
-        left: $life-size-reduced * 10.5;
-    }
-
-    #mobile-title div:nth-of-type(26) {
-        top: 0;
-        left: $life-size-reduced * 10.5;
-    }
+   
     
     #options.left {
         opacity: 1;
@@ -277,9 +300,16 @@ $life-size-reduced: $life-size/2;
         top: 0px;
     }
     
-    #preset {
-        display: none;
+    #presets-div {
+        position: absolute;
+       top: 380px;
+        z-index: -1;
     }
+    
+    #presets-div .divider {
+        margin-bottom: 40px;
+    }
+    
     main {
         position: absolute;
         left: 0px;
@@ -291,6 +321,7 @@ $life-size-reduced: $life-size/2;
         padding-top: 50px;
         width: 100%;
         overflow: hidden;
+        z-index: 1;
     }
     
     #gridContainer {
@@ -300,20 +331,8 @@ $life-size-reduced: $life-size/2;
         width: 100%;
     }
     
-    #presets-div {
-        position: absolute;
-        bottom: 20px;
-        
-    }
     
-    #presets-div.fade {
-        
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        opacity: 1;
-        z-index: 0;
-    }
+   
 }
 
 @media screen and (min-width: 451px) and (max-width: 768px) {
@@ -354,7 +373,7 @@ $life-size-reduced: $life-size/2;
         transform: translate(5px, 0);
     }
     
-    #operacional .fa-bars {
+    #hamb-menu {
         display: inline;
         position: absolute;
         top: 20px;
@@ -496,7 +515,7 @@ $life-size-reduced: $life-size/2;
         transform: translate(5px, 0);
     }
     
-    #operacional .fa-bars {
+    #hamb-menu {
         display: inline;
         position: absolute;
         top: 20px;
@@ -604,7 +623,7 @@ $life-size-reduced: $life-size/2;
         transform: translate(5px, 0);
     }
     
-    #operacional .fa-bars {
+    #hamb-menu {
         display: inline;
         position: absolute;
         top: 20px;
