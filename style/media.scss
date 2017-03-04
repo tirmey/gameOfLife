@@ -76,7 +76,6 @@ $life-padding: 20px;
     #mobile-title {
         display: block;
         position: absolute;
-        
         transition: all 1s;
         height: 80px;
         width: 100%;
@@ -303,6 +302,10 @@ $life-padding: 20px;
     #presets-div {
         position: absolute;
        top: 380px;
+        z-index: 1;
+    }
+    
+    #presets-div.zero-index {
         z-index: -1;
     }
     

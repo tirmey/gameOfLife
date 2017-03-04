@@ -599,6 +599,7 @@ document.getElementById("menu").addEventListener("click", function(e){
         }
     } 
     windowControl(clickedItem.id, "add", "open");
+    document.getElementById("presets-div").classList.add("zero-index");
     
 });
 
@@ -613,6 +614,11 @@ document.getElementById("main-navigation").addEventListener("click", function(e)
     
     //closing windows
     windowControl(clickedItem.id, "remove", "close");
+    
+    setTimeout(function() {
+        document.getElementById("presets-div").classList.remove("zero-index");
+    }, 500);
+    
 });
 
 //INPUT COLUMS - change the width of the matrix
