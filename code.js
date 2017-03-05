@@ -8,9 +8,6 @@ var col,
     getPresetPosition,     
     start,
     blink;
-
-
-
     
 
     var presets = {
@@ -146,9 +143,11 @@ var col,
 
             //defining the selectedPreset object property
             if (selected != document.getElementById("presets-div") && selected != document.getElementById("presets-div-items") && selected.classList.contains("preset-selected") ) {
-                presets.selectedPreset = selected.id; 
+                presets.selectedPreset = selected.id;
+                document.getElementById("preset").classList.add("active");
             } else {
                 presets.selectedPreset = "";
+                document.getElementById("preset").classList.remove("active");
             }
         },
         
@@ -425,6 +424,7 @@ var col,
             }
         },
     };
+
 ///////////////////////////////LISTENERS//////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
@@ -451,21 +451,7 @@ document.getElementById("gridContainer").addEventListener("click", function(e){
     } else {
         presets.insertPreset(presets.selectedPreset, clickedItem.id);
     }
-   
 });
-
-//listener apply to window, to detect resize
-/*window.addEventListener("resize", function() {
-    col = document.getElementById("cols").value;
-    line = document.getElementById("lines").value;
-    document.getElementById("gridContainer").innerHTML="";
-    createGrid(col, line);
-    if (document.getElementById("start").classList.contains("hidden")) {
-        clearInterval(start);
-        document.getElementById("start").classList.toggle("hidden");
-        document.getElementById("pause").classList.toggle("hidden");
-    }
-});*/
 
 // to change the color of the cells when hovering to insert pattern
 document.getElementById("gridContainer").addEventListener("mouseover", function(e){
@@ -477,18 +463,46 @@ document.getElementById("gridContainer").addEventListener("mouseout", function(e
     presets.shapeRefresh(e);
 });
 
-//HAMBURGER MENU
-document.getElementById("hamb-menu").addEventListener("click", function(e) {
-    
-    if (e.target !== e.currentTarget || e.target.id == "control-panel")  {
+//HAMBURGER MENU - MOBILE
+document.getElementById("hamb-menu-mobile").addEventListener("click", function(e) {
+    var clickedItem;
+    if (e.target !== e.currentTarget)  {
         clickedItem = e.currentTarget;  //all clicks should be diretioned to the hamburguer icon                  
     }
     e.stopPropagation();
     
     windowControl("all", "remove", "close");
     
+    
 });
 
+//HAMBURGER MENU - TABLET
+document.getElementById("hamb-menu-tablet").addEventListener("click", function(e) {
+    var clickedItem;
+    if (e.target !== e.currentTarget)  {
+        clickedItem = e.currentTarget;  //all clicks should be diretioned to the hamburguer icon                  
+    }
+    e.stopPropagation();
+    
+    windowControl("all", "remove", "close");
+    
+   
+});
+
+//CONTROL PANEL
+document.getElementById("control-panel").addEventListener("click", function(e) {
+    var clickedItem;
+    console.log(e.target);
+    e.stopPropagation;
+    if (e.target !== e.currentTarget ) {
+        clickedItem = e.target;
+    }
+   
+    console.log(clickedItem);
+    console.log(e.currentTarget);
+    
+    windowControl("all", "remove", "close");
+}, false);
 
 //BUTTON START - start the simulation
 document.getElementById("start").addEventListener("click", function(){
@@ -570,7 +584,15 @@ document.getElementById("presets-div-items").addEventListener("click", function(
     presets.addOrRemove(e);
 });
 
-//ROTATE PRESETS
+//ROTATE PRESETS - ROTATE PRESET BUTTON
+document.getElementById("preset").addEventListener("click", function(e) {
+    
+    if (presets.selectedPreset != "") {
+        presets.rotateObj(); 
+    }
+});
+
+//ROTATE PRESETS - R KEY
 document.addEventListener("keypress", function(e) {
     
     //rotating the item if some preset is selected. keyCode 82 correspond to letter "r"
@@ -592,7 +614,8 @@ document.getElementById("menu").addEventListener("click", function(e){
     e.stopPropagation();
     
     if (clickedItem.id != "menu") {
-        //document.getElementById("presets-div").classList.add("fade"); 
+        
+        //removing selected presets
         for (let i = 0; i < removeAll.length; i++) {        
             removeAll[i].classList.remove("preset-selected");
             presets.selectedPreset = "";
@@ -600,25 +623,25 @@ document.getElementById("menu").addEventListener("click", function(e){
     } 
     windowControl(clickedItem.id, "add", "open");
     document.getElementById("presets-div").classList.add("zero-index");
+    document.getElementById("presets-div").classList.add("fade");
     
 });
 
 //CLOSE MENUS - closing windows - closing the menu items windows 
 document.getElementById("main-navigation").addEventListener("click", function(e){
     var clickedItem;
-    
-    if (e.target !== e.currentTarget) {
-        clickedItem = e.target;                    
-    }
+        
+        if (e.target.classList.contains("close")) {
+            windowControl("menus", "remove", "close");
+            setTimeout(function() {
+                document.getElementById("presets-div").classList.remove("zero-index");
+                
+            }, 500);
+            document.getElementById("presets-div").classList.remove("fade");
+        }
+        
+        
     e.stopPropagation();
-    
-    //closing windows
-    windowControl(clickedItem.id, "remove", "close");
-    
-    setTimeout(function() {
-        document.getElementById("presets-div").classList.remove("zero-index");
-    }, 500);
-    
 });
 
 //INPUT COLUMS - change the width of the matrix
@@ -633,6 +656,11 @@ document.getElementById("lines").addEventListener("change", function(){
     line = document.getElementById("lines").value;
     document.getElementById("gridContainer").innerHTML="";
     createGrid(col, line);
+});
+
+//INPUT VELOCITY - change the number of miliseconds per cicle
+document.getElementById("velocity").addEventListener("change", function(){
+    actionVelocity = document.getElementById("velocity").value;
 });
 
 ///////////////////////////////FUNCTIONS///////////////////////////////
@@ -670,12 +698,19 @@ function createGrid(col, line) {
     
     allCells = document.querySelectorAll(".cell");
     for (i = 0; i <allCells.length; i++) {
-        if (window.innerWidth >= 1501) {
-            allCells[i].style.width = (window.innerWidth*0.65/col) + "px";
-            allCells[i].style.height = (window.innerWidth*0.65/col) + "px";
-        } else if (window.innerWidth < 1501 && window.innerWidth >= 1025){
-            allCells[i].style.width = (window.innerWidth*0.82/col) + "px";
-            allCells[i].style.height = (window.innerWidth*0.82/col) + "px";
+        if (window.innerWidth >= 200 && window.innerWidth <= 500) {
+            allCells[i].style.width = (window.innerWidth*0.8/col) + "px";
+            allCells[i].style.height = (window.innerWidth*0.8/col) + "px";
+        } else if (window.innerWidth >= 501 && window.innerWidth <= 768) {
+            allCells[i].style.width = (window.innerWidth*0.85/col) + "px";
+            allCells[i].style.height = (window.innerWidth*0.85/col) + "px";
+      
+        } else if (window.innerWidth > 768 && window.innerWidth <= 1500) {
+            allCells[i].style.width = (window.innerWidth*0.9/col) + "px";
+            allCells[i].style.height = (window.innerWidth*0.9/col) + "px";
+        } else if (window.innerWidth > 1501 ) {
+            allCells[i].style.width = (window.innerWidth*0.95/col) + "px";
+            allCells[i].style.height = (window.innerWidth*0.95/col) + "px";
         }
     }
 }
@@ -753,16 +788,17 @@ function startPause() {
     },actionVelocity);
 }
 
-function windowControl(itemId, action, idCommand) { //If itemId = all, all the windows will be closed. ACTION must be "add" or "remove" idCommand should be "open" or "close". 
+function windowControl(itemId, action, idCommand) { //If itemId = all, all the windows will be closed, and menu will retract. if itemID = "menus", only the menu windows will close. ACTION must be "add" or "remove" idCommand should be "open" or "close". 
     
-    if (itemId == idCommand + "-options" || itemId == "all") {
+    if (itemId == idCommand + "-options" || itemId == "menus" || itemId == "all") {
         document.getElementById("options").classList[action]("options-down"); 
-        console.log("dual");
+        console.log("item Id vale: ");
+        console.log(itemId);
     }
-    if (itemId == idCommand + "-about-game" || itemId == "all") {
+    if (itemId == idCommand + "-about-game" || itemId == "menus" || itemId == "all") {
         document.getElementById("about-game").classList[action]("about-game-down");
     }
-    if (itemId == idCommand + "-about-author" || itemId == "all") {
+    if (itemId == idCommand + "-about-author" || itemId == "menus" || itemId == "all") {
         document.getElementById("about-author").classList[action]("about-author-down");
     }
     
@@ -770,7 +806,9 @@ function windowControl(itemId, action, idCommand) { //If itemId = all, all the w
         document.getElementById("operacional").classList.toggle("left");
         document.getElementById("title").classList.toggle("left");    
         document.getElementById("mobile-title").classList.toggle("left");
-        document.getElementById("control-panel").classList.toggle("left");        
+        document.getElementById("control-panel").classList.toggle("left");
+        document.getElementById("presets-div").classList.remove("fade");
+        document.getElementById("presets-div").classList.remove("zero-index");
     }
 }
 
@@ -799,11 +837,7 @@ function scrSize() {
         col=40;
         line=50;
     }
-    console.log("width: ");
-    console.log(width);
     
-console.log("screen height: ");
-    console.log(screen.height);
     
 }
 

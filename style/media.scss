@@ -1,6 +1,7 @@
 $life-size: 10px;
 $life-size-reduced: $life-size;
 $life-padding: 20px;
+$white-color: #ddd;
 
 @media screen and (max-width: 450px) {
     
@@ -22,12 +23,7 @@ $life-padding: 20px;
         margin: 20px 0 10px 0;
         font-family: 'Changa One', cursive;
     }
-    
-    .cell {
-        width: 3vmin;
-        height: 3vmin;
-    }
-    
+   
     .controls {
         
         -ms-flex-pack: distribute;
@@ -38,10 +34,10 @@ $life-padding: 20px;
     button {
         font-size: 0.6em;
         font-weight: 700;
-        padding: 10px 15px;
-        margin: 1.5vmin 0;    
+        padding: 5px;
+        margin: 5px 0;    
     }
-
+        
     #grid-control {
         width: 400px;
         margin-top: 10px; 
@@ -256,7 +252,11 @@ $life-padding: 20px;
         overflow: hidden;
     }
     
-    #hamb-menu {
+    #control-panel {
+        display: none;
+    }
+    
+    #hamb-menu-mobile {
         display: inline;
         position: absolute;
         top: 20px;
@@ -264,6 +264,7 @@ $life-padding: 20px;
         color: #ddd;
         font-size: 1.5em;
         z-index: 5;
+        cursor: pointer
     }
     
     nav {
@@ -334,35 +335,38 @@ $life-padding: 20px;
         width: 100%;
     }
     
-    
+     
+    /*.cell {
+        width: 3vmin;
+        height: 3vmin;
+    }*/
    
 }
 
-@media screen and (min-width: 451px) and (max-width: 768px) {
+@media screen and (min-width: 451px) and (max-width: 1920px) {
     
-     #operacional {
-    position: absolute;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
+    #operacional {
+        position: absolute;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
         -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
-    -webkit-box-pack: center;
+        flex-flow: row wrap;
+        -webkit-box-pack: center;
         -ms-flex-pack: center;
-            justify-content: center;  
-    -ms-flex-line-pack: start;  
+        justify-content: center;  
+        -ms-flex-line-pack: start;  
         align-content: flex-start;
-    width: 400px;
-    min-height: 100vh;
-    height: 100%;
-    top: 0;
-    left: 0;
-    
-    -ms-flex-preferred-size: auto;
+        width: 400px;
+        min-height: 100vh;
+        height: 100%;
+        top: 0;
+        left: 0;
+        -ms-flex-preferred-size: auto;
         flex-basis: auto;
-    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
+        box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
         -webkit-transition: all 0.5s;
         transition: all 0.5s;
     }
@@ -376,37 +380,43 @@ $life-padding: 20px;
         transform: translate(5px, 0);
     }
     
-    #hamb-menu {
+    #hamb-menu-tablet {
         display: inline;
         position: absolute;
         top: 20px;
-        right: 13px;
+        right: 20px;
         color: #ddd;
         font-size: 1.5em;
-        z-index: 3;
     }
     
-   #control-panel {
-        opacity: 0;
-        position: absolute;
-        top: 300px;
-        right: 5px;
-        writing-mode: vertical-rl;
-    }
-    
-     #control-panel.left {
-        opacity: 1;
-        
+    #hamb-menu-mobile {
+        display: none;
     }
     
     #main-navigation {
-        
+        top: 200px;
         height: 650px;
         background-image: url(img/back.jpg);
         z-index: 1;
+        overflow: none;
+    }
+    
+    #title {
+        width: 400px;
+        
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        pointer-events:none; //great property!!! allows click through the element to reach overlayed elements
+    }
+    
+    #control-panel {
+        z-index: -1;
     }
     
     #title.left {
+        left: -355px;
         opacity: 0;
         box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     }
@@ -433,27 +443,18 @@ $life-padding: 20px;
         padding: 0 15px;
     }
 
-    #about-game.about-game-down {
-        top: 0px;
-    }
-    
-    
-    #preset {
-        display: none;
-    }
-    
     #presets-div {
         position: absolute;
-        
+       top: 380px;
+        z-index: 1;
     }
     
-    #presets-div.fade {
-        
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        opacity: 1;
-        
+    #presets-div.zero-index {
+        z-index: -1;
+    }
+    
+    #presets-div .divider {
+        margin-bottom: 40px;
     }
     
     main {
@@ -481,30 +482,31 @@ $life-padding: 20px;
     }
 }
 
+/*
 @media screen and (min-width: 768px) and (max-width: 1024px) {
     
-     #operacional {
-    position: absolute;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
+    #operacional {
+        position: absolute;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
         -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
-    -webkit-box-pack: center;
+        flex-flow: row wrap;
+        -webkit-box-pack: center;
         -ms-flex-pack: center;
-            justify-content: center;  
-    -ms-flex-line-pack: start;  
+        justify-content: center;  
+        -ms-flex-line-pack: start;  
         align-content: flex-start;
-    width: 400px;
-    min-height: 100vh;
-    height: 100%;
-    top: 0;
-    left: 0;
-    -ms-flex-preferred-size: auto;
+        width: 400px;
+        min-height: 100vh;
+        height: 100%;
+        top: 0;
+        left: 0;
+        -ms-flex-preferred-size: auto;
         flex-basis: auto;
-    box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
+        box-shadow: 5px 0px 25px 0 rgba(0,0,0,0.75);
         -webkit-transition: all 0.5s;
         transition: all 0.5s;
     }
@@ -518,30 +520,44 @@ $life-padding: 20px;
         transform: translate(5px, 0);
     }
     
-    #hamb-menu {
+    #hamb-menu-tablet {
         display: inline;
         position: absolute;
         top: 20px;
-        right: 13px;
+        right: 20px;
         color: #ddd;
         font-size: 1.5em;
-        z-index: 3;
-    }
-    
-    #control-panel {
-        opacity: 0;
-        position: absolute;
-        top: 300px;
-        right: 5px;
-        writing-mode: vertical-rl;
-    }
-    
-     #control-panel.left {
-        opacity: 1;
         
     }
     
+    #hamb-menu-mobile {
+        display: none;
+    }
+    
+    #main-navigation {
+        top: 200px;
+        height: 650px;
+        background-image: url(img/back.jpg);
+        z-index: 1;
+        overflow: none;
+    }
+    
+    #title {
+        width: 400px;
+        
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        pointer-events:none; //great property!!! allows click through the element to reach overlayed elements
+    }
+    
+    #control-panel {
+        z-index: -1;
+    }
+    
     #title.left {
+        left: -355px;
         opacity: 0;
         box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     }
@@ -551,17 +567,35 @@ $life-padding: 20px;
         box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     }
     
-    
-    #preset {
-        display: none;
+    #options input {
+        width: 30px;
     }
     
-    #presets-div.fade {
-        
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        opacity: 1;
+    #about-game {
+        top: -420px;
+        height: 400px;
+        z-index: 1;
+    }
+    
+    #about-game-text {
+        height: 230px;
+        width: 100%;
+        overflow: auto;
+        padding: 0 15px;
+    }
+
+    #presets-div {
+        position: absolute;
+       top: 380px;
+        z-index: 1;
+    }
+    
+    #presets-div.zero-index {
+        z-index: -1;
+    }
+    
+    #presets-div .divider {
+        margin-bottom: 40px;
     }
     
     main {
@@ -587,9 +621,10 @@ $life-padding: 20px;
         width: 2vmin;
         height: 2vmin;
     }
-    
 }
+*/
 
+/*
 @media screen and (min-width: 1025px) and (max-width: 1500px) {
     
     
@@ -636,18 +671,7 @@ $life-padding: 20px;
         z-index: 3;
     }
     
-   #control-panel {
-        opacity: 0;
-        position: absolute;
-        top: 300px;
-        right: 5px;
-        writing-mode: vertical-rl;
-    }
-    
-     #control-panel.left {
-        opacity: 1;
-        
-    }
+
     
     #title.left {
         opacity: 0;
@@ -719,3 +743,4 @@ $life-padding: 20px;
   
 }
 
+*/
