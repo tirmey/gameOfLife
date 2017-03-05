@@ -1,4 +1,4 @@
-// tro monitoring, open ruby command prompt and enter the command: sass --watch <input directory>:<output directory>. In this case, sass --watch web:web
+// tro monitoring, open ruby command prompt and enter the command: sass --watch <input directory>:<output directory>. In this case, sass --watch style:style (tem que estar no diretório raíz: d:onedrive/web/GOL)
 
 $dark-color: #444;
 $white-color: #ddd;
@@ -522,7 +522,7 @@ nav div .fa {
     box-shadow: 0 5px 10px 0px rgba(0,0,0,0.25);
     position: absolute;
     left: 0;
-    top: -350px;
+    top: -380px;
     width: 100%;
     padding: 20px;
     overflow: hidden;
