@@ -565,9 +565,9 @@ document.addEventListener("keypress", function(e){
             document.getElementById("pause").classList.toggle("hidden");
         }
     }
-    
-    //CTRL + Z - UNDO GRID CHANGES -only wokrs with no resize... why?
-    if (e.code = "KeyZ" && e.ctrlKey) {
+    console.log(e);
+    //CTRL + I - UNDO GRID CHANGES 
+    if (e.code == "KeyI" && e.ctrlKey) {
         if (undoRedo.position > 0) {
             undoRedo.position--;
             console.log("position vale: ");
@@ -585,17 +585,40 @@ document.addEventListener("keypress", function(e){
             }
         }
         console.log("posição atuyal é :" + undoRedo.position)
-        //copyying the undoRedo array in the right position to the actual grid
+        //copying the undoRedo array in the right position to the actual grid
         for (let i = 0; i < line; i++) {
             for (let j = 0; j < col; j++) {
                 grid[i][j] = undoRedo.grids[undoRedo.position][i][j];
             }
         }
-        
-        console.log("o array agora tem " + undoRedo.grids.length + " grids anteriores. Posição no arrayde grids: " + undoRedo.position);
     }
     
     //CTRL + Y - REDO GRID CHANGES
+    if (e.code == "KeyY" && e.ctrlKey) {
+        if (undoRedo.position < undoRedo.grids.length - 1) {
+            undoRedo.position++;
+            console.log("position vale: ");
+            console.log(undoRedo.position);
+        }
+        
+        for (let i = line-1; i >= 0; i--) { 
+            for (let j = col-1; j >= 0; j--) { 
+                if (undoRedo.grids[undoRedo.position][i][j] == 1) {
+                    document.getElementById(i + "-" + j).classList.add("alive");
+                    
+                } else if (undoRedo.grids[undoRedo.position][i][j] == 0) {
+                    document.getElementById(i + "-" + j).classList.remove("alive");
+                }
+            }
+        }
+        console.log("posição atuyal é :" + undoRedo.position)
+        //copying the undoRedo array in the right position to the actual grid
+        for (let i = 0; i < line; i++) {
+            for (let j = 0; j < col; j++) {
+                grid[i][j] = undoRedo.grids[undoRedo.position][i][j];
+            }
+        }
+    }
 });
 
 //BUTTON CLEAR - clear the board
@@ -710,6 +733,9 @@ document.getElementById("main-navigation").addEventListener("click", function(e)
 document.getElementById("cols").addEventListener("change", function(){
     col = document.getElementById("cols").value;
     document.getElementById("gridContainer").innerHTML="";
+    undoRedo.grids = [];
+    undoRedoArr = [];
+    undoRedo.position = 0;
     createGrid(col, line);
 });
 
@@ -717,6 +743,9 @@ document.getElementById("cols").addEventListener("change", function(){
 document.getElementById("lines").addEventListener("change", function(){
     line = document.getElementById("lines").value;
     document.getElementById("gridContainer").innerHTML="";
+    undoRedo.grids = [];
+    undoRedoArr = [];
+    undoRedo.position = 0;
     createGrid(col, line);
 });
 
@@ -742,6 +771,14 @@ function createGrid(col, line) {
        tempGrid[i] = new Array(line);
     } 
     
+    undoRedo.grids = [];
+    undoRedo.position = 0;
+    
+    undoRedoArr = new Array(line);
+    for (let i = 0; i < line; i++) { 
+       undoRedoArr[i] = new Array(line);
+    }
+    
     for (let i = line-1; i >= 0; i--) {        
         for ( let j = col-1; j >= 0; j--) { 
             grid[i][j] = 0;
@@ -759,7 +796,7 @@ function createGrid(col, line) {
     document.getElementById((line-1) + "-" + (col-1)).classList.add("lastRow-last");
     
     allCells = document.querySelectorAll(".cell");
-    for (i = 0; i <allCells.length; i++) {
+    for (i = 0; i < allCells.length; i++) {
         if (window.innerWidth >= 200 && window.innerWidth <= 500) {
             allCells[i].style.width = (window.innerWidth*0.8/col) + "px";
             allCells[i].style.height = (window.innerWidth*0.8/col) + "px";
